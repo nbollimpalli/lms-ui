@@ -1,0 +1,61 @@
+
+<mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>filter_list</mat-icon>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="filters">
+      <mat-form-field>
+        <mat-label>Stores</mat-label>
+        <mat-select multiple [formControl]="shops_fc" [(ngModel)]="shops_selection">
+          <mat-select-trigger>
+            {{shops_fc.value ? shops_fc.value[0] : ''}}
+            <span *ngIf="shops_fc.value?.length > 1" class="example-additional-selection">
+              (+{{shops_fc.value.length - 1}} {{shops_fc.value?.length === 2 ? 'other' : 'others'}})
+            </span>
+          </mat-select-trigger>
+          <!-- <mat-option selected [value]="'All'">All</mat-option> -->
+          <mat-option [value]="'All'">All</mat-option>
+          <mat-option *ngFor="let store of labels" [value]="store">{{store}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Order status</mat-label>
+        <mat-select multiple [formControl]="order_stat_fc" [(ngModel)]="order_stat_selection">
+          <mat-select-trigger>
+            {{order_stat_fc.value ? order_stat_fc.value[0] : ''}}
+            <span *ngIf="order_stat_fc.value?.length > 1" class="example-additional-selection">
+              (+{{order_stat_fc.value.length - 1}} {{order_stat_fc.value?.length === 2 ? 'other' : 'others'}})
+            </span>
+          </mat-select-trigger>
+          <mat-option [value]="'All'">All</mat-option>
+          <mat-option *ngFor="let order_stat of order_status" [value]="order_stat">{{order_stat}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker0" placeholder="start Date" [value]="fromDate" disabled>
+        <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
+        <mat-datepicker disabled="false" #picker0></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker1" placeholder="end date" [value]="toDate" disabled>
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker disabled="false" #picker1></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </mat-expansion-panel>
+  
+  
+  <div class="grid-container">
+    <div class="grid-element">
+        <canvas class="canv" id="orders">
+          </canvas>
+    </div>
+    <div class="grid-element">
+        <canvas class="canv" id="shops-revenue">
+        </canvas>
+    </div>
+  </div>
+  
+  

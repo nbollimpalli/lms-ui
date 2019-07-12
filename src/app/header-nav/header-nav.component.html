@@ -1,0 +1,65 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav [style.background-color]="'rgba(51,63,76,1)'" #drawer class="sidenav" fixedInViewport="true"
+      [attr.role]="'navigation'"
+      [mode]="'over'"
+      [opened]="false">
+    <mat-toolbar>
+        <span class="white-color">Hello</span>
+        <span class='tollbar-splitter'></span>
+        <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        >
+        <mat-icon class="white-color" aria-label="Side nav toggle icon">close</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-divider></mat-divider>
+    <div *ngFor="let menu_items of menu_data">
+      <mat-nav-list>
+          <mat-list-item *ngFor="let menu_item of menu_items" [routerLink]="menu_item.path" (click)="drawer.close()">
+          <button type="button" aria-label="Your Apps" mat-icon-button>
+            <mat-icon class="white-color" aria-label="Apps" >{{ menu_item.icon }}</mat-icon>
+            <span class="white-color"> {{ menu_item.title }}</span>
+          </button>
+          </mat-list-item>
+      </mat-nav-list>
+      <mat-divider></mat-divider>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content [style.background-color]="'#ffffff'">
+    <mat-toolbar [style.background-color]="'#383d65'">
+      <!-- <a routerLink="" class="logo"><img class="logo-img" src="https://s3.ap-south-1.amazonaws.com/algovent-s3-static/logo.png" alt="Algovent"></a>       -->
+      <button
+        type="button"
+        aria-label="local_laundry_service"
+        mat-icon-button
+        routerLink=""
+        >
+        <mat-icon class="white-color" aria-label="local_laundry_service">local_laundry_service</mat-icon>
+    </button>
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        >
+        <mat-icon class="toggle-icon white-color" aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span class='tollbar-splitter'></span>
+      <button
+        type="button"
+        aria-label="Search"
+        mat-icon-button
+        >
+        <mat-icon class="white-color" aria-label="Login">login</mat-icon>
+    </button>
+    <button *ngIf="!x.loggedin" class="signup-button white-color" mat-button routerLink="/login">LOGIN</button>        
+    <button *ngIf="x.loggedin" (click)="x.logout()" class="logout-button white-color" mat-button routerLink="/">LOGOUT</button>
+    </mat-toolbar>
+    <mat-divider></mat-divider>
+    <div class="app-content"><router-outlet></router-outlet></div>
+    <!-- Add Content Here -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

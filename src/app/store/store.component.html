@@ -1,0 +1,105 @@
+<div class="banner-container">
+    <div class="banner">
+        <h1>{{ name.value }}</h1>
+        <p><mat-icon>location_on</mat-icon> {{ address.value }}</p>
+        <button [routerLink]="['/store/'+storeid+'/order']">Create Order</button>
+    </div>
+</div>
+<mat-tab-group>
+    <mat-tab label="Details">
+        <mat-horizontal-stepper #stepper>
+                <mat-step [stepControl]="storeForm">
+                    <ng-template matStepLabel>Store Details</ng-template>
+                    <form class="form" (ngSubmit)="onStoreSubmit()" #f [formGroup]="storeForm">
+                            <mat-form-field class="mat-form-input">
+                                <input #name matInput placeholder="Name" formControlName="name"
+                                        type="text" [errorStateMatcher]="matcher">
+                                <mat-error *ngIf="storeForm.controls['name'].hasError('required')">
+                                Store Name is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        
+                            <mat-form-field class="mat-form-input">
+                                <input matInput #phone placeholder="Phone" type="phone" formControlName="phone"
+                                        [errorStateMatcher]="matcher">
+                                <mat-error *ngIf="storeForm.controls['phone'].hasError('required')">
+                                    Phone is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                    
+                            <mat-form-field class="mat-form-input">
+                                <textarea #address matInput placeholder="Store Address" formControlName="address"></textarea>
+                            </mat-form-field>
+                        </form>
+                    <div>
+                        <button *ngIf="edit === false" mat-button (click)="onStoreSubmit()">CREATE</button>
+                        <button *ngIf="edit" mat-button (click)="onStoreSubmit()">UPDATE</button>
+                        <button mat-button matStepperNext>ADD PRICING</button>
+                    </div>
+                </mat-step>
+                <mat-step [stepControl]="pricingForm">
+                    <ng-template matStepLabel>Pricing</ng-template>
+                    <form class="h-form" (ngSubmit)="addPrice()" #pf [formGroup]="pricingForm">
+                        <mat-form-field class="hmat-form-input">
+                            <input #pname matInput placeholder="Name" formControlName="name"
+                                    type="text" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="pricingForm.controls['name'].hasError('required')">
+                            Price slab Name is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    
+                        <mat-form-field class="hmat-form-input">
+                            <input matInput #price placeholder="Price" type="number" formControlName="price"
+                                    [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="pricingForm.controls['price'].hasError('required')">
+                                Price is <strong>required</strong>
+                            </mat-error>
+                            <mat-error *ngIf="pricingForm.controls['price'].hasError('min')">
+                                Price value should be greater than 0
+                            </mat-error>
+                        </mat-form-field>
+                        <button mat-button type="submit">ADD</button>
+                    </form>
+                    <mat-selection-list #priceslabs>
+                        <mat-list-option *ngFor="let price of pricing | keyvalue">
+                            <mat-icon mat-list-icon>attach_money</mat-icon>
+                            <h4 mat-line>{{price.value['name'] | titlecase}}</h4>
+                            <p mat-line>Rs. {{price.value['price']}} </p>
+                        </mat-list-option>
+                    </mat-selection-list>
+                    <div>
+                        <button mat-button matStepperPrevious>GO TO STORE</button>
+                    </div>
+                </mat-step>
+        </mat-horizontal-stepper>
+    </mat-tab>
+    <mat-tab *ngIf="edit" label="Orders">
+            <mat-paginator [length]="50"
+    [pageSize]="10">
+            </mat-paginator>
+            <div class="algolist">
+            <div class="algolist-heading">
+                <mat-icon>store</mat-icon>
+            </div>
+            <div  *ngFor="let order of orders" class="algolist-item  grey-bg">
+                <div class="algolist-item-content">
+                    <div class="algolist-item-content-details">
+                    <mat-icon class="algolist-item-content-details-item">shopping_basket</mat-icon>    
+                    <div class="algolist-item-content-details-item">USER ID : {{order.userid}}</div>
+                    <div class="algolist-item-content-details-item">TOTAL PRICE : {{order.total}}</div>
+                    </div>
+                </div>
+                <div class="algolist-item-actions">
+                    <button matTooltip="Edit" [routerLink]="['/store/'+storeid+'/order/'+order.orderid]" aria-label="Edit" mat-icon-button><mat-icon>edit</mat-icon></button>
+                </div>
+            </div>
+            </div>
+    </mat-tab>
+    <mat-tab *ngIf="edit" label="Customers">
+            <mat-paginator [length]="50"
+    [pageSize]="10">
+</mat-paginator>
+    </mat-tab>
+    
+</mat-tab-group>
+          

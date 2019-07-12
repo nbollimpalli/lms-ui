@@ -1,0 +1,33 @@
+<div class="banner-container">
+    <div class="banner">
+        <!-- <mat-form-field class="banner-filters">
+            <mat-label style="color: white">Stores</mat-label>
+            <mat-select multiple [formControl]="shops_fc" [(ngModel)]="shops_selection">
+              <mat-select-trigger style="color: white">
+                {{shops_fc.value ? shops_fc.value[0] : ''}}
+                <span *ngIf="shops_fc.value?.length > 1" class="example-additional-selection">
+                  (+{{shops_fc.value.length - 1}} {{shops_fc.value?.length === 2 ? 'other' : 'others'}})
+                </span>
+              </mat-select-trigger>
+              <mat-option selected [value]="'All'">All</mat-option>
+              <mat-option [value]="'All'">All</mat-option>
+              <mat-option *ngFor="let store of stores" [value]="store.payload.doc.data().name">{{store.payload.doc.data().name}}</mat-option>
+            </mat-select>
+          </mat-form-field> -->
+        <button routerLink="/store" matTooltip="Add Store">Add Store</button>
+    </div>
+</div>
+<br/>
+<div class="ucard-container">
+  <div *ngFor="let store of stores" [routerLink]="['/store/'+store.payload.doc.id]" class="ucard">
+      <img class="ucard-img" src="https://algovent-s3-static.s3.ap-south-1.amazonaws.com/storefront.png" alt="Avatar">
+      <div class="ucontainer">
+          
+          <h4><b>{{ store.payload.doc.data().name }}</b></h4> 
+          <mat-divider></mat-divider>
+          <p><mat-icon>call</mat-icon> {{ store.payload.doc.data().phone }}</p>
+          <mat-divider></mat-divider>
+          <p><mat-icon>location_on</mat-icon> {{ store.payload.doc.data().address }}</p> 
+      </div>
+  </div>
+</div>

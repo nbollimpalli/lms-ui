@@ -1,0 +1,18 @@
+.customer-email {
+    width: 30vh;
+    margin-left: 2vh;
+}
+
+.quantity {
+    width: 5vh;
+    margin-left: 2vh;
+}
+
+.price-slab {
+    width: 15vh;
+    margin-left: 2vh;
+}
+
+.divider {
+    color: blue;
+}

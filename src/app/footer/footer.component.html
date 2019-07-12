@@ -1,0 +1,24 @@
+
+<div class="grid-container">
+    <!-- <div class="grid-item" > -->
+      <mat-card class="dashboard-card" *ngFor="let card of services_data">
+        <mat-card-header>
+          <mat-card-title>
+            <span class="footer_column_title">{{card.title}}</span>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-divider class="grey-divider"></mat-divider>
+        <mat-card-content class="dashboard-card-content">
+            <mat-nav-list>
+              <mat-list-item  *ngFor="let service of card.services">
+                <img *ngIf="card.icon_type == 'img_icon'" src="{{getIcon(card.icon_type, service)}}" alt="" height="42" width="42">
+                <mat-icon class="white-color" *ngIf="card.icon_type == 'icon'" aria-label="Apps" >{{getIcon(card.icon_type, service)}}</mat-icon>
+                &nbsp;
+                <a class="footer_column_row" href="{{link_url_data[service]}}"> {{ service }}</a>
+              </mat-list-item>
+            </mat-nav-list>
+        </mat-card-content>
+      </mat-card>
+    <!-- </div> -->
+  </div>
+  <div class="rights white-color"><i class="material-icons rights white-color">copyright</i> 2019 laundry.com All Rights Reserved</div>

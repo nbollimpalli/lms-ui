@@ -1,0 +1,47 @@
+.filters{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-between;
+    background-color: #e4e4e4;
+}
+
+.stores{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-between;
+}
+
+.example-small-box, .example-large-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px;
+    padding: 16px;
+    border-radius: 8px;
+  }
+  
+  .example-small-box {
+    height: 100px;
+    width: 100px;
+  }
+  
+  .example-large-box {
+    height: 300px;
+    width: 300px;
+  }
+
+.mat-form-input {
+  width: 100%;
+}
+
+.mat-form-submit {
+  width: 70vh;
+}
+
+.mat-select-arrow{
+    color : white !important;
+}

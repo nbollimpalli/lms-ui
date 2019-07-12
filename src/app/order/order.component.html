@@ -1,0 +1,78 @@
+<mat-tab-group>
+    <mat-tab label="Details">
+        <mat-horizontal-stepper #stepper>
+          <mat-step>
+            <ng-template matStepLabel>Order Details</ng-template>
+            <mat-form-field class="customer-email" >
+                <input #cmail [value]="cemail" matInput placeholder="Customer email"
+                        type="email">
+            </mat-form-field>
+            <button mat-button (click)="onCustomerEmailUpdate(cmail.value)">UPDATE CUSTOMER</button>
+            <button mat-button (click)="reset()">RESET</button>
+            <mat-divider></mat-divider>
+            <div *ngIf="order.userid != null">
+              <div class="algolist">
+                <div class="algolist-heading">
+                  <mat-icon>store</mat-icon>
+                  <span class="algolist-heading-text">
+                    Order Details ( TOTAL : {{ order.total }} )
+                  </span>
+                </div>
+                <button mat-button (click)="addNewOrderItem()">ADD NEW ORDER ITEM</button>
+                <div  *ngFor="let orderItem of orderItems" class="algolist-item  grey-bg">
+                    <div class="algolist-item-content">
+                      <div class="algolist-item-content-details">
+                        <mat-icon class="algolist-item-content-details-item">shopping_basket</mat-icon>
+                        <div class="algolist-item-content-details-item" *ngFor="let pricingItem of orderItem.price"> {{ pricingItem.name }} : {{ pricingItem.price }} </div>
+                        <mat-divider class="divider"></mat-divider>
+                        <div class="algolist-item-content-details-item">UNIT PRICE :  {{ orderItem.unitprice }}</div>                        
+                        <div class="algolist-item-content-details-item">TOTAL PRICE : UNIT PRICE({{ orderItem.unitprice }}) x QUANTITY({{ orderItem.quantity }}) = {{ orderItem.total }}</div>
+                      </div>
+                    </div>
+                    <div class="algolist-item-actions">
+                        <button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" matTooltip="Add Services" aria-label="Add Services" mat-icon-button><mat-icon>add_circle</mat-icon></button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item *ngFor="let pricingItem of pricingItems" (click)="addPricing(orderItem, pricingItem)">
+                              <mat-icon>label</mat-icon>
+                              <span>{{ pricingItem.name }} : ({{ pricingItem.price }})</span>
+                            </button>
+                          </mat-menu>
+                        <button matTooltip="Reduce Quantity" aria-label="Reduce Quantity" mat-icon-button [disabled]="orderItem.quantity <= 0" (click)="decreaseQuantity(orderItem)"><mat-icon>arrow_left</mat-icon></button>
+                        <button matTooltip="Increase Quantity" aria-label="Increase Quantity" mat-icon-button (click)="increaseQuantity(orderItem)" ><mat-icon>arrow_right</mat-icon></button>
+                        <button matTooltip="Delete" aria-label="Delete" mat-icon-button (click)="deleteOrderItem(orderItem)"><mat-icon>delete</mat-icon></button>
+                    </div>
+                </div>
+              </div>
+              <div>
+                  <button *ngIf="edit === false" mat-button (click)="onOrderSubmit()">CREATE</button>
+                  <button *ngIf="edit" mat-button (click)="onOrderSubmit()">UPDATE</button>
+                  <button mat-button matStepperNext>CHECK TAG DETAILS</button>
+              </div>
+            </div>
+          </mat-step>
+          <mat-step>
+              <ng-template matStepLabel>Order Tag</ng-template>
+              <div class="algolist" *ngIf="edit">
+                  <div class="algolist-heading">
+                    <mat-icon>print</mat-icon>
+                  </div>
+                  <div  *ngFor="let orderItem of orderItems" class="algolist-item  grey-bg">
+                      <div class="algolist-item-content">
+                        <div class="algolist-item-content-details">
+                          <mat-icon class="algolist-item-content-details-item">shopping_basket</mat-icon>
+                          <div class="algolist-item-content-details-item">USER EMAIL : {{cemail}}</div>
+                          <div class="algolist-item-content-details-item">TOKEN : {{orderItem.index}}</div>
+                          <div class="algolist-item-content-details-item">TAG ID : {{ storeid }}_{{orderid}}_{{userid}}</div>
+                        </div>
+                      </div>
+                      <div class="algolist-item-actions">
+                          <button matTooltip="Print" aria-label="Print" mat-icon-button><mat-icon>print</mat-icon></button>
+                      </div>
+                  </div>
+                </div>
+          </mat-step>
+        </mat-horizontal-stepper>
+    </mat-tab>
+    <mat-tab label="Transaction History">
+    </mat-tab>
+</mat-tab-group>

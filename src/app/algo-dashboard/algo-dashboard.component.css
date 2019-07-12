@@ -1,0 +1,53 @@
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.grid-container{
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: top;
+}
+
+.grid-element {
+  min-width: 40vw;  /* Or whatever */
+}
+
+.reports-filter {
+  width: 100%
+}
+
+.filters {
+  margin: 2px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: top;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.example-additional-selection {
+  opacity: 0.75;
+  font-size: 0.75em;
+}
+
+.canv {
+  min-height: 300px !important;
+}
+
+

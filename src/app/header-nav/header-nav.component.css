@@ -1,0 +1,76 @@
+/* .sidenav-container {
+  height: 100%;
+} */
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.logo-img
+{
+    max-width: 50px;
+    max-height: 50px;
+    padding-top: 12px;
+}
+.login-button
+{
+  padding-top: 4px;
+}
+.logo-s-img
+{
+  max-width: 200px;
+  max-height: 50px;
+}
+.logo
+{
+  display: display;
+}
+
+.logo-s{
+  display: none;
+}
+
+.company-name
+{
+  padding-top: 4px; 
+  font-family: 'Cabin Sketch';
+}
+
+.login-button
+{
+  font-family: 'Cabin Sketch';
+}
+
+.mat-divider {
+  border-top-color: rgba(255,255,255,.12);
+}
+
+@media only screen and (max-width: 560px) {
+  .logo
+  {
+    display: none;
+  }
+
+  .logo-s{
+    display: inline;
+    padding-top : 8px;
+  }
+}
+
+.sidenav-container{
+  /* z-index: 10000000; */
+}
+
+.app-content{
+  min-height: calc(100vh - 64px);
+}

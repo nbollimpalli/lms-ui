@@ -1,0 +1,249 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+.tollbar-splitter
+{
+  flex: 1 1 auto;
+}
+
+.center-form-container
+{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.center-form-container-by-col
+{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.center-form-container-by-row
+{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.grey-divider
+{
+  border-top-color: #ffffff1f;
+}
+
+.white-color {
+  color: white;
+}
+
+.red-color {
+  color: #fb31317d;
+}
+
+button
+{
+  cursor: pointer;
+}
+
+.toolbar-button {
+  margin-top: 15px !important;
+}
+
+.ucard-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.ucard {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 30%;
+}
+
+/* On mouse-over, add a deeper shadow */
+.ucard:hover {
+  cursor: pointer;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.ucontainer {
+  padding: 2px 16px;
+}
+
+.ucard-img {
+  width: 100%
+}
+
+.banner-container {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://algovent-s3-static.s3.ap-south-1.amazonaws.com/banner-902587_1920.jpg");
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  background-color: bisque;
+  background-position: center;
+}
+
+.banner {
+  width: 100vh;
+  height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+}
+
+.banner button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 10px 25px;
+  color: black;
+  background-color: #ddd;
+  text-align: center;
+  cursor: pointer;
+}
+
+.banner button:hover {
+  background-color: #555;
+  color: white;
+}
+
+.form-container {
+  margin-top : 6vh;
+  margin-bottom: 6vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 30%;
+}
+
+.h-form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+}
+
+.hmat-form-input {
+  width: 15vh;
+  margin-left: 2vh; 
+}
+
+.grey-bg
+{
+  background-color:#e8e6e6;
+}
+
+.algolist {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+}
+
+.algolist-heading
+{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  width: 95%;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+}
+
+.algolist-item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin : 1vh;
+}
+
+.algolist-item-content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 40%;
+  margin: 1vh;
+}
+
+.algolist-item-actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding-right: 1vh;
+}
+
+.algolist-item-content-icon {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1vh;
+}
+
+.algolist-heading-text {
+  margin-left: 1vh;
+}
+
+.algolist-item-content-details {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1vh;
+}
+
+.algolist-item-content-details-item {
+  padding: 2px;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
