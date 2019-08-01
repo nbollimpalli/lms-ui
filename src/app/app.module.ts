@@ -43,6 +43,13 @@ import { PolicyComponent } from './policy/policy.component';
 import { ReportsComponent } from './reports/reports.component';
 import { SupportComponent } from './support/support.component';
 import { SettingsComponent } from './settings/settings.component';
+import { FabricCatsComponent } from './fabric-cats/fabric-cats.component';
+import { FabricCatComponent } from './fabric-cat/fabric-cat.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { CustomerHomeComponent } from './customer-home/customer-home.component';
+import { ConnectionService } from 'ng-connection-service';
+import { BreakpointObserverService } from './shared/services/breakpoint-observer.service';
+import { DialogService } from './shared/services/dialog.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,6 +75,10 @@ import { SettingsComponent } from './settings/settings.component';
     ReportsComponent,
     SupportComponent,
     SettingsComponent,
+    FabricCatsComponent,
+    FabricCatComponent,
+    PageNotFoundComponent,
+    CustomerHomeComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -85,8 +96,8 @@ import { SettingsComponent } from './settings/settings.component';
       { enableTracing: true} // <-- debugging purposes only
     )
   ],
-  providers: [ FirebaseService, UserService, RestService, ApiFactoryService, FileManagerService, AuthService, SearchService, SeoService, SnackbarService],
-  entryComponents: [SearchPopupComponent],
+  providers: [BreakpointObserverService, DialogService, SnackbarService, FirebaseService, UserService, RestService, ApiFactoryService, FileManagerService, AuthService, SearchService, SeoService, ConnectionService],
+  entryComponents: [SearchPopupComponent, LoginComponent, SignupComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

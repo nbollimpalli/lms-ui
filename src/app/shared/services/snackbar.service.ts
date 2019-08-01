@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { UserService } from './user.service'
 import { MatSnackBar } from '@angular/material';
 
 @Injectable({
@@ -7,22 +6,17 @@ import { MatSnackBar } from '@angular/material';
 })
 export class SnackbarService {
 
-  constructor(
-    private userservice : UserService,
-    public snackBar: MatSnackBar
-  )
+  constructor(public snackBar: MatSnackBar)
   {
 
   }
 
   load()
   {
-    this.userservice.user.ProfileUpdationPending = true;
   }
 
   calm()
   {
-    this.userservice.user.ProfileUpdationPending = false;
   }
 
   show_snackbar(message)

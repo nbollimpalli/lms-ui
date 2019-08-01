@@ -67,10 +67,16 @@
   }
 }
 
-.sidenav-container{
-  /* z-index: 10000000; */
-}
-
 .app-content{
   min-height: calc(100vh - 64px);
+}
+
+.login-url {
+  font-size: 12px;
+}
+
+.action-seperator {
+  font-size: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 }

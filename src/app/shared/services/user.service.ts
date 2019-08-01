@@ -1,7 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { User } from '../models/user.model';
 import { RestService } from './rest.service';
 import { FirebaseService } from './firebase.service';
+import { Router } from '@angular/router';
+import { ConnectionService } from 'ng-connection-service';
+import { SnackbarService } from './snackbar.service';
 
 @Injectable()
 export class UserService {
@@ -9,59 +12,134 @@ export class UserService {
   role : string;
   public fuser;
   public loggedin = false;
+  public loading = false;
+  public isConnected = true;
+  successEmitter = new EventEmitter<Object>();
+  errorEmitter = new EventEmitter<Object>();
 
-  constructor(private restService : RestService, private firebaseService : FirebaseService) {
+  constructor(
+              private restService : RestService, 
+              private firebaseService : FirebaseService, 
+              private router : Router, 
+              private connectionService: ConnectionService, 
+              private snackbar : SnackbarService,
+            ) {
+    this.monitorConnectivity();
+    this.loading = true;
     this.user = new User();
-    var token = localStorage.getItem('token');
+    var token = localStorage.getItem('userToken');
     console.log('loggedin user token');
     console.log(token);
+    this.updateGuestUser();
     if(token != null)
     {
-      this.firebaseService.getUser(token).subscribe(
-        (data) => {
-          this.loggedin = true;
-          this.fuser = data.payload;
-        }
-      )
+      this.updateLoggedInUser(token);
     }
-    
+    else
+    {
+      this.loading = false;
+      this.router.navigate([this.user.HomeUrl]);
+    }
   }
 
-  isLoggedIn()
+  
+
+  updateLoggedInUser(token)
   {
-    return this.user.LoggedIn;
+    this.restService.get('FETCH_PROFILE', null, null).subscribe(
+      (data) => {
+        console.log('****');
+        console.log(data);
+        this.user.setupLoggedInUser(data['data']);
+        this.successEmitter.emit({'code' : 'login', 'data' : data});
+        this.loading = false;
+        this.router.navigate([this.user.HomeUrl]);
+      },
+      (data) => {
+        this.loading = false;
+        this.errorEmitter.emit({'code' : 'login', 'data' : data});
+      }
+    );
   }
 
-  loadUser(data)
+  updateGuestUser()
   {
-    return true;
+    this.user.setupGuestUser();
+    this.successEmitter.emit({'code' : 'login', 'data' : true});
   }
 
-  setUserState(userState: String)
+  hasPermission(perm)
   {
-    this.user.UserState = userState;
+    return (this.user.SuperUser || (this.user.Permissions[perm] == true) );
   }
 
-  getUserState()
+  hasPermissions(perms)
   {
-    return this.user.UserState;
+    if(this.user.SuperUser)
+    {
+      return true;
+    }
+    else
+    {
+      if(perms == null || perms.length <= 0)
+      {
+        return false;
+      }
+      else
+      {
+        var has_perm = true;
+        perms.forEach(perm => {
+           has_perm = has_perm && (this.user.Permissions[perm] == true);
+           if(has_perm == false)
+           {
+             return false;
+           }
+        });
+        return true;
+      }
+    }
   }
 
-  registerUser()
+  signupUser(data)
   {
-    const body = null;//= this.user.export_register_info();
-    return this.restService.post( 'REGISTER_USER', null, null, body );
+    console.log('signupdata');
+    console.log(data);
+    this.loading = true;
+    this.restService.post( 'SIGNUP_USER', null, null, data ).subscribe(
+      (data) => {
+        console.log(data);
+        this.successEmitter.emit({'code' : 'signup', 'data' : data});
+        this.loading = false;
+      },
+      (data) => {
+        this.snackbar.afterRequestFailure(data);
+        this.loading = false;
+        this.errorEmitter.emit({'code' : 'signup', 'data' : data});
+        this.loading = false;
+      }
+    );
+    return;
   }
 
   loginUser(loginData)
   {
-    const body = { payload:
-      {
-        email: loginData['email'],
-        password: loginData['pwd']
+    console.log('logindata');
+    console.log(loginData);
+    this.loading = true;
+    this.restService.post( 'LOGIN_USER', null, null, loginData ).subscribe(
+      (data) => {
+        console.log(data);
+        var token = data["data"]["token"];
+        this.afterLogin(token);
+        this.snackbar.afterRequest(data["data"]);
+        this.updateLoggedInUser(token);
+      },
+      (data) => {
+        this.snackbar.afterRequestFailure(data);
+        this.loading = false;
       }
-    };
-    return this.restService.post( 'LOGIN_USER', null, null, body );
+    );
+    return;
   }
 
   afterLogin(token)
@@ -71,9 +149,9 @@ export class UserService {
 
   logout()
   {
-    localStorage.removeItem('token');
-    this.loggedin = false;
-    this.fuser = null;
+    localStorage.removeItem('userToken');
+    this.updateGuestUser();
+    this.router.navigate([this.user.HomeUrl]);
   }
 
   updateBasicInfo(data)
@@ -83,26 +161,12 @@ export class UserService {
       this.user.Email = data['email'];
       this.user.Name = data['name'];
       this.user.Mobile = data['mobile'];
-      this.user.SendToMailId = data['email'];
-      this.user.SendToMobile = data['mobile'];
+
     }
   }
 
   updateProfile()
-  {
-    this.user.ProfileUpdationPending = true;
-    this.fetchProfile().subscribe(
-      (sdata) => {
-        //this.user.import(sdata['data']['user']);
-      },
-      (fdata) => {
-
-      },
-      () => {
-        this.user.ProfileUpdationPending = false;
-      }
-    );
-  }
+  {}
 
   fetchProfile()
   {
@@ -131,5 +195,17 @@ export class UserService {
   {
     const body = { 'token' : token, 'password' : password}
     return this.restService.post('RESET_PASSWORD', null, null, body);
+  }
+
+  getHomeUrl()
+  {
+    return this.user.HomeUrl;
+  }
+
+  monitorConnectivity()
+  {
+    this.connectionService.monitor().subscribe(isConnected => {
+      this.isConnected = isConnected;
+    })
   }
 }

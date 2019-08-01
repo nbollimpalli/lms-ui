@@ -1,17 +1,18 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { UserService } from '../../shared/services/user.service';
 import {FormControl, Validators, FormGroup, FormBuilder} from '@angular/forms';
 import { AlgoErrorStateMatcher } from '../../shared/utils/algo-error-state-matcher';
-import { SnackbarService } from 'src/app/shared/services/snackbar.service';
-import { Router } from '@angular/router';
-import { FirebaseService } from '../../shared/services/firebase.service';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
+export interface LoginDialogData {
+}
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   matcher = new AlgoErrorStateMatcher();
@@ -29,24 +30,27 @@ export class LoginComponent implements OnInit, OnDestroy {
     'Linked-In' : 'https://s3.ap-south-1.amazonaws.com/algovent-static/algo-linkedin.svg',
     'Google' : 'https://s3.ap-south-1.amazonaws.com/algovent-static/algo-google.svg'
   };
-  userService;
-  constructor(private userServicex : UserService, private formBuilder: FormBuilder, private snackbarService : SnackbarService, private router : Router, private firebaseService : FirebaseService) { 
-    this.userService = userServicex;
+  constructor(
+              public userService : UserService, 
+              private formBuilder: FormBuilder,
+              public loginDialogRef: MatDialogRef<LoginComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: LoginDialogData
+              ) { 
+  }
+
+  onNoClick(): void {
+    this.loginDialogRef.close();
   }
 
   ngOnInit() {
     this.loginForm  =  this.formBuilder.group({
-      email: new FormControl('', {validators: [Validators.required], updateOn: 'blur'}),
+      mobile: new FormControl('', {validators: [Validators.required], updateOn: 'blur'}),
       password: new FormControl('', {validators: [Validators.required]} )
     });
     console.log(this.loginForm);
   }
 
   get formControls() { return this.loginForm.controls; }
-
-  ngOnDestroy() {
-    this.userService.setUserState('any');
-  }
 
   onSubmit()
   {
@@ -56,48 +60,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
     else
     {
-      this.firebaseService.getLoggedInUser(this.loginForm.value.email).subscribe(
-        (data) => {
-          //data.docs[0].data()
-          if(data.size > 0)
-          {
-            this.userService.fuser = data.docs[0];
-            if(this.userService.fuser.data()['password'] === this.loginForm.value['password'])
-            {
-              this.userService.loggedin = true;
-              localStorage.setItem('token', this.userService.fuser.id);
-              this.snackbarService.show_snackbar('Successfully loggedin');
-              this.router.navigate(['/']);
-            }
-            else
-            {
-              this.snackbarService.show_snackbar('Invalid password');
-            }
-          }
-          else
-          {
-            this.snackbarService.show_snackbar('Email not found');            
-          }
-        }
-      );
-      // this.userService.loginUser(this.loginForm.value).subscribe(
-      //   (data) => {
-      //     this.snackbarService.afterRequest(data);
-      //     this.afterLogin(data);
-      //   },
-      //   (data) => {
-      //     this.snackbarService.afterRequestFailure(data);
-      //   }
-      // );
+      this.userService.loginUser(this.loginForm.value);
     }
   }
-
-  afterLogin(data)
-  {
-    var token = data['data']['token'];
-    this.userService.afterLogin(token);
-    this.router.navigate(['']);
-    this.snackbarService.afterRequest(data);
-  }
-
 }

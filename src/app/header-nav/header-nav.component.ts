@@ -1,33 +1,33 @@
-import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../shared/services/user.service';
-
+import { DialogService } from '../shared/services/dialog.service';
 @Component({
   selector: 'app-header-nav',
   templateUrl: './header-nav.component.html',
   styleUrls: ['./header-nav.component.css'],
 })
-export class HeaderNavComponent {
+export class HeaderNavComponent implements OnInit {
 
-  menu_data = [
+  menu_data = [];
+  all_menu_data = [
     [
       { 
         title: 'Stores',
         icon: 'store',
-        path: '/stores'
+        path: '/stores',
+        permission: 'can_list_stores'
       },
       {
         title: 'Reports',
         icon: 'file_copy',
-        path: '/reports'
+        path: '/reports',
+        permission: 'can_list_reports'
       },
       { 
         title: 'Users',
         icon: 'supervised_user_circle',
-        path: '/users'
+        path: '/users',
+        permission: 'can_list_users'
       },
     ],
     [
@@ -55,14 +55,47 @@ export class HeaderNavComponent {
       }
     ]
   ];
+    
+  constructor(
+              public userService : UserService,
+              public dialogService : DialogService,
+              )  {
+  }
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches)
+  ngOnInit()
+  {
+    this.userService.successEmitter.subscribe(
+      (data) => {
+        var code = data['code'];
+        if(code == 'login'  || code == 'logout')
+        {
+          this.menu_data = [];
+          this.all_menu_data.forEach(menu_data => {
+              var new_menu_data = [];
+              menu_data.forEach(menu_data_item => {
+                  var permission = menu_data_item['permission'];
+                  if(permission == null || this.userService.hasPermission(permission))
+                  {
+                    new_menu_data.push(menu_data_item);
+                  }
+                }
+              );
+              if (new_menu_data.length > 0)
+              {
+                this.menu_data.push(new_menu_data);
+              }
+          });
+          console.log(this.menu_data);
+        }
+      }
     );
-  x : UserService = null;
+  }
+
   
-  constructor(private breakpointObserver: BreakpointObserver, private router : Router,private userService : UserService) {
-    this.x = userService;
+
+  logout(drawer)
+  {
+    drawer.close();
+    this.userService.logout();
   }
 }

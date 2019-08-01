@@ -1,115 +1,100 @@
-import { Component, OnInit } from '@angular/core';
-import { Chart } from 'chart.js';
-import { FormControl } from '@angular/forms';
+import { Component } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { UserService } from '../shared/services/user.service';
 
 @Component({
   selector: 'app-algo-dashboard',
   templateUrl: './algo-dashboard.component.html',
   styleUrls: ['./algo-dashboard.component.css'],
 })
-export class AlgoDashboardComponent implements OnInit {
+export class AlgoDashboardComponent {
   /** Based on the screen size, switch from standard to one column per row */
 
-  orders_chart;
-  shop_revenue_chart;
-  fromDate : Date;
-  toDate : Date;
-  shops_fc = new FormControl();
-  order_stat_fc = new FormControl();
-  shops_selection = ['All'];
-  order_stat_selection = ['All'];
-  constructor() {
-    this.fromDate = new Date();
-    this.toDate = new Date();
-    this.fromDate.setDate(this.fromDate.getDate()-1);
-  }
+  services_data = [
+    {  title: 'Fabric Categories Management', services:
+      [
+        {
+          'title' : 'New Fabric Category',
+          'icon' : 'playlist_add',
+          'url' : '/fabric-category'
+        },
+        {
+          'title' : 'Fabric Categories',
+          'icon' : 'list',
+          'url' : '/fabric-categories'
+        }, 
+      ]
+    },
+    { title: 'Store Management', services:
+      [
+        {
+          'title' : 'Create New Store',
+          'icon' : 'add',
+          'url' : '/store'
+        },
+        {
+          'title' : 'Stores',
+          'icon' : 'store_mall_directory',
+          'url' : '/stores'
+        }
+      ]
+    },
+    { title: 'User Management', services :
+      [
+        {
+          'title' : 'New User',
+          'icon' : 'person_add',
+          'url' : '/user'
+        },
+        {
+          'title' : 'Employees',
+          'icon' : 'people',
+          'url' : '/users'
+        },
+        {
+          'title' : 'Customers',
+          'icon' : 'people_outline',
+          'url' : '/users'
+        }
+      ]
+    },
+    { title: 'Discounts', services:
+      [
+        {
+          'title' : 'New Offer',
+          'icon' : 'add',
+          'url' : '/offer'
+        },
+        {
+          'title' : 'Offers',
+          'icon' : 'redeem',
+          'url' : '/offers'
+        }
+      ]
+    }
+  ];
+
+  position_matrix = {cols: 1, rows: 1};
+  
+  bk = this.breakpointObserver.observe([Breakpoints.Small]).pipe(
+    map(({ matches }) => {
+      if (matches) {
+        console.log('in small');
+        this.setDashBoardLayout(1, 1);
+        return;
+      }
+      console.log('in large');
+      this.setDashBoardLayout(3, 1);
+      return;
+    })
+  );
+
+  constructor(private breakpointObserver: BreakpointObserver, private userService : UserService) {}
 
   setDashBoardLayout(col: number, row: number) {
+    this.position_matrix.cols = col;
+    this.position_matrix.rows = row;
     return;
-  }
-
-  ngOnInit(){
-    this.loadDashBoard();
-  }
-
-  loadDashBoard()
-  {
-    this.loadOrders();
-    this.loadShopRevenue();
-  }
-  labels = ['Shop A', 'Shop B', 'Shop C', 'Shop D', 'Shop E', 'Shop F', 'Shop G', 'Shop H'];
-  order_status = ['Orders recieved', 'Orders In Progress', 'Completed Orders', 'Order Delivered'];
-  loadShopRevenue()
-  {
-    this.shop_revenue_chart = new Chart('shops-revenue', {
-      type: 'doughnut',
-      options: {
-        responsive: true,
-        title: {
-          display: true,
-          text: 'Shops Revenue'
-        },
-      },
-      data: {
-          labels: this.labels,
-          datasets: [{
-              data: [10, 20, 30, 50, 20, 25, 12, 34],
-              backgroundColor: [
-                "#FAEBD7",
-                "#DCDCDC",
-                "#E9437A",
-                "#E9968B",
-                "#E9957C",
-                "#E9976A",
-                "#E9697A",
-                "#E6997A"
-              ]
-          }]
-      }
-    }
-    );
-  }
-
-  loadOrders()
-  {
-    this.orders_chart = new Chart('orders', {
-      type: 'bar',
-      options: {
-        responsive: true,
-        title: {
-          display: true,
-          text: 'Orders Report'
-        },
-      },
-      data: {
-        labels: this.labels,
-        datasets: [
-          {
-            type: 'bar',
-            label: 'Orders recieved',
-            data: [243, 156, 365, 30, 156, 265, 356, 543],
-            backgroundColor: 'rgba(255,0,255,0.4)',
-            borderColor: 'rgba(255,0,255,0.4)',
-            fill: false,
-          },
-          {
-            type: 'bar',
-            label: 'Orders Delivered',
-            data: [243, 156, 365, 30, 156, 265, 356, 543].reverse(),
-            backgroundColor: 'rgba(0,0,255,0.4)',
-            borderColor: 'rgba(0,0,255,0.4)',
-            fill: false,
-          },
-          {
-            type: 'bar',
-            label: 'Orders In Progress',
-            data: [47, 180, 190, 40, 36, 15, 6, 900].reverse(),
-            backgroundColor: 'rgba(128,0,255,0.4)',
-            borderColor: 'rgba(0,0,255,0.4)',
-            fill: false,
-          }
-        ]
-      }
-    });
   }
 }

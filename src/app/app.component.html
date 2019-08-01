@@ -1,3 +1,11 @@
+<div class="loading" *ngIf="userService.loading == true || userService.isConnected == false">
+    <div *ngIf="userService.loading == true" class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <div *ngIf="userService.isConnected == false" class="lds-spinner">
+        <i class="material-icons">
+            signal_wifi_off
+        </i>
+    </div>
+</div>
 <app-header-nav *ngIf="true"></app-header-nav>
 <div class="app-content"><router-outlet></router-outlet></div>
 <app-footer *ngIf="true"></app-footer>

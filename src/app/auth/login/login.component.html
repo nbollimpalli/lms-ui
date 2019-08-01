@@ -1,6 +1,11 @@
+<div class="dialog-close-button-with-title">
+  <div><h4>WELCOME TO ECART</h4></div>
+  <div class="fun-strip">
+  </div>
+  <button mat-dialog-close  mat-icon-button><mat-icon class="cancel-dialog-icon">cancel</mat-icon></button>
+</div>
 <div class="center-form-container-by-row root-login-container">
   <div class="login-form-enclosure">
-    <div class="simple-divider"><h3>LOG IN WITH</h3></div>
     <!-- <div class="social-sso">
         <a routerLink="/" *ngFor="let login of social_logins">
           <img class="scoial-icon" src="{{img_icon_data[login]}}" alt="" height="42" width="42">
@@ -9,13 +14,10 @@
     <div class="simple-divider"><h3>OR</h3></div> -->
     <form class="center-form-container-by-col login-form" (ngSubmit)="onSubmit()" #f [formGroup]="loginForm">
       <mat-form-field class="mat-form-input">
-        <input matInput placeholder="Email or Mobile" formControlName="email"
+        <input matInput placeholder="Mobile" formControlName="mobile"
                 type="text" [errorStateMatcher]="matcher">
-        <mat-error *ngIf="loginForm.controls['email'].hasError('email') && !loginForm.controls['email'].hasError('required')">
-          Please enter a valid email address
-        </mat-error>
-        <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
-          Email is <strong>required</strong>
+        <mat-error *ngIf="loginForm.controls['mobile'].hasError('required')">
+          Mobile is <strong>required</strong>
         </mat-error>
       </mat-form-field>
 
@@ -26,14 +28,12 @@
             Password is <strong>required</strong>
           </mat-error>
       </mat-form-field>
-
-      <button class="login-button" mat-raised-button type="submit">LOGIN</button>
+      <div class="login-actions">
+          <button class="login-button login-actions-item" mat-raised-button type="submit">Login</button>
+          <button class="login-button login-actions-item" mat-raised-button>Forgot Password</button>
+        </div>
+      
     </form>
-
-    <div class="center-form-container-by-row login-options">
-      <button mat-raised-button routerLink="/signup">SIGNUP</button>
-      <button mat-raised-button routerLink="/signup">FORGOT PASSWORD</button>
-    </div>
   </div>
 </div>
     

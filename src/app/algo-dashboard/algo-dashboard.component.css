@@ -1,53 +1,52 @@
-.example-headers-align .mat-expansion-panel-header-title,
-.example-headers-align .mat-expansion-panel-header-description {
-  flex-basis: 0;
+.grid-container {
+  margin: 40px;
 }
 
-.example-headers-align {
-  justify-content: space-between;
-  align-items: center;
+.dashboard-card {
+  position: absolute;
+  top: 15px;
+  bottom: 15px;
+  background-color: rgba(14, 12, 12, 0);
+  border-color: rgba(0, 0, 0, 0);
+  box-shadow: none;
 }
 
-.grid-container{
-  margin: 5px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: top;
+.dashboard-card-content {
+  text-align: center;
 }
 
-.grid-element {
-  min-width: 40vw;  /* Or whatever */
+.app-category {
+  color: rgba(255,255,255,.7);
+  font-size: 0.7em;
 }
 
-.reports-filter {
-  width: 100%
+mat-card-header {
+  background-color : #40456d;
+  font-size: 1em;
 }
 
-.filters {
-  margin: 2px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: top;
+.mat-grid-tile
+{
+  width: 100%;
 }
 
-.actions {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
+mat-card
+{
+  width: 90%;
 }
 
-.example-additional-selection {
-  opacity: 0.75;
-  font-size: 0.75em;
+.app
+{
+  color: dimgrey;
+  font-size: 0.9em;
 }
 
-.canv {
-  min-height: 300px !important;
+.app_icon
+{
+  padding: 2px;
 }
 
-
+.app_url
+{
+  color: black;
+}

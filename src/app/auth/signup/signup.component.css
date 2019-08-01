@@ -62,13 +62,24 @@
   color: #848688e3;
 }
 
+.example-margin {
+    margin: 0 10px;
+  }
+
 .signup-form-enclosure
 {
-    min-width: 30%;
-    max-width: 50%;
+    width: 80%;
 }
 
 .root-signup-container
 {
     height: 100%;
+}
+
+.required-checks {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+    flex-wrap: wrap;
 }

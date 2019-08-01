@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from './shared/services/user.service';
 import { Router } from '@angular/router';
 
@@ -7,13 +7,9 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent{
   title = 'ecommerce-ui';
-  constructor(private userService : UserService, private router : Router){
-    console.log(userService.loggedin);
-    if(userService.loggedin === false)
-    {
-      this.router.navigate['/reports'];
-    }
+  constructor(public userService : UserService, private router : Router){
   }
+
 }

@@ -1,6 +1,12 @@
+<div class="dialog-close-button-with-title">
+  <div><h4>SIGNUP</h4></div>
+  <div class="fun-strip">
+  </div>
+  <button mat-dialog-close  mat-icon-button><mat-icon class="cancel-dialog-icon">cancel</mat-icon></button>
+</div>
 <div class="center-form-container-by-row root-signup-container">
     <div class="signup-form-enclosure">
-      <div class="simple-divider"><h3>SIGNUP WITH</h3></div>
+      
       <!-- <div class="social-sso">
           <a routerLink="/" *ngFor="let login of social_logins">
             <img class="scoial-icon" src="{{img_icon_data[login]}}" alt="" height="42" width="42">
@@ -9,6 +15,17 @@
       <!-- <div class="simple-divider"><h3>OR</h3></div> -->
       <form class="center-form-container-by-col signup-form" (ngSubmit)="onSubmit()" [formGroup]="signupForm">
           <mat-form-field class="mat-form-input">
+            <input matInput placeholder="Mobile" formControlName="mobile"
+                    type="text" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="signupForm.controls['mobile'].hasError('mobile') && !signupForm.controls['mobile'].hasError('required')">
+              Please enter a valid mobile number
+            </mat-error>
+            <mat-error *ngIf="signupForm.controls['mobile'].hasError('required')">
+              Mobile is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+
+        <!-- <mat-form-field class="mat-form-input">
             <input matInput placeholder="Name" formControlName="name"
                     type="text" [errorStateMatcher]="matcher">
             <mat-error *ngIf="signupForm.controls['name'].hasError('name') && !signupForm.controls['name'].hasError('required')">
@@ -17,7 +34,7 @@
             <mat-error *ngIf="signupForm.controls['name'].hasError('required')">
               Name is <strong>required</strong>
             </mat-error>
-          </mat-form-field>
+          </mat-form-field> -->
 
         <mat-form-field class="mat-form-input">
           <input matInput placeholder="Email" formControlName="email"
@@ -29,17 +46,6 @@
             Email is <strong>required</strong>
           </mat-error>
         </mat-form-field>
-
-        <mat-form-field class="mat-form-input">
-            <input matInput placeholder="Mobile" formControlName="mobile"
-                    type="text" [errorStateMatcher]="matcher">
-            <mat-error *ngIf="signupForm.controls['mobile'].hasError('mobile') && !signupForm.controls['mobile'].hasError('required')">
-              Please enter a valid email address
-            </mat-error>
-            <mat-error *ngIf="signupForm.controls['mobile'].hasError('required')">
-              Mobile is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
   
         <mat-form-field class="mat-form-input">
             <input matInput placeholder="Password" type="password" formControlName="password"
@@ -56,13 +62,15 @@
               Password is <strong>required</strong>
             </mat-error>
         </mat-form-field>
-  
-        <button class="signup-button" mat-raised-button type="submit">SIGNUP</button>
+        <mat-checkbox class="mat-form-input" formControlName="agreed">Agreed To Terms and Conditions</mat-checkbox>
+        <mat-divider></mat-divider>
+        <mat-checkbox class="mat-form-input" formControlName="subscribe_newsletter">Subscribe To News Letter</mat-checkbox>
+                  
+        <button [disabled]="signupForm.invalid" class="signup-button" mat-raised-button type="submit">SIGNUP</button>
       </form>
   
       <div class="center-form-container-by-row signup-options">
-        <button mat-raised-button routerLink="/login">LOGIN</button>
-        <button mat-raised-button routerLink="/signup">FORGOT PASSWORD</button>
+        
       </div>
     </div>
   </div>

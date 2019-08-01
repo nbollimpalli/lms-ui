@@ -66,6 +66,18 @@ button
   align-items: center;
 }
 
+.dialog-close-button-with-title {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cancel-dialog-icon {
+  color: #626f8882;
+}
+
 .ucard {
   /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -243,6 +255,10 @@ button
 
 .algolist-item-content-details-item {
   padding: 2px;
+}
+
+.fun-strip {
+  min-width: 10vw;
 }
 
 html, body { height: 100%; }

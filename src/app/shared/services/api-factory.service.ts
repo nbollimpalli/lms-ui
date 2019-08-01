@@ -15,12 +15,15 @@ export class ApiFactoryService {
   load_apis() {
     //auth services
     this.api_map.set('LOGIN_USER', '/auth/login/');
-    this.api_map.set('REGISTER_USER', '/auth/register/');
+    this.api_map.set('SIGNUP_USER', '/auth/signup/');
     this.api_map.set('SOCIAL_SIGN_ON', '/auth/social-auth/');
     this.api_map.set('FORGOT_PASSWORD', '/auth/forgot-password/');
     this.api_map.set('SEND_OTP', '/auth/send-otp/');
     this.api_map.set('VERIFY_OTP', '/auth/verify-otp/');
     this.api_map.set('RESET_PASSWORD', '/auth/reset-password/');
+    
+    //current user services
+    this.api_map.set('FETCH_PROFILE', '/profile/');
 
     //file manager services
     this.api_map.set('UPLOAD_FILE', '/file/upload/');

@@ -18,12 +18,18 @@ import { PolicyComponent } from './policy/policy.component';
 import { ReportsComponent } from './reports/reports.component';
 import { SupportComponent } from './support/support.component';
 import { SettingsComponent } from './settings/settings.component';
+import { FabricCatsComponent } from './fabric-cats/fabric-cats.component';
+import { FabricCatComponent } from './fabric-cat/fabric-cat.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { CustomerHomeComponent } from './customer-home/customer-home.component';
 
 export const appRoutes: Routes = [
-  { path: '', component: StoresComponent , pathMatch: 'full'},
-  { path: 'signup', component: SignupComponent },
-  { path: 'login', component: LoginComponent },
+  { path: '', component: AlgoDashboardComponent , pathMatch: 'full'},
+  { path: 'dashboard', component: AlgoDashboardComponent },
+  { path: 'chome', component: CustomerHomeComponent },
   { path: 'profile', component: UserComponent },
+  { path: 'fabric-categories', component: FabricCatsComponent },
+  { path: 'fabric-category', component: FabricCatComponent },
   { path: 'users', component: UsersComponent },
   { path: 'user', component: UserComponent },
   { path: 'user/:id', component: UserComponent },
@@ -42,5 +48,6 @@ export const appRoutes: Routes = [
   { path: 'reports', component: ReportsComponent },
   { path: 'support', component: SupportComponent },
   { path: 'settings', component: SettingsComponent },
-  { path: '**', component: AlgoDashboardComponent }
+  { path: '404', component: PageNotFoundComponent },  
+  { path: '**', component: PageNotFoundComponent }
 ];
