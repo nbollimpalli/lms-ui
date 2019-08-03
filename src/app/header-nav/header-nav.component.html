@@ -53,6 +53,29 @@
       <span class='tollbar-splitter'></span>
       <button
         type="button"
+        mat-icon-button
+        matBadge="1" 
+        matBadgePosition="before"
+        matBadgeColor="warn"
+        [matMenuTriggerFor]="menu"
+        *ngIf="userService.user.LoggedIn"
+      >
+        <mat-icon class="toggle-icon white-color" aria-label="notifications" >notifications_active</mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu">
+          <button *ngFor="let n of userService.notifications" mat-menu-item (click)="onClickOfNotification(n,[])">
+            <mat-icon>{{n['icon']}}</mat-icon>
+            <span>{{n['name']}}</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>notifications_off</mat-icon>
+            <span>Disable alerts</span>
+          </button>
+        </mat-menu>
+
+      <button
+        type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
@@ -60,10 +83,11 @@
       >
         <mat-icon class="toggle-icon white-color" aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
+      
       <span *ngIf="userService.user.LoggedIn == false">
-        <a [routerLink]=""   class="login-url white-color" (click)="dialogService.openDialog('login', {})">LOGIN</a>
-        <span class="white-color action-seperator">or</span>
-        <a [routerLink]=""  class="login-url white-color" (click)="dialogService.openDialog('signup', {})">REGISTER</a>
+        <a [routerLink]=""   class="login-url white-color" (click)="dialogService.openDialog(['login', {}])">LOGIN</a>
+        <span class="white-color action-seperator">/</span>
+        <a [routerLink]=""  class="login-url white-color" (click)="dialogService.openDialog(['signup', {}])">REGISTER</a>
      </span>
   </mat-toolbar>
 

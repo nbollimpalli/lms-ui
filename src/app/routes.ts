@@ -17,16 +17,17 @@ import { NewsComponent } from './news/news.component';
 import { PolicyComponent } from './policy/policy.component';
 import { ReportsComponent } from './reports/reports.component';
 import { SupportComponent } from './support/support.component';
-import { SettingsComponent } from './settings/settings.component';
 import { FabricCatsComponent } from './fabric-cats/fabric-cats.component';
 import { FabricCatComponent } from './fabric-cat/fabric-cat.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CustomerHomeComponent } from './customer-home/customer-home.component';
+import { RoleMgmtComponent } from './role-mgmt/role-mgmt.component';
 
 export const appRoutes: Routes = [
-  { path: '', component: AlgoDashboardComponent , pathMatch: 'full'},
+  { path: '', component: CustomerHomeComponent , pathMatch: 'full'},
   { path: 'dashboard', component: AlgoDashboardComponent },
   { path: 'chome', component: CustomerHomeComponent },
+  { path: 'roles', component: RoleMgmtComponent },
   { path: 'profile', component: UserComponent },
   { path: 'fabric-categories', component: FabricCatsComponent },
   { path: 'fabric-category', component: FabricCatComponent },
@@ -47,7 +48,6 @@ export const appRoutes: Routes = [
   { path: 'policy', component: PolicyComponent },
   { path: 'reports', component: ReportsComponent },
   { path: 'support', component: SupportComponent },
-  { path: 'settings', component: SettingsComponent },
   { path: '404', component: PageNotFoundComponent },  
   { path: '**', component: PageNotFoundComponent }
 ];

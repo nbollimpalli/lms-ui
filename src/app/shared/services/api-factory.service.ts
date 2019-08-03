@@ -17,14 +17,20 @@ export class ApiFactoryService {
     this.api_map.set('LOGIN_USER', '/auth/login/');
     this.api_map.set('SIGNUP_USER', '/auth/signup/');
     this.api_map.set('SOCIAL_SIGN_ON', '/auth/social-auth/');
-    this.api_map.set('FORGOT_PASSWORD', '/auth/forgot-password/');
-    this.api_map.set('SEND_OTP', '/auth/send-otp/');
-    this.api_map.set('VERIFY_OTP', '/auth/verify-otp/');
-    this.api_map.set('RESET_PASSWORD', '/auth/reset-password/');
-    
+    this.api_map.set('REQ_OTP', '/profile/otp');
+    this.api_map.set('VERIFY_USER', '/profile/verify');
+    this.api_map.set('IS_VALID_OTP', '/profile/valid-otp');
+    this.api_map.set('RESET_PASSWORD', '/profile/reset-password/');
+    this.api_map.set('FORGOT_RESET_PASSWORD', '/profile/forgot-password-reset');
     //current user services
     this.api_map.set('FETCH_PROFILE', '/profile/');
-
+    this.api_map.set('UPDATE_PROFILE', '/profile/update');
+    //user management
+    this.api_map.set('GROUPS', '/profile/groups');
+    this.api_map.set('CONTENT_TYPES', '/profile/content-types');
+    this.api_map.set('PERMISSIONS', '/profile/permissions');
+    this.api_map.set('UPDATE_PERMISSION', '/profile/permission/update');
+    
     //file manager services
     this.api_map.set('UPLOAD_FILE', '/file/upload/');
     this.api_map.set('DELETE_FILE', '/file/delete/');

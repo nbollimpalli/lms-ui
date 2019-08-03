@@ -1,7 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { User } from '../models/user.model';
 import { RestService } from './rest.service';
-import { FirebaseService } from './firebase.service';
 import { Router } from '@angular/router';
 import { ConnectionService } from 'ng-connection-service';
 import { SnackbarService } from './snackbar.service';
@@ -16,10 +15,10 @@ export class UserService {
   public isConnected = true;
   successEmitter = new EventEmitter<Object>();
   errorEmitter = new EventEmitter<Object>();
+  notifications = [];
 
   constructor(
               private restService : RestService, 
-              private firebaseService : FirebaseService, 
               private router : Router, 
               private connectionService: ConnectionService, 
               private snackbar : SnackbarService,
@@ -33,27 +32,65 @@ export class UserService {
     this.updateGuestUser();
     if(token != null)
     {
-      this.updateLoggedInUser(token);
+      this.updateLoggedInUser(true);
     }
     else
     {
       this.loading = false;
-      this.router.navigate([this.user.HomeUrl]);
     }
   }
 
-  
+  requestOTP(mobile, type)
+  {
+    var params = {'mobile' : mobile, 'type' : type}
+    this.restService.get('REQ_OTP', null, params).subscribe(
+      (data) => {
+        this.snackbar.afterRequest(data);
+      },
+      (data) => {
+        this.snackbar.afterRequestFailure(data);
+      }
+    );
+  }
 
-  updateLoggedInUser(token)
+  verify(otp)
+  {
+    var body = {'otp' : otp}
+    this.restService.post('VERIFY_USER', null, null, body).subscribe(
+      (data) => {
+        this.snackbar.afterRequest(data);
+        this.successEmitter.emit({'code' : 'verify', 'data' : data});
+        this.notifications.length = 0;
+      },
+      (data) => {
+        this.snackbar.afterRequestFailure(data);
+      }
+    );
+  }
+
+  updateLoggedInUser(refresh)
   {
     this.restService.get('FETCH_PROFILE', null, null).subscribe(
       (data) => {
         console.log('****');
         console.log(data);
         this.user.setupLoggedInUser(data['data']);
-        this.successEmitter.emit({'code' : 'login', 'data' : data});
+        var emi = {'code' : 'login', 'data' : data};
+        if(this.user.Status == 'pending')
+        {
+          this.notifications.push({ 'name':'Verify your account','icon':'flash_on','action' : 'verifyAccount'});
+          if(refresh == false)
+          {
+            emi['action'] = 'openDialog';
+            emi['params'] = ['verify', {}];
+          }
+        }
+        this.successEmitter.emit(emi);
         this.loading = false;
-        this.router.navigate([this.user.HomeUrl]);
+        if(refresh == false)
+        {
+          this.router.navigate([this.user.HomeUrl]);
+        }
       },
       (data) => {
         this.loading = false;
@@ -132,7 +169,7 @@ export class UserService {
         var token = data["data"]["token"];
         this.afterLogin(token);
         this.snackbar.afterRequest(data["data"]);
-        this.updateLoggedInUser(token);
+        this.updateLoggedInUser(false);
       },
       (data) => {
         this.snackbar.afterRequestFailure(data);
@@ -207,5 +244,10 @@ export class UserService {
     this.connectionService.monitor().subscribe(isConnected => {
       this.isConnected = isConnected;
     })
+  }
+
+  updateUser(data)
+  {
+    
   }
 }

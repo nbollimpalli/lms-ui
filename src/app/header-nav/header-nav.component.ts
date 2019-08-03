@@ -35,11 +35,6 @@ export class HeaderNavComponent implements OnInit {
         title: 'Profile',
         icon: 'account_box',
         path: '/profile'
-      },
-      { 
-        title: 'Settings',
-        icon: 'settings',
-        path: '/settings'
       }
     ],
     [
@@ -55,6 +50,7 @@ export class HeaderNavComponent implements OnInit {
       }
     ]
   ];
+  
     
   constructor(
               public userService : UserService,
@@ -91,7 +87,15 @@ export class HeaderNavComponent implements OnInit {
     );
   }
 
-  
+  onClickOfNotification(notification, params)
+  {
+    this[notification['action']](params);
+  }
+
+  verifyAccount(params)
+  {
+    this.dialogService.openDialog(['verify', {}]);
+  }
 
   logout(drawer)
   {

@@ -1,1 +1,22 @@
-<p>verify works!</p>
+<div class="dialog-close-button-with-title">
+<div><h4>Verification</h4></div>
+<div class="fun-strip">
+</div>
+<button mat-dialog-close  mat-icon-button><mat-icon class="cancel-dialog-icon">cancel</mat-icon></button>
+</div>
+
+
+<mat-horizontal-stepper [linear]="true" #stepper>
+    <mat-step [stepControl]="requestOTP">
+        <ng-template matStepLabel></ng-template>
+        <div class="center-form-container-by-row root-login-container">
+            <mat-form-field class="mat-form-input">
+                <input matInput placeholder="OTP" [(ngModel)]="otp" type="text">
+            </mat-form-field>
+            <div class="login-actions">
+                <button class="login-button login-actions-item" (click)="userService.requestOTP(userService.user.Mobile, 'confirm_user')" mat-raised-button>Request OTP</button>
+                <button [disabled] = "otp.length != 6" class="login-button login-actions-item" (click)="userService.verify(otp)" mat-raised-button>Confirm OTP</button>
+            </div>
+        </div>
+    </mat-step>
+</mat-horizontal-stepper>

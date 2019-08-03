@@ -42,7 +42,6 @@ import { NewsComponent } from './news/news.component';
 import { PolicyComponent } from './policy/policy.component';
 import { ReportsComponent } from './reports/reports.component';
 import { SupportComponent } from './support/support.component';
-import { SettingsComponent } from './settings/settings.component';
 import { FabricCatsComponent } from './fabric-cats/fabric-cats.component';
 import { FabricCatComponent } from './fabric-cat/fabric-cat.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -50,6 +49,8 @@ import { CustomerHomeComponent } from './customer-home/customer-home.component';
 import { ConnectionService } from 'ng-connection-service';
 import { BreakpointObserverService } from './shared/services/breakpoint-observer.service';
 import { DialogService } from './shared/services/dialog.service';
+import { VerifyComponent } from './auth/verify/verify.component';
+import { RoleMgmtComponent } from './role-mgmt/role-mgmt.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,11 +75,12 @@ import { DialogService } from './shared/services/dialog.service';
     PolicyComponent,
     ReportsComponent,
     SupportComponent,
-    SettingsComponent,
     FabricCatsComponent,
     FabricCatComponent,
     PageNotFoundComponent,
     CustomerHomeComponent,
+    VerifyComponent,
+    RoleMgmtComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -97,7 +99,7 @@ import { DialogService } from './shared/services/dialog.service';
     )
   ],
   providers: [BreakpointObserverService, DialogService, SnackbarService, FirebaseService, UserService, RestService, ApiFactoryService, FileManagerService, AuthService, SearchService, SeoService, ConnectionService],
-  entryComponents: [SearchPopupComponent, LoginComponent, SignupComponent],
+  entryComponents: [SearchPopupComponent, LoginComponent, SignupComponent, VerifyComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

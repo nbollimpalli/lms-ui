@@ -43,6 +43,11 @@ export class AlgoDashboardComponent {
     { title: 'User Management', services :
       [
         {
+          'title' : 'Roles and Permissions',
+          'icon' : 'lock',
+          'url' : '/roles'
+        },
+        {
           'title' : 'New User',
           'icon' : 'person_add',
           'url' : '/user'

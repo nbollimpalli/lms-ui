@@ -1,0 +1,106 @@
+/* .signup-button
+{
+    background-color: white;
+    color: black;
+} */
+
+.ucard {
+    background-color: #373d65;
+}
+
+.mat-form-input {
+    width: 100%;
+}
+
+.signup-button
+{
+    font: inherit;
+    width: 100%;
+    background-color: #373d65;
+    border-width: 0px;
+    border-radius: 0px;
+    height: 40px;
+    padding: 5px;
+    margin-top: 20px;
+    color: white;
+}
+
+.social-sso
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.signup-options
+{
+    margin-top: 25px;
+    width: 100%;
+}
+
+.signup-options > button
+{
+    min-width: 40%;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.scoial-icon
+{
+    height: 40px;
+    width: 40px;
+    padding: 5px;
+}
+
+.simple-divider
+{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: #848688e3;
+}
+
+.example-margin {
+    margin: 0 10px;
+  }
+
+.signup-form-enclosure
+{
+    min-width: 20%;
+}
+
+.settings-enclosure
+{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    color: #848688e3;
+}
+
+.root-signup-container
+{
+    min-height: 80vh;
+}
+
+.pem-text {
+    margin-left: 4vw;
+    color: #dcdedeb8;
+}
+
+.required-checks {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.padding-top-10vh {
+    padding-top: 10vh;
+}

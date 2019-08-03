@@ -36,6 +36,20 @@
   width: 100%;
 }
 
+.avatar {
+  vertical-align: initial;
+  width: 70px;
+  height: 70px;
+  margin-bottom: 10vh;
+  background-color: #383e65;
+  cursor: pointer;
+  border-radius: 30%;
+}
+
+.avatar:hover {
+  border-radius: 0%;
+}
+
 .grey-divider
 {
   border-top-color: #ffffff1f;
@@ -43,6 +57,10 @@
 
 .white-color {
   color: white;
+}
+
+.silver-line-color {
+  color: #dcdedeb8;
 }
 
 .red-color {
@@ -56,6 +74,16 @@ button
 
 .toolbar-button {
   margin-top: 15px !important;
+}
+
+.verticle-line {
+  padding: 0px;
+  margin: 5vh;
+  border: 0px;
+  border-color: red;
+  min-height: 50vh;
+  width: 1px;
+  background-color: #dcd1d18c;
 }
 
 .ucard-container {
@@ -87,7 +115,16 @@ button
   margin-bottom: 15px;
   margin-left: 5px;
   margin-right: 5px;
-  width: 30%;
+  min-width: 20%;
+  min-height: 5vh;
+}
+
+.ucard-items-space-inbetween {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* On mouse-over, add a deeper shadow */
@@ -260,6 +297,13 @@ button
 .fun-strip {
   min-width: 10vw;
 }
+
+.tab-icon {
+  margin-right: 0px;
+  font-size: 15px;
+}
+
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

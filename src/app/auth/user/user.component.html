@@ -1,36 +1,116 @@
-<mat-vertical-stepper [linear]="false" #stepper>
-    <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Fill out your name</ng-template>
-        <mat-form-field>
-          <input matInput placeholder="Name" formControlName="name" required>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Email" formControlName="email" required>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="secondFormGroup">
-      <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Fill out your address</ng-template>
-        <mat-form-field>
-          <input matInput placeholder="Address" formControlName="secondCtrl" required>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      You are now done.
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
+<mat-tab-group mat-align-tabs="center">
+      <mat-tab >
+        <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">person</mat-icon>
+        Profile
+        </ng-template>
+
+        <div class="center-form-container-by-row root-signup-container">
+            <div class="settings-enclosure">
+                <img src="https://algovent-static.s3.ap-south-1.amazonaws.com/algovent.png" alt="Avatar" class="avatar">
+                <mat-checkbox disabled [ngModel]="true" class="mat-form-input" >Subscribed To News Letter</mat-checkbox>
+                <mat-checkbox disabled [ngModel]="true" class="mat-form-input" >Subscribed To Transactional Notifications</mat-checkbox>
+                <mat-checkbox disabled [ngModel]="true" class="mat-form-input" >Subscribed To Desktop Notifications</mat-checkbox>
+                <mat-checkbox disabled [ngModel]="true" class="mat-form-input" >Subscribed To Mobile Notifications</mat-checkbox>
+            </div>
+            <div class="verticle-line"></div>
+            <div class="signup-form-enclosure">
+              <form class="center-form-container-by-col signup-form" (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
+                  <mat-form-field class="mat-form-input">
+                    <input disabled matInput placeholder="Mobile" type="text" [value]="userService.user.Mobile">
+                  </mat-form-field>
+
+                  <mat-form-field class="mat-form-input">
+                      <input disabled matInput placeholder="Status" type="text" [value]="userService.user.Status">
+                    </mat-form-field>
+
+                <mat-form-field class="mat-form-input">
+                  <input matInput placeholder="Name" formControlName="name"
+                          type="text" [errorStateMatcher]="matcher">
+                  <mat-error *ngIf="userForm.controls['name'].hasError('name') && !userForm.controls['name'].hasError('required')">
+                    Please enter a valid name
+                  </mat-error>
+                  <mat-error *ngIf="userForm.controls['name'].hasError('required')">
+                    Name is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+                
+                <mat-form-field class="mat-form-input">
+                  <input matInput placeholder="Email" formControlName="email"
+                          type="text" [errorStateMatcher]="matcher">
+                  <mat-error *ngIf="userForm.controls['email'].hasError('email') && !userForm.controls['email'].hasError('required')">
+                    Please enter a valid email address
+                  </mat-error>
+                  <mat-error *ngIf="userForm.controls['email'].hasError('required')">
+                    Email is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="mat-form-input">
+                    <input matInput placeholder="Confirm Password" formControlName="existing_password"
+                            type="password" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="userForm.controls['existing_password'].hasError('required')">
+                      Password is <strong>required</strong> for confirmation
+                    </mat-error>
+                  </mat-form-field>
+
+                <mat-divider></mat-divider>
+                
+                          
+                <button [disabled]="userForm.invalid" class="signup-button" mat-raised-button type="submit">UPDATE PROFILE</button>
+              </form>
+            </div>
+          </div>
+      </mat-tab>
+
+      <mat-tab >
+      <ng-template mat-tab-label>
+      <mat-icon class="tab-icon">vpn_key</mat-icon>
+      Reset Password
+      </ng-template>
+      <div class="center-form-container-by-row root-signup-container">
+          <div class="signup-form-enclosure">
+      
+          <form class="center-form-container-by-col signup-form" (ngSubmit)="onSubmit(passwordResetForm)" [formGroup]="passwordResetForm">
+
+            <mat-form-field class="mat-form-input">
+                <input matInput placeholder="Existing Password" formControlName="existing_password"
+                        type="password" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="passwordResetForm.controls['existing_password'].hasError('required')">
+                  Existing Password is <strong>required</strong> for confirmation
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="mat-form-input">
+                  <input matInput placeholder="New Password" formControlName="new_password"
+                          type="password" [errorStateMatcher]="matcher">
+                  <mat-error *ngIf="passwordResetForm.controls['new_password'].hasError('required')">
+                    New Password is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+
+            <mat-divider></mat-divider>
+            <!-- <mat-checkbox class="mat-form-input" formControlName="subscribe_newsletter">Subscribe To News Letter</mat-checkbox> -->
+                      
+            <button [disabled]="passwordResetForm.invalid" class="signup-button" mat-raised-button type="submit">RESET PASSWORD</button>
+          </form>
+          </div>
       </div>
-    </mat-step>
-  </mat-vertical-stepper>
+      </mat-tab>
+      <mat-tab *ngIf="userService.user.Staff">
+      <ng-template mat-tab-label>
+      <mat-icon class="tab-icon">lock</mat-icon>
+      Your permissions
+      </ng-template>
+      <div class="ucard-container padding-top-10vh">
+        <div class="ucard ucard-items-space-inbetween" *ngFor="let permission of permissions">
+          <div class="pem-text">YOU {{permission['name'] | uppercase}}</div>
+          <div>
+            <button mat-icon-button>
+              <mat-icon class="silver-line-color" aria-label="Example icon-button with a heart icon">help</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      </mat-tab>
+  </mat-tab-group>

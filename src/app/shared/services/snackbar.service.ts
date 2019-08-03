@@ -32,12 +32,22 @@ export class SnackbarService {
   {
     this.calm();
     var messages = data['error'];
+    console.log(data);
+    
     if(messages)
     {
-      messages = messages['messages'];
+      if(messages['messages'] == null)
+      {
+        this.show_snackbar(messages['detail']);
+      }
+      else
+      {
+        messages = messages['messages'];
+      }
     }
     if(messages && messages.length > 0)
     {
+     
       this.show_snackbar(messages.join(','));
     }
   }
