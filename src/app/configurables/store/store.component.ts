@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from '../shared/services/firebase.service';
+import { FirebaseService } from '../../shared/services/firebase.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {FormControl, Validators, FormGroup, FormBuilder} from '@angular/forms';
-import { AlgoErrorStateMatcher } from '../shared/utils/algo-error-state-matcher';
-import { SnackbarService } from '../shared/services/snackbar.service';
+import { AlgoErrorStateMatcher } from '../../shared/utils/algo-error-state-matcher';
+import { SnackbarService } from '../../shared/services/snackbar.service';
 
 
 export interface PricingItem {

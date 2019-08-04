@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FirebaseService } from '../shared/services/firebase.service';
+import { FirebaseService } from '../../shared/services/firebase.service';
 @Component({
   selector: 'app-stores',
   templateUrl: './stores.component.html',

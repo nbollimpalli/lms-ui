@@ -1,11 +1,3 @@
-<mat-toolbar-row class="filters">
-  <button class="toolbar-button" mat-icon-button matTooltip="Add User">
-    <mat-icon  aria-label="Users">people</mat-icon>
-  </button>
-  <button class="toolbar-button" routerLink="/user" mat-icon-button matTooltip="Add User">
-    <mat-icon  aria-label="Add User">person_add</mat-icon>
-  </button>
-</mat-toolbar-row>
 <div >
   <mat-paginator [length]="total_count" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions" (page)="setPagination($event)"></mat-paginator>
   <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
@@ -54,7 +46,7 @@
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+  <tr mat-row [routerLink]="['/user/'+element['id']]" *matRowDef="let element; columns: columnsToDisplay;"
       class="example-element-row"
       >
   </tr>

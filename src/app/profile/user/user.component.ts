@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
 import {FormControl, Validators, FormGroup, FormBuilder} from '@angular/forms';
 import { AlgoErrorStateMatcher } from '../../shared/utils/algo-error-state-matcher';
-import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { RestService } from 'src/app/shared/services/rest.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -18,12 +18,28 @@ export class UserComponent implements OnInit {
   matcher = new AlgoErrorStateMatcher();
   subscribe = true;
   permissions = {};
+  id;
+  mode = 'new';
   constructor(
     public userService : UserService, 
     private formBuilder: FormBuilder,
     private snackbarService: SnackbarService,
     private restService: RestService,
-  ) { }
+    private route : ActivatedRoute
+  ) 
+  { 
+    this.route.params.subscribe( params => {
+      this.id = params['id']
+      if(this.id == 'profile')
+      {
+        this.mode = 'profile';
+      }
+      else if(this.id != null)
+      {
+        this.mode = 'edit'
+      }
+    } );
+  }
 
   social_logins = [
     'Facebook',

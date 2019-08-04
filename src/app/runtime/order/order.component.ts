@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from '../shared/services/firebase.service';
+import { FirebaseService } from '../../shared/services/firebase.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import {FormControl, FormBuilder} from '@angular/forms';
-import { SnackbarService } from '../shared/services/snackbar.service';
+import { FormBuilder } from '@angular/forms';
+import { SnackbarService } from '../../shared/services/snackbar.service';
 
 export interface PricingItem {
   name: string;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RestService } from '../../shared/services/rest.service';
-import { SnackbarService } from '../../shared/services/snackbar.service';
+import { RestService } from '../../../shared/services/rest.service';
+import { SnackbarService } from '../../../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-permissions',

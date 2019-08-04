@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UserService } from '../shared/services/user.service';
+import { UserService } from '../../shared/services/user.service';
 import {PageEvent} from '@angular/material';
-import { RestService } from '../shared/services/rest.service';
-import { SnackbarService } from '../shared/services/snackbar.service';
+import { RestService } from '../../shared/services/rest.service';
+import { SnackbarService } from '../../shared/services/snackbar.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';

@@ -1,30 +1,28 @@
 import { Routes } from '@angular/router';
 
-import { AlgoDashboardComponent } from './algo-dashboard/algo-dashboard.component';
-import { LoginComponent } from './auth/login/login.component';
-import { SignupComponent } from './auth/signup/signup.component';
-import { UserComponent } from './auth/user/user.component';
-import { UsersComponent } from './users/users.component';
-import { StoresComponent } from './stores/stores.component';
-import { StoreComponent } from './store/store.component';
-import { OrdersComponent } from './orders/orders.component';
-import { OrderComponent } from './order/order.component';
-import { AboutComponent } from './about/about.component';
-import { ContactComponent } from './contact/contact.component';
-import { FeedbackComponent } from './feedback/feedback.component';
-import { JobsComponent } from './jobs/jobs.component';
-import { NewsComponent } from './news/news.component';
-import { PolicyComponent } from './policy/policy.component';
+import { AlgoDashboardComponent } from './configurables/algo-dashboard/algo-dashboard.component';
+import { UserComponent } from './profile/user/user.component';
+import { UsersComponent } from './configurables/users/users.component';
+import { StoresComponent } from './configurables/stores/stores.component';
+import { StoreComponent } from './configurables/store/store.component';
+import { OrdersComponent } from './runtime/orders/orders.component';
+import { OrderComponent } from './runtime/order/order.component';
+import { AboutComponent } from './company/about/about.component';
+import { ContactComponent } from './company/contact/contact.component';
+import { FeedbackComponent } from './company/feedback/feedback.component';
+import { JobsComponent } from './company/jobs/jobs.component';
+import { NewsComponent } from './company/news/news.component';
+import { PolicyComponent } from './company/policy/policy.component';
 import { ReportsComponent } from './reports/reports.component';
-import { SupportComponent } from './support/support.component';
-import { FabricCatsComponent } from './fabric-cats/fabric-cats.component';
-import { FabricCatComponent } from './fabric-cat/fabric-cat.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { SupportComponent } from './company/support/support.component';
+import { FabricCatsComponent } from './configurables/fabric-cats/fabric-cats.component';
+import { FabricCatComponent } from './configurables/fabric-cat/fabric-cat.component';
+import { PageNotFoundComponent } from './company/page-not-found/page-not-found.component';
 import { CustomerHomeComponent } from './customer-home/customer-home.component';
-import { PermissionsComponent } from './role-mgmt/permissions/permissions.component';
-import { RolesComponent } from './role-mgmt/roles/roles.component';
-import { WalletComponent } from './wallet/wallet.component';
-import { HistoryComponent } from './history/history.component';
+import { PermissionsComponent } from './configurables/role-mgmt/permissions/permissions.component';
+import { RolesComponent } from './configurables/role-mgmt/roles/roles.component';
+import { WalletComponent } from './profile/wallet/wallet.component';
+import { HistoryComponent } from './profile/history/history.component';
 
 export const appRoutes: Routes = [
   { path: '', component: CustomerHomeComponent , pathMatch: 'full'},
@@ -32,13 +30,13 @@ export const appRoutes: Routes = [
   { path: 'chome', component: CustomerHomeComponent },
   { path: 'roles', component: RolesComponent },
   { path: 'permissions', component: PermissionsComponent },
-  { path: 'profile', component: UserComponent },
   { path: 'wallet', component: WalletComponent },
   { path: 'history', component: HistoryComponent },
   { path: 'fabric-categories', component: FabricCatsComponent },
   { path: 'fabric-category', component: FabricCatComponent },
   { path: 'users/:type', component: UsersComponent },
   { path: 'user', component: UserComponent },
+  { path: 'user/profile', component: UserComponent },
   { path: 'user/:id', component: UserComponent },
   { path: 'stores', component: StoresComponent },
   { path: 'store', component: StoreComponent },
