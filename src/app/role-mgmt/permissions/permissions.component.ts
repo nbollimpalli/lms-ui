@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { RestService } from '../shared/services/rest.service';
-import { SnackbarService } from '../shared/services/snackbar.service';
+import { RestService } from '../../shared/services/rest.service';
+import { SnackbarService } from '../../shared/services/snackbar.service';
 
 @Component({
-  selector: 'app-role-mgmt',
-  templateUrl: './role-mgmt.component.html',
-  styleUrls: ['./role-mgmt.component.css']
+  selector: 'app-permissions',
+  templateUrl: './permissions.component.html',
+  styleUrls: ['./permissions.component.css']
 })
-export class RoleMgmtComponent implements OnInit {
+export class PermissionsComponent implements OnInit {
   groups = [];
   content_types = []
   permissions = {};

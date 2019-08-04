@@ -35,6 +35,16 @@ export class HeaderNavComponent implements OnInit {
         title: 'Profile',
         icon: 'account_box',
         path: '/profile'
+      },
+      { 
+        title: 'Wallet',
+        icon: 'account_balance_wallet',
+        path: '/wallet'
+      },
+      { 
+        title: 'History',
+        icon: 'history',
+        path: '/history'
       }
     ],
     [

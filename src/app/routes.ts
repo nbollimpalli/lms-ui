@@ -21,17 +21,23 @@ import { FabricCatsComponent } from './fabric-cats/fabric-cats.component';
 import { FabricCatComponent } from './fabric-cat/fabric-cat.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CustomerHomeComponent } from './customer-home/customer-home.component';
-import { RoleMgmtComponent } from './role-mgmt/role-mgmt.component';
+import { PermissionsComponent } from './role-mgmt/permissions/permissions.component';
+import { RolesComponent } from './role-mgmt/roles/roles.component';
+import { WalletComponent } from './wallet/wallet.component';
+import { HistoryComponent } from './history/history.component';
 
 export const appRoutes: Routes = [
   { path: '', component: CustomerHomeComponent , pathMatch: 'full'},
   { path: 'dashboard', component: AlgoDashboardComponent },
   { path: 'chome', component: CustomerHomeComponent },
-  { path: 'roles', component: RoleMgmtComponent },
+  { path: 'roles', component: RolesComponent },
+  { path: 'permissions', component: PermissionsComponent },
   { path: 'profile', component: UserComponent },
+  { path: 'wallet', component: WalletComponent },
+  { path: 'history', component: HistoryComponent },
   { path: 'fabric-categories', component: FabricCatsComponent },
   { path: 'fabric-category', component: FabricCatComponent },
-  { path: 'users', component: UsersComponent },
+  { path: 'users/:type', component: UsersComponent },
   { path: 'user', component: UserComponent },
   { path: 'user/:id', component: UserComponent },
   { path: 'stores', component: StoresComponent },

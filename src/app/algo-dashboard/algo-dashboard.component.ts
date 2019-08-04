@@ -43,11 +43,6 @@ export class AlgoDashboardComponent {
     { title: 'User Management', services :
       [
         {
-          'title' : 'Roles and Permissions',
-          'icon' : 'lock',
-          'url' : '/roles'
-        },
-        {
           'title' : 'New User',
           'icon' : 'person_add',
           'url' : '/user'
@@ -55,12 +50,26 @@ export class AlgoDashboardComponent {
         {
           'title' : 'Employees',
           'icon' : 'people',
-          'url' : '/users'
+          'url' : '/users/staff'
         },
         {
           'title' : 'Customers',
           'icon' : 'people_outline',
-          'url' : '/users'
+          'url' : '/users/customers'
+        }
+      ]
+    },
+    { title: 'Groups and Permissions', services:
+      [
+        {
+          'title' : 'Groups',
+          'icon' : 'people',
+          'url' : '/roles'
+        },
+        {
+          'title' : 'Permissions',
+          'icon' : 'lock',
+          'url' : '/permissions'
         }
       ]
     },
@@ -77,7 +86,8 @@ export class AlgoDashboardComponent {
           'url' : '/offers'
         }
       ]
-    }
+    },
+    
   ];
 
   position_matrix = {cols: 1, rows: 1};

@@ -50,7 +50,11 @@ import { ConnectionService } from 'ng-connection-service';
 import { BreakpointObserverService } from './shared/services/breakpoint-observer.service';
 import { DialogService } from './shared/services/dialog.service';
 import { VerifyComponent } from './auth/verify/verify.component';
-import { RoleMgmtComponent } from './role-mgmt/role-mgmt.component';
+import { PermissionsComponent } from './role-mgmt/permissions/permissions.component';
+import { RolesComponent } from './role-mgmt/roles/roles.component';
+import { WalletComponent } from './wallet/wallet.component';
+import { HistoryComponent } from './history/history.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,7 +84,10 @@ import { RoleMgmtComponent } from './role-mgmt/role-mgmt.component';
     PageNotFoundComponent,
     CustomerHomeComponent,
     VerifyComponent,
-    RoleMgmtComponent,
+    RolesComponent,
+    PermissionsComponent,
+    WalletComponent,
+    HistoryComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

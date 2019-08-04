@@ -6,61 +6,59 @@
     <mat-icon  aria-label="Add User">person_add</mat-icon>
   </button>
 </mat-toolbar-row>
-<br/>
-<br/>
 <div >
-    <mat-paginator [length]="50"
-    [pageSize]="10">
-</mat-paginator>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
-    <!-- Position Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>
-        <mat-form-field class="mat-form-input">
-            <input matInput placeholder="Name" formControlName="name"
-                    type="text">
+  <mat-paginator [length]="total_count" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions" (page)="setPagination($event)"></mat-paginator>
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>
+        <mat-form-field >
+            <input matInput placeholder="NAME" [formControl]="name">
         </mat-form-field>
-      </th>
-      <td mat-cell *matCellDef="let element"> {{element.payload.doc.data().name}} </td>
-    </ng-container>
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element['name']}} </td>
+  </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef> 
-          <mat-form-field class="mat-form-input">
-              <input matInput placeholder="Email" formControlName="email"
-                      type="text">
+  <ng-container matColumnDef="mobile">
+    <th mat-header-cell *matHeaderCellDef> 
+        <mat-form-field >
+            <input matInput placeholder="MOBILE" [formControl]="mobile">
+        </mat-form-field> 
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element['mobile']}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> 
+        <mat-form-field >
+            <input matInput placeholder="EMAIL" [formControl]="email">
+        </mat-form-field> 
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element['email']}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef> 
+        <mat-form-field>
+            <mat-select placeholder="STATUS" [formControl]="status" multiple>
+              <mat-select-trigger>
+                {{status.value ? status.value[0] : ''}}
+                <span *ngIf="status.value?.length > 1" >
+                  (+{{status.value.length - 1}} {{status.value?.length === 2 ? 'other' : 'others'}})
+                </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let statusListItem of statusList" [value]="statusListItem">{{statusListItem}}</mat-option>
+            </mat-select>
           </mat-form-field>
-      </th>
-      <td mat-cell *matCellDef="let element"> {{element.payload.doc.data().email}} </td>
-    </ng-container>
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element['status']}} </td>
+  </ng-container>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="role">
-      <th mat-header-cell *matHeaderCellDef> Role </th>
-      <td mat-cell *matCellDef="let element"> {{element.payload.doc.data().role}} </td>
-    </ng-container>
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+      class="example-element-row"
+      >
+  </tr>
+  <!-- <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr> -->
+</table>
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="edit">
-      <th mat-header-cell *matHeaderCellDef> Edit </th>
-      <td mat-cell *matCellDef="let element"> 
-        <button mat-icon-button><mat-icon>edit</mat-icon></button>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="delete">
-        <th mat-header-cell *matHeaderCellDef> Delete </th>
-        <td mat-cell *matCellDef="let element"> 
-          <button mat-icon-button><mat-icon>delete</mat-icon></button>
-        </td>
-      </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
 </div>
