@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { AlgoDashboardComponent } from './configurables/algo-dashboard/algo-dashboard.component';
-import { UserComponent } from './profile/user/user.component';
+import { ProfileComponent } from './profile/profile/profile.component';
 import { UsersComponent } from './configurables/users/users.component';
 import { StoresComponent } from './configurables/stores/stores.component';
 import { StoreComponent } from './configurables/store/store.component';
@@ -23,6 +23,7 @@ import { PermissionsComponent } from './configurables/role-mgmt/permissions/perm
 import { RolesComponent } from './configurables/role-mgmt/roles/roles.component';
 import { WalletComponent } from './profile/wallet/wallet.component';
 import { HistoryComponent } from './profile/history/history.component';
+import { UserComponent } from './configurables/user/user.component';
 
 export const appRoutes: Routes = [
   { path: '', component: CustomerHomeComponent , pathMatch: 'full'},
@@ -34,9 +35,9 @@ export const appRoutes: Routes = [
   { path: 'history', component: HistoryComponent },
   { path: 'fabric-categories', component: FabricCatsComponent },
   { path: 'fabric-category', component: FabricCatComponent },
-  { path: 'users/:type', component: UsersComponent },
+  { path: 'users/:type', component: UsersComponent },  
   { path: 'user', component: UserComponent },
-  { path: 'user/profile', component: UserComponent },
+  { path: 'profile', component: ProfileComponent },
   { path: 'user/:id', component: UserComponent },
   { path: 'stores', component: StoresComponent },
   { path: 'store', component: StoreComponent },

@@ -12,9 +12,29 @@ export class User {
     HomeUrl;
     Permissions;
     PermissionsList;
+    Group;
 
     constructor()
     {
+      this.setupNewUser()
+    }
+
+    setupNewUser()
+    {
+      this.Email = '';
+      this.Name = '';
+      this.Mobile = '';
+      this.LoggedIn = false;
+      this.AgreeTerms = true;
+      this.Subscribe = true;
+      this.SubscribeTransactions = true;
+      this.Status = 'pending';
+      this.SuperUser = false;
+      this.Staff = false;
+      this.HomeUrl = '/chome';
+      this.Permissions = {};
+      this.PermissionsList = [];
+      this.Group = null;
     }
 
     setupGuestUser()
@@ -24,13 +44,15 @@ export class User {
       this.Mobile = '';
       this.LoggedIn = false;
       this.AgreeTerms = true;
-      this.Subscribe = false;
+      this.Subscribe = true;
+      this.SubscribeTransactions = true;
       this.Status = 'active';
       this.SuperUser = false;
       this.Staff = false;
       this.HomeUrl = '/chome';
       this.Permissions = {};
       this.PermissionsList = [];
+      this.Group = null;
     }
 
     setupLoggedInUser(data)
@@ -49,6 +71,7 @@ export class User {
       this.SuperUser = data['is_superuser'];
       this.Permissions = data['permissions'];
       this.PermissionsList = data['permissions_list'];
+      this.Group = data['group'];
       if(data['is_staff'] == true)
       {
         this.HomeUrl = '/dashboard';

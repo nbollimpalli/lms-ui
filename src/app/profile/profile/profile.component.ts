@@ -8,10 +8,10 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css']
 })
-export class UserComponent implements OnInit {
+export class ProfileComponent implements OnInit {
   userForm: FormGroup;
   passwordResetForm : FormGroup;
   settingsForm : FormGroup;

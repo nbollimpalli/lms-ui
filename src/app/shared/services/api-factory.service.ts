@@ -31,9 +31,8 @@ export class ApiFactoryService {
     this.api_map.set('PERMISSIONS', '/management/permissions');
     this.api_map.set('UPDATE_PERMISSION', '/management/permission/update');
     this.api_map.set('USERS', '/management/users');
-    this.api_map.set('UPDATE_MANAGE_USER', '/users/update-manage-user/');
-    this.api_map.set('UPSERT_ROLE', '/ecore/upsert-role/');
-    this.api_map.set('FETCH_USER_PROFILE', '/users/profile');
+    this.api_map.set('USER', '/management/user');
+    this.api_map.set('UPSERT_USER', '/management/user/upsert');
     
     //file manager services
     this.api_map.set('UPLOAD_FILE', '/file/upload/');

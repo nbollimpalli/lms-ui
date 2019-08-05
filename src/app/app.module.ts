@@ -15,7 +15,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { appRoutes } from './routes';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
-import { UserComponent } from './profile/user/user.component';
+import { ProfileComponent } from './profile/profile/profile.component';
 import { UserService } from './shared/services/user.service';
 import { RestService } from './shared/services/rest.service';
 import { ApiFactoryService } from './shared/services/api-factory.service';
@@ -54,6 +54,7 @@ import { PermissionsComponent } from './configurables/role-mgmt/permissions/perm
 import { RolesComponent } from './configurables/role-mgmt/roles/roles.component';
 import { WalletComponent } from './profile/wallet/wallet.component';
 import { HistoryComponent } from './profile/history/history.component';
+import { UserComponent } from './configurables/user/user.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,7 @@ import { HistoryComponent } from './profile/history/history.component';
     AlgoDashboardComponent,
     LoginComponent,
     SignupComponent,
-    UserComponent,
+    ProfileComponent,
     ShowErrorsComponent,
     UsersComponent,
     StoresComponent,
@@ -88,6 +89,7 @@ import { HistoryComponent } from './profile/history/history.component';
     PermissionsComponent,
     WalletComponent,
     HistoryComponent,
+    UserComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

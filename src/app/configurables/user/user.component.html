@@ -1,0 +1,80 @@
+<mat-tab-group mat-align-tabs="center">
+        <mat-tab >
+          <ng-template mat-tab-label>
+          <mat-icon class="tab-icon">person</mat-icon>
+          User
+          </ng-template>
+  
+          <div class="center-form-container-by-row root-signup-container">
+              <!-- <div class="settings-enclosure">
+                  <mat-checkbox disabled [ngModel]="true" class="mat-form-input" >Subscribed To News Letter</mat-checkbox>
+                  <mat-checkbox disabled [ngModel]="true" class="mat-form-input" >Subscribed To Transactional Notifications</mat-checkbox>
+                  <mat-checkbox disabled [ngModel]="true" class="mat-form-input" >Subscribed To Desktop Notifications</mat-checkbox>
+                  <mat-checkbox disabled [ngModel]="true" class="mat-form-input" >Subscribed To Mobile Notifications</mat-checkbox>
+              </div>
+              <div class="verticle-line"></div> -->
+              <div class="signup-form-enclosure">
+                <form class="center-form-container-by-col signup-form" (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
+                    
+                  <mat-form-field class="mat-form-input">
+                    <input matInput placeholder="Mobile" formControlName="mobile"
+                            type="text" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="userForm.controls['mobile'].hasError('mobile') && !userForm.controls['mobile'].hasError('required')">
+                      Please enter a valid mobile
+                    </mat-error>
+                    <mat-error *ngIf="userForm.controls['name'].hasError('required')">
+                      Mobile is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field class="mat-form-input">
+                    <input matInput placeholder="Name" formControlName="name"
+                            type="text" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="userForm.controls['name'].hasError('name') && !userForm.controls['name'].hasError('required')">
+                      Please enter a valid name
+                    </mat-error>
+                    <mat-error *ngIf="userForm.controls['name'].hasError('required')">
+                      Name is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                  
+                  <mat-form-field class="mat-form-input">
+                    <input matInput placeholder="Email" formControlName="email"
+                            type="text" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="userForm.controls['email'].hasError('email') && !userForm.controls['email'].hasError('required')">
+                      Please enter a valid email address
+                    </mat-error>
+                    <mat-error *ngIf="userForm.controls['email'].hasError('required')">
+                      Email is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>  
+                  <mat-divider></mat-divider>
+                  
+                  <mat-form-field class="mat-form-input">
+                    <mat-label>Status</mat-label>
+                    <mat-select formControlName="status" name="status">
+                      <mat-option *ngFor="let status of statusList" [value]="status.value">
+                        {{status.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <br>
+                  <mat-checkbox #staff class="mat-form-input" formControlName="is_staff">Staff</mat-checkbox>
+                  <mat-form-field *ngIf="staff.checked" class="mat-form-input">
+                    <mat-label>Group</mat-label>
+                    <mat-select formControlName="group" name="group">
+                      <mat-option *ngFor="let group of groups" [value]="group.id">
+                        {{group.name | uppercase}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <br>
+                  <mat-checkbox class="mat-form-input" formControlName="subscribe_newsletter">Subscribe To News Letter</mat-checkbox>
+                  <mat-checkbox class="mat-form-input" formControlName="subscribe_transactions">Subscribe To Transactions</mat-checkbox>
+                  <mat-checkbox class="mat-form-input" formControlName="reset_password">Reset Password</mat-checkbox>
+                  <button [disabled]="userForm.invalid" class="signup-button" mat-raised-button type="submit">{{ actionLabel }}</button>
+                </form>
+              </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>

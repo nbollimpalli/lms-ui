@@ -19,6 +19,20 @@
 table {
     width: 100%;
 }
+
+.users-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+}
+
+.users {
+  width: 80%;
+  padding-top: 5vh;
+}
   
 
 table {
