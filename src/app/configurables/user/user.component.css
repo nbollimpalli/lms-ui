@@ -1,9 +1,5 @@
-/* .signup-button
-{
-    background-color: white;
-    color: black;
-} */
 
+@import url('https://fonts.googleapis.com/css?family=Abel');
 .ucard {
     background-color: #373d65;
 }
@@ -16,13 +12,13 @@
 {
     font: inherit;
     width: 100%;
-    background-color: #373d65;
+    background-color: rgb(56, 61, 101);
     border-width: 0px;
-    border-radius: 0px;
+    border-radius: 3px;
     height: 40px;
     padding: 5px;
     margin-top: 20px;
-    color: white;
+    color: #f3f3f3;
 }
 
 .signup-options
@@ -53,11 +49,12 @@
     margin: 0 10px;
   }
 
-.signup-form-enclosure
+.single-form-enclosure
 {
-    min-width: 20%;
-    border: 5px;
-    border-color: black;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    background-color: #f3f3f3;
+    padding : 15px;
 }
 
 

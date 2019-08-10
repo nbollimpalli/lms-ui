@@ -303,6 +303,112 @@ button
   font-size: 15px;
 }
 
+.article-card-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 8vh;
+}
+
+article.card {
+  width: 250px;
+  height: 300px;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+article.card:hover .infos , article.card:hover .thumb{
+  cursor: pointer;
+  opacity: .9;
+  background-color: rgb(233, 231, 231);
+  transition: background-color .5s;
+}
+
+article.card .thumb {
+  width: auto;
+  height: 150px;
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/397014/new-york-city.png") no-repeat center;
+  background-size: cover;
+  border-radius: 3px;
+}
+
+article.card .infos {
+  width: auto;
+  height: 150px;
+  position: relative;
+  padding: 0px 8px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+article.card .infos .item {
+  position: relative;
+  margin: 2px 0px;
+  font-size: 1rem;
+  overflow: hidden;
+  color: rgba(125, 123, 123, 0.95);
+}
+
+/* Smartphones (portrait and landscape) ---------- */
+@media screen and (min-width: 320px) and (max-width: 480px){
+  /* styles */
+  .single-form-enclosure {
+      width: 90%;
+  }
+}
+
+@media screen and (min-width: 480) and (max-width: 768px){
+  /* styles */
+  .single-form-enclosure {
+      width: 80%;
+  }
+}
+
+/* Tablets, iPads (portrait and landscape) ---------- */
+@media screen and (min-width: 768px) and (max-width: 1024px){
+  /* styles */
+  .single-form-enclosure {
+      width: 70%;
+  }
+}
+
+/* Tablets, iPads (portrait and landscape) ---------- */
+@media screen and (min-width: 1024px){
+  /* styles */
+  .single-form-enclosure {
+      width: 50%;
+  }
+}
+
+/* Desktops and laptops ---------- */
+@media screen and (min-width: 1224px){
+  /* styles */
+  .single-form-enclosure {
+      width: 30%;
+  }
+}
+/* Large screens ---------- */
+@media screen and (min-width: 1824px){
+  /* styles */
+  .single-form-enclosure {
+      width: 20%;
+  }
+}
+  
+  
+
 
 
 html, body { height: 100%; }

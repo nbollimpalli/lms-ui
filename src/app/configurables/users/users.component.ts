@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { UserService } from '../../shared/services/user.service';
 import {PageEvent} from '@angular/material';
 import { RestService } from '../../shared/services/rest.service';
@@ -23,14 +23,15 @@ import { debounceTime, tap } from 'rxjs/operators';
 })
 
 export class UsersComponent implements OnInit, OnDestroy {
+  @Input() org_id : String;
   // MatPaginator Inputs
+  base_url = '/user/';
   current_page = 1;
   total_count = 10;
   length = 100;
   page_size = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
-
-  is_staff = 'False';
+  @Input() is_staff = 'False';
   name = new FormControl();
   mobile = new FormControl();
   email = new FormControl();
@@ -54,6 +55,8 @@ export class UsersComponent implements OnInit, OnDestroy {
 
 
 
+
+
   // MatPaginator Output
   pageEvent: PageEvent;
 
@@ -71,11 +74,35 @@ export class UsersComponent implements OnInit, OnDestroy {
   
   ngOnInit() {
     this.loadUsers()
+    this.initFilters();
+    console.log(this.is_staff);
+    console.log(this.org_id);
+    if(this.is_staff = 'True')
+    {
+        this.base_url = '/org/'+this.org_id+this.base_url;
+    }
+  }
+
+  initFilters()
+  {
+    this.unsubscribe();
+    this.name = new FormControl();
+    this.mobile = new FormControl();
+    this.email = new FormControl();
+    this.status = new FormControl();
     this.setDebouncers(this.name);
     this.setDebouncers(this.mobile);
     this.setDebouncers(this.email);
     this.setDebouncers(this.status);
+    this.loadUsers();
   }
+
+  unsubscribe() {
+    this.subscriptions.forEach( element => {
+      element.unsubscribe();
+    } );
+  }
+  
 
   setDebouncers(frmctrl)
   {
@@ -90,14 +117,11 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach( element => {
-      element.unsubscribe();
-    } );
+    this.unsubscribe();
   }
 
   loadUsers()
   {
-    this.userService.loading = true;
     console.log(this.status.value);
     var filters = 'is_staff-'+this.is_staff;
     filters = filters + ( (this.name.value == null || this.name.value.trim().length == 0) ? '' : ',name__icontains-'+this.name.value);
@@ -105,16 +129,18 @@ export class UsersComponent implements OnInit, OnDestroy {
     filters = filters + ( (this.email.value == null || this.email.value.trim().length == 0) ? '' : ',email__icontains-'+this.email.value);
     filters = filters + ( (this.status.value == null || this.status.value.length == 0) ? '' : ',status__in-'+this.status.value.join('~'));
     var   query_params = { 'filters' : filters, 'page' : this.current_page, 'count_per_page' : this.page_size }
+    if(this.org_id != null)
+    {
+      query_params['org_id'] = this.org_id;
+    }
     this.restService.get('USERS', null, query_params).subscribe(
       (data) => {
         this.dataSource = data['data']['users']
         this.total_count = data['data']['total_count']
         console.log(this.dataSource);
-        this.userService.loading = false;
       },
       (data) => {
         this.snackbarService.afterRequest(data);
-        this.userService.loading = false;
       }
     );
   }

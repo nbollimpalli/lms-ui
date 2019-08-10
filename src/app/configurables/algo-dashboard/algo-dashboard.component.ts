@@ -12,36 +12,60 @@ export class AlgoDashboardComponent {
   /** Based on the screen size, switch from standard to one column per row */
 
   services_data = [
-    {  title: 'Fabric Categories Management', services:
+    { title: 'Org Management', services:
       [
         {
-          'title' : 'New Fabric Category',
-          'icon' : 'playlist_add',
-          'url' : '/fabric-category'
+          'title' : 'Create New Org',
+          'icon' : 'add',
+          'url' : '/org'
         },
         {
-          'title' : 'Fabric Categories',
-          'icon' : 'list',
-          'url' : '/fabric-categories'
-        }, 
+          'title' : 'Orgs',
+          'icon' : 'domain',
+          'url' : '/orgs'
+        }
       ]
     },
-    { title: 'Store Management', services:
+    {  title: 'Fabrics', services:
       [
         {
-          'title' : 'Create New Store',
-          'icon' : 'add',
-          'url' : '/store'
+          'title' : 'Fabric Types',
+          'icon' : 'texture',
+          'url' : '/fabrics'
         },
         {
-          'title' : 'Stores',
-          'icon' : 'store_mall_directory',
-          'url' : '/stores'
+          'title' : 'Addons',
+          'icon' : 'playlist_add',
+          'url' : '/addons'
+        },
+        {
+          'title' : 'Damages',
+          'icon' : 'broken_image',
+          'url' : '/damages'
+        }
+      ]
+    },
+    { title: 'Pricing', services:
+      [
+        {
+          'title' : 'Prices',
+          'icon' : 'money',
+          'url' : '/prices'
+        },
+        {
+          'title' : 'Offers',
+          'icon' : 'redeem',
+          'url' : '/offers'
         }
       ]
     },
     { title: 'User Management', services :
       [
+        {
+          'title' : 'Groups and Permissions',
+          'icon' : 'lock',
+          'url' : '/permissions'
+        },
         {
           'title' : 'New User',
           'icon' : 'person_add',
@@ -59,35 +83,6 @@ export class AlgoDashboardComponent {
         }
       ]
     },
-    { title: 'Groups and Permissions', services:
-      [
-        {
-          'title' : 'Groups',
-          'icon' : 'people',
-          'url' : '/roles'
-        },
-        {
-          'title' : 'Permissions',
-          'icon' : 'lock',
-          'url' : '/permissions'
-        }
-      ]
-    },
-    { title: 'Discounts', services:
-      [
-        {
-          'title' : 'New Offer',
-          'icon' : 'add',
-          'url' : '/offer'
-        },
-        {
-          'title' : 'Offers',
-          'icon' : 'redeem',
-          'url' : '/offers'
-        }
-      ]
-    },
-    
   ];
 
   position_matrix = {cols: 1, rows: 1};

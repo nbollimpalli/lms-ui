@@ -1,105 +1,105 @@
-<!-- <div class="banner-container">
-    <div class="banner">
-        <h1>{{ name.value }}</h1>
-        <p><mat-icon>location_on</mat-icon> {{ address.value }}</p>
-        <button [routerLink]="['/store/'+storeid+'/order']">Create Order</button>
-    </div>
-</div> -->
-<mat-tab-group>
-    <mat-tab label="Details">
-        <mat-horizontal-stepper #stepper>
-                <mat-step [stepControl]="storeForm">
-                    <ng-template matStepLabel>Store Details</ng-template>
-                    <form class="form" (ngSubmit)="onStoreSubmit()" #f [formGroup]="storeForm">
-                            <mat-form-field class="mat-form-input">
-                                <input #name matInput placeholder="Name" formControlName="name"
-                                        type="text" [errorStateMatcher]="matcher">
-                                <mat-error *ngIf="storeForm.controls['name'].hasError('required')">
-                                Store Name is <strong>required</strong>
-                                </mat-error>
-                            </mat-form-field>
-                        
-                            <mat-form-field class="mat-form-input">
-                                <input matInput #phone placeholder="Phone" type="phone" formControlName="phone"
-                                        [errorStateMatcher]="matcher">
-                                <mat-error *ngIf="storeForm.controls['phone'].hasError('required')">
-                                    Phone is <strong>required</strong>
-                                </mat-error>
-                            </mat-form-field>
-                    
-                            <mat-form-field class="mat-form-input">
-                                <textarea #address matInput placeholder="Store Address" formControlName="address"></textarea>
-                            </mat-form-field>
-                        </form>
-                    <div>
-                        <button *ngIf="edit === false" mat-button (click)="onStoreSubmit()">CREATE</button>
-                        <button *ngIf="edit" mat-button (click)="onStoreSubmit()">UPDATE</button>
-                        <button mat-button matStepperNext>ADD PRICING</button>
-                    </div>
-                </mat-step>
-                <mat-step [stepControl]="pricingForm">
-                    <ng-template matStepLabel>Pricing</ng-template>
-                    <form class="h-form" (ngSubmit)="addPrice()" #pf [formGroup]="pricingForm">
-                        <mat-form-field class="hmat-form-input">
-                            <input #pname matInput placeholder="Name" formControlName="name"
-                                    type="text" [errorStateMatcher]="matcher">
-                            <mat-error *ngIf="pricingForm.controls['name'].hasError('required')">
-                            Price slab Name is <strong>required</strong>
-                            </mat-error>
-                        </mat-form-field>
-                    
-                        <mat-form-field class="hmat-form-input">
-                            <input matInput #price placeholder="Price" type="number" formControlName="price"
-                                    [errorStateMatcher]="matcher">
-                            <mat-error *ngIf="pricingForm.controls['price'].hasError('required')">
-                                Price is <strong>required</strong>
-                            </mat-error>
-                            <mat-error *ngIf="pricingForm.controls['price'].hasError('min')">
-                                Price value should be greater than 0
-                            </mat-error>
-                        </mat-form-field>
-                        <button mat-button type="submit">ADD</button>
-                    </form>
-                    <mat-selection-list #priceslabs>
-                        <mat-list-option *ngFor="let price of pricing | keyvalue">
-                            <mat-icon mat-list-icon>attach_money</mat-icon>
-                            <h4 mat-line>{{price.value['name'] | titlecase}}</h4>
-                            <p mat-line>Rs. {{price.value['price']}} </p>
-                        </mat-list-option>
-                    </mat-selection-list>
-                    <div>
-                        <button mat-button matStepperPrevious>GO TO STORE</button>
-                    </div>
-                </mat-step>
-        </mat-horizontal-stepper>
-    </mat-tab>
-    <mat-tab *ngIf="edit" label="Orders">
-            <mat-paginator [length]="50"
-    [pageSize]="10">
-            </mat-paginator>
-            <div class="algolist">
-            <div class="algolist-heading">
-                <mat-icon>store</mat-icon>
+<mat-tab-group mat-align-tabs="center">
+        <mat-tab >
+          <ng-template mat-tab-label>
+          <mat-icon class="tab-icon">store</mat-icon>
+          Store
+          </ng-template>
+  
+          <div class="center-form-container-by-row root-signup-container">
+              <div class="single-form-enclosure">
+                <form class="center-form-container-by-col signup-form" (ngSubmit)="onSubmit(storeForm)" [formGroup]="storeForm">
+                <mat-form-field class="mat-form-input">
+                    <input matInput placeholder="Name" formControlName="name"
+                            type="text" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="storeForm.controls['name'].hasError('name') && !storeForm.controls['name'].hasError('required')">
+                        Please enter a valid name
+                    </mat-error>
+                    <mat-error *ngIf="storeForm.controls['name'].hasError('required')">
+                        Name is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+                  <mat-form-field class="mat-form-input">
+                    <input matInput placeholder="Telephone" formControlName="telephone"
+                            type="text" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="storeForm.controls['telephone'].hasError('telephone') && !storeForm.controls['telephone'].hasError('required')">
+                      Please enter a valid Telephone
+                    </mat-error>
+                    <mat-error *ngIf="storeForm.controls['telephone'].hasError('required')">
+                      Telephone is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field class="mat-form-input">
+                    <mat-label>Type</mat-label>
+                    <mat-select formControlName="type" name="type">
+                      <mat-option *ngFor="let typec of typeList" [value]="typec.value">
+                        {{typec.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <br>
+                  <button [disabled]="storeForm.invalid" class="signup-button" mat-raised-button type="submit">{{ actionLabel }}</button>
+                </form>
+              </div>
             </div>
-            <div  *ngFor="let order of orders" class="algolist-item  grey-bg">
-                <div class="algolist-item-content">
-                    <div class="algolist-item-content-details">
-                    <mat-icon class="algolist-item-content-details-item">shopping_basket</mat-icon>    
-                    <div class="algolist-item-content-details-item">USER ID : {{order.userid}}</div>
-                    <div class="algolist-item-content-details-item">TOTAL PRICE : {{order.total}}</div>
-                    </div>
-                </div>
-                <div class="algolist-item-actions">
-                    <button matTooltip="Edit" [routerLink]="['/store/'+storeid+'/order/'+order.orderid]" aria-label="Edit" mat-icon-button><mat-icon>edit</mat-icon></button>
-                </div>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+            <mat-icon class="tab-icon">money</mat-icon>
+            Pricing
+            </ng-template>
+            
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+            <mat-icon class="tab-icon">rv_hookup</mat-icon>
+            Workflow
+            </ng-template>
+        </mat-tab>
+        <mat-tab (click)="loadAddresses()" *ngIf="id != null">
+          <ng-template mat-tab-label>
+          <mat-icon class="tab-icon">location_on</mat-icon>
+          Address
+          </ng-template>
+          <div class="tool-bar-container">
+            <div class="filter-tool-bar">
+              
             </div>
             </div>
-    </mat-tab>
-    <mat-tab *ngIf="edit" label="Customers">
-            <mat-paginator [length]="50"
-    [pageSize]="10">
-</mat-paginator>
-    </mat-tab>
+          <div class='addresses'>
+            <mat-nav-list class="address-item">
+              <h3 mat-subheader>
+                  <button mat-button color="primary" matTooltip="NEW ADDRESS" (click)="dialogService.openDialog(['address', {'store_id' : id}])">
+                      <mat-icon>add_location</mat-icon> ADD ADDRESS
+                  </button>
+              </h3>
+              <mat-divider></mat-divider>
+              <mat-list-item *ngFor="let address of addresses" (click)="dialogService.openDialog(['address', {'id':address['id'], 'store_id' : id}])">
+                <!-- <mat-icon mat-list-icon>location_on</mat-icon> -->
+                <h2 mat-line class="address-name">
+                  {{address['name'] | uppercase}}
+                </h2>
+                <p mat-line>
+                  {{address['flat']}}
+                </p>
+                <p mat-line>
+                  {{address['landmark']}}
+                </p>
+                <p mat-line>
+                  {{address['street']}}
+                </p>
+                <p mat-line>
+                  {{address['area']}}
+                </p>
+                <p mat-line>
+                  {{ address['city'] }} {{ address['state'] }} {{ address['country'] }} {{ address['zipcode'] }}
+                  </p>
+                <mat-divider></mat-divider>
+              </mat-list-item>
+              
+            </mat-nav-list>
+            </div>
+      </mat-tab>
+    </mat-tab-group>
+
     
-</mat-tab-group>
-          

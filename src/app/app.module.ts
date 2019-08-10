@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { AlgodexModule } from '@algovent/algodex';
 import { FooterComponent } from './naviagators/footer/footer.component';
 import { MaterialModule } from './material.module';
-import { SearchPopupComponent } from './shared/components/search-popup/search-popup.component';
 import { HeaderNavComponent } from './naviagators/header-nav/header-nav.component';
 import { AlgoDashboardComponent } from './configurables/algo-dashboard/algo-dashboard.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -42,8 +41,6 @@ import { NewsComponent } from './company/news/news.component';
 import { PolicyComponent } from './company/policy/policy.component';
 import { ReportsComponent } from './reports/reports.component';
 import { SupportComponent } from './company/support/support.component';
-import { FabricCatsComponent } from './configurables/fabric-cats/fabric-cats.component';
-import { FabricCatComponent } from './configurables/fabric-cat/fabric-cat.component';
 import { PageNotFoundComponent } from './company/page-not-found/page-not-found.component';
 import { CustomerHomeComponent } from './customer-home/customer-home.component';
 import { ConnectionService } from 'ng-connection-service';
@@ -55,12 +52,24 @@ import { RolesComponent } from './configurables/role-mgmt/roles/roles.component'
 import { WalletComponent } from './profile/wallet/wallet.component';
 import { HistoryComponent } from './profile/history/history.component';
 import { UserComponent } from './configurables/user/user.component';
+import { AddAddressComponent } from './shared/components/add-address/add-address.component';
+import { PricesComponent } from './configurables/prices/prices.component';
+import { PriceComponent } from './configurables/price/price.component';
+import { FabricsComponent } from './configurables/fabrics/fabrics.component';
+import { FabricComponent } from './configurables/fabric/fabric.component';
+import { ClothingsComponent } from './configurables/clothings/clothings.component';
+import { ClothingComponent } from './configurables/clothing/clothing.component';
+import { ServicesComponent } from './configurables/services/services.component';
+import { ServiceComponent } from './configurables/service/service.component';
+import { AddonsComponent } from './configurables/addons/addons.component';
+import { AddonComponent } from './configurables/addon/addon.component';
+import { OrgsComponent } from './configurables/orgs/orgs.component';
+import { OrgComponent } from './configurables/org/org.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
-    SearchPopupComponent,
     HeaderNavComponent,
     AlgoDashboardComponent,
     LoginComponent,
@@ -80,8 +89,6 @@ import { UserComponent } from './configurables/user/user.component';
     PolicyComponent,
     ReportsComponent,
     SupportComponent,
-    FabricCatsComponent,
-    FabricCatComponent,
     PageNotFoundComponent,
     CustomerHomeComponent,
     VerifyComponent,
@@ -90,6 +97,19 @@ import { UserComponent } from './configurables/user/user.component';
     WalletComponent,
     HistoryComponent,
     UserComponent,
+    AddAddressComponent,
+    PricesComponent,
+    PriceComponent,
+    FabricsComponent,
+    FabricComponent,
+    ClothingsComponent,
+    ClothingComponent,
+    ServicesComponent,
+    ServiceComponent,
+    AddonsComponent,
+    AddonComponent,
+    OrgsComponent,
+    OrgComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -108,7 +128,7 @@ import { UserComponent } from './configurables/user/user.component';
     )
   ],
   providers: [BreakpointObserverService, DialogService, SnackbarService, FirebaseService, UserService, RestService, ApiFactoryService, FileManagerService, AuthService, SearchService, SeoService, ConnectionService],
-  entryComponents: [SearchPopupComponent, LoginComponent, SignupComponent, VerifyComponent],
+  entryComponents: [LoginComponent, SignupComponent, VerifyComponent, AddAddressComponent, PriceComponent, FabricComponent,ClothingComponent,ServiceComponent,AddonComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

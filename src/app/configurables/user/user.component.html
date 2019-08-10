@@ -6,14 +6,7 @@
           </ng-template>
   
           <div class="center-form-container-by-row root-signup-container">
-              <!-- <div class="settings-enclosure">
-                  <mat-checkbox disabled [ngModel]="true" class="mat-form-input" >Subscribed To News Letter</mat-checkbox>
-                  <mat-checkbox disabled [ngModel]="true" class="mat-form-input" >Subscribed To Transactional Notifications</mat-checkbox>
-                  <mat-checkbox disabled [ngModel]="true" class="mat-form-input" >Subscribed To Desktop Notifications</mat-checkbox>
-                  <mat-checkbox disabled [ngModel]="true" class="mat-form-input" >Subscribed To Mobile Notifications</mat-checkbox>
-              </div>
-              <div class="verticle-line"></div> -->
-              <div class="signup-form-enclosure">
+              <div class="single-form-enclosure">
                 <form class="center-form-container-by-col signup-form" (ngSubmit)="onSubmit(userForm)" [formGroup]="userForm">
                     
                   <mat-form-field class="mat-form-input">
@@ -59,8 +52,7 @@
                     </mat-select>
                   </mat-form-field>
                   <br>
-                  <mat-checkbox #staff class="mat-form-input" formControlName="is_staff">Staff</mat-checkbox>
-                  <mat-form-field *ngIf="staff.checked" class="mat-form-input">
+                  <mat-form-field class="mat-form-input">
                     <mat-label>Group</mat-label>
                     <mat-select formControlName="group" name="group">
                       <mat-option *ngFor="let group of groups" [value]="group.id">
@@ -77,4 +69,56 @@
               </div>
             </div>
         </mat-tab>
+        <mat-tab (click)="loadAddresses()" *ngIf="id != null">
+          <ng-template mat-tab-label>
+          <mat-icon class="tab-icon">store</mat-icon>
+          Stores
+          </ng-template>
+        </mat-tab>
+        <mat-tab (click)="loadAddresses()" *ngIf="id != null">
+            <ng-template mat-tab-label>
+            <mat-icon class="tab-icon">location_on</mat-icon>
+            Address
+            </ng-template>
+            <div class="tool-bar-container">
+              <div class="filter-tool-bar">
+                
+              </div>
+              </div>
+            <div class='addresses'>
+              <mat-nav-list class="address-item">
+                <h3 mat-subheader>
+                    <button mat-button color="primary" matTooltip="NEW ADDRESS" (click)="dialogService.openDialog(['address', {'user_id' : id}])">
+                        <mat-icon>add_location</mat-icon> ADD ADDRESS
+                    </button>
+                </h3>
+                <mat-divider></mat-divider>
+                <mat-list-item *ngFor="let address of addresses" (click)="dialogService.openDialog(['address', {'id':address['id'], 'user_id' : id}])">
+                  <!-- <mat-icon mat-list-icon>location_on</mat-icon> -->
+                  <h2 mat-line class="address-name">
+                    {{address['name'] | uppercase}}
+                  </h2>
+                  <p mat-line>
+                    {{address['flat']}}
+                  </p>
+                  <p mat-line>
+                    {{address['landmark']}}
+                  </p>
+                  <p mat-line>
+                    {{address['street']}}
+                  </p>
+                  <p mat-line>
+                    {{address['area']}}
+                  </p>
+                  <p mat-line>
+                    {{ address['city'] }} {{ address['state'] }} {{ address['country'] }} {{ address['zipcode'] }}
+                    </p>
+                  <mat-divider></mat-divider>
+                </mat-list-item>
+                
+              </mat-nav-list>
+              </div>
+        </mat-tab>
     </mat-tab-group>
+
+    

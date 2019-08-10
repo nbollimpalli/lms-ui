@@ -7,6 +7,12 @@ import { Dimension } from '../interfaces/dimension';
 import { UserService } from './user.service';
 import { SignupComponent } from 'src/app/auth/signup/signup.component';
 import { VerifyComponent } from 'src/app/auth/verify/verify.component';
+import { AddAddressComponent } from '../components/add-address/add-address.component';
+import { PriceComponent } from '../../configurables/price/price.component';
+import { FabricComponent } from '../../configurables/fabric/fabric.component';
+import { ClothingComponent } from '../../configurables/clothing/clothing.component';
+import { ServiceComponent } from '../../configurables/service/service.component';
+import { AddonComponent } from '../../configurables/addon/addon.component';
 
 const dialog_sizes = {
     'auth' : {
@@ -32,6 +38,30 @@ const dialogComponents = {
         'c' : VerifyComponent,
         'd' : authDimension
     },
+    'address' : {
+      'c' : AddAddressComponent,
+      'd' : authDimension
+    },
+    'price' : {
+      'c' : PriceComponent,
+      'd' : authDimension
+    },
+    'fabric' : {
+      'c' : FabricComponent,
+      'd' : authDimension
+    },
+    'clothing' : {
+      'c' : ClothingComponent,
+      'd' : authDimension
+    },
+    'service' : {
+      'c' : ServiceComponent,
+      'd' : authDimension
+    },
+    'addon' : {
+      'c' : AddonComponent,
+      'd' : authDimension
+    }
   };
 
 @Injectable()

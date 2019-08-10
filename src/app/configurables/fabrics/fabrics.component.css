@@ -1,0 +1,70 @@
+.tool-bar-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .filter-tool-bar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+    background-color: #f3f3f3;
+    padding: 20px;
+  }
+  .filter-tool-bar-input{
+    border:none;
+    background-image:none;
+    background-color:transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    outline: none;
+  }
+  
+  .filter-icon {
+    font-size: 25px;
+    border: 1px;
+    padding: 5px;
+  }
+  
+  .input-element{
+    border: 1px;
+    box-shadow: 3px;
+    background-color: #e6e6e6;
+    padding: 5px;
+    width: 120px;
+  }
+  
+  .input-element, .input-element-label {
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 0px;
+    border-radius: 3px;
+  }
+  
+  .input-element-label {
+    color: rgba(96, 96, 96, 0.87);
+    font-size: 0.6em;
+  }
+
+  .list-container {
+      width: 100%;
+      display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-end;
+        padding: 20px;
+
+  }
+
+  .list-container-item {
+      width: 40%;
+      min-height: 60vh;
+  }

@@ -15,8 +15,6 @@ import { NewsComponent } from './company/news/news.component';
 import { PolicyComponent } from './company/policy/policy.component';
 import { ReportsComponent } from './reports/reports.component';
 import { SupportComponent } from './company/support/support.component';
-import { FabricCatsComponent } from './configurables/fabric-cats/fabric-cats.component';
-import { FabricCatComponent } from './configurables/fabric-cat/fabric-cat.component';
 import { PageNotFoundComponent } from './company/page-not-found/page-not-found.component';
 import { CustomerHomeComponent } from './customer-home/customer-home.component';
 import { PermissionsComponent } from './configurables/role-mgmt/permissions/permissions.component';
@@ -24,24 +22,41 @@ import { RolesComponent } from './configurables/role-mgmt/roles/roles.component'
 import { WalletComponent } from './profile/wallet/wallet.component';
 import { HistoryComponent } from './profile/history/history.component';
 import { UserComponent } from './configurables/user/user.component';
+import { PricesComponent } from './configurables/prices/prices.component';
+
+import { FabricsComponent } from './configurables/fabrics/fabrics.component';
+import { ClothingsComponent } from './configurables/clothings/clothings.component';
+import { ServicesComponent } from './configurables/services/services.component';
+import { AddonsComponent } from './configurables/addons/addons.component';
+
+import { OrgsComponent } from './configurables/orgs/orgs.component';
+import { OrgComponent } from './configurables/org/org.component';
 
 export const appRoutes: Routes = [
   { path: '', component: CustomerHomeComponent , pathMatch: 'full'},
   { path: 'dashboard', component: AlgoDashboardComponent },
   { path: 'chome', component: CustomerHomeComponent },
   { path: 'roles', component: RolesComponent },
+  { path: 'prices', component: PricesComponent },
   { path: 'permissions', component: PermissionsComponent },
   { path: 'wallet', component: WalletComponent },
   { path: 'history', component: HistoryComponent },
-  { path: 'fabric-categories', component: FabricCatsComponent },
-  { path: 'fabric-category', component: FabricCatComponent },
-  { path: 'users/:type', component: UsersComponent },  
+  { path: 'users/:type', component: UsersComponent },
   { path: 'user', component: UserComponent },
+  { path: 'org/:org_id/user', component: UserComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'org/:org_id/user/:id', component: UserComponent },
   { path: 'user/:id', component: UserComponent },
   { path: 'stores', component: StoresComponent },
-  { path: 'store', component: StoreComponent },
-  { path: 'store/:id', component: StoreComponent },
+  { path: 'org/:org_id/store', component: StoreComponent },
+  { path: 'org/:org_id/store/:id', component: StoreComponent },
+  { path: 'orgs', component: OrgsComponent },
+  { path: 'org', component: OrgComponent },
+  { path: 'org/:id', component: OrgComponent },
+  { path: 'fabrics', component: FabricsComponent },
+  { path: 'fabric/:fid/clothings', component: ClothingsComponent },
+  { path: 'fabric/:fid/clothing/:cid/services', component: ServicesComponent },
+  { path: 'addons', component: AddonsComponent },
   { path: 'orders', component: OrdersComponent },
   { path: 'store/:storeid/order', component: OrderComponent },
   { path: 'store/:storeid/order/:id', component: OrderComponent },

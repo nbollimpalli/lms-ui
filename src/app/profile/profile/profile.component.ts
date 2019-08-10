@@ -5,6 +5,7 @@ import { AlgoErrorStateMatcher } from '../../shared/utils/algo-error-state-match
 import { SnackbarService } from 'src/app/shared/services/snackbar.service';
 import { RestService } from 'src/app/shared/services/rest.service';
 import { ActivatedRoute } from '@angular/router';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 
 @Component({
   selector: 'app-user',
@@ -18,14 +19,16 @@ export class ProfileComponent implements OnInit {
   matcher = new AlgoErrorStateMatcher();
   subscribe = true;
   permissions = {};
+  addresses = [];
   id;
   mode = 'new';
   constructor(
-    public userService : UserService, 
+    public userService : UserService,
     private formBuilder: FormBuilder,
     private snackbarService: SnackbarService,
     private restService: RestService,
-    private route : ActivatedRoute
+    private route : ActivatedRoute,
+    private dialogService : DialogService,
   ) 
   { 
     this.route.params.subscribe( params => {
@@ -61,9 +64,9 @@ export class ProfileComponent implements OnInit {
     this.userService.successEmitter.subscribe(
       (data) => {
         var code = data['code'];
-        if(code == 'login')
+        if(code == 'address')
         {
-          this.resetForm();
+          this.loadAddresses();
         }
       }
     );
@@ -71,6 +74,7 @@ export class ProfileComponent implements OnInit {
 
   initForms()
   {
+    this.loadAddresses();
     this.passwordResetForm = this.formBuilder.group({
       existing_password: new FormControl('', {validators: [Validators.required]} ),
       new_password: new FormControl('', {validators: [Validators.required]} ),
@@ -114,6 +118,17 @@ export class ProfileComponent implements OnInit {
     {
       this.updateUser(form.value);
     }
+  }
+
+  loadAddresses()
+  {
+    this.restService.get('ADDRESSES', null, null).subscribe(
+      (data) => {
+        this.addresses = data['data'];
+        console.log('****');
+        console.log(data);
+      }
+    );
   }
 
   updateUser(data)

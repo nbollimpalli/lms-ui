@@ -80,3 +80,9 @@
   padding-left: 10px;
   padding-right: 10px;
 }
+
+/* mat-toolbar {
+  position: fixed;
+  top: 0;
+  width: 100%
+} */

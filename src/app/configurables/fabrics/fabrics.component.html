@@ -1,0 +1,47 @@
+<div class="tool-bar-container">
+        <div class="filter-tool-bar">
+            <mat-icon class="filter-icon">money</mat-icon>
+            <div>
+                <div class="input-element-label">NAME</div>
+                <div class="input-element"><input autocomplete="rutjdskjde" [formControl]="name" class="filter-tool-bar-input" type="text"></div>
+            </div>
+          <button mat-icon-button color="primary" matTooltip="RESET FILTERS" (click)="initFilters()">
+              <mat-icon>tune</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" matTooltip="NEW FABRIC TYPE" (click)="dialogService.openDialog(['fabric', {}])">
+              <mat-icon>fiber_new</mat-icon>
+          </button>
+        </div>
+</div>
+<mat-paginator [length]="total_count" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions" (page)="setPagination($event)"></mat-paginator>
+<div class="list-container">
+    <div class="list-container-item">
+    <mat-nav-list>
+        <h3 mat-subheader>Fabrics</h3>
+        <mat-accordion>
+            <mat-expansion-panel *ngFor="let price of dataSource">
+                
+                <mat-expansion-panel-header>
+                {{price['name'] | uppercase}} 
+                </mat-expansion-panel-header>
+                <button matTooltip="NEW PRICE" (click)="dialogService.openDialog(['fabric', {}])">
+                        NEW
+                </button>
+                <mat-accordion>
+                    <mat-expansion-panel *ngFor="let price of dataSource">
+                        <mat-expansion-panel-header>
+                        {{price['name'] | uppercase}}
+                        </mat-expansion-panel-header>
+                        This the expansion 1 content
+                    </mat-expansion-panel>
+                </mat-accordion>
+                <mat-action-row>
+                        <button mat-button>EDIT</button>
+                        <button mat-button>DELETE</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </mat-nav-list>
+    </div>
+</div>
+

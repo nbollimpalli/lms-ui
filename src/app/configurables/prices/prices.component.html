@@ -1,0 +1,40 @@
+
+<div class="tool-bar-container">
+        <div class="filter-tool-bar">
+            <mat-icon class="filter-icon">money</mat-icon>
+            <div>
+                <div class="input-element-label">NAME</div>
+                <div class="input-element"><input autocomplete="rutjdskjde" [formControl]="name" class="filter-tool-bar-input" type="text"></div>
+            </div>
+            <div>
+                <div class="input-element-label">TYPE</div>
+                <div class="input-element">
+                <mat-select [formControl]="type" multiple>
+                    <mat-select-trigger>
+                    {{type.value ? type.value[0] : ''}}
+                    <span *ngIf="type.value?.length > 1" >
+                        (+{{type.value.length - 1}} {{type.value?.length === 2 ? 'other' : 'others'}})
+                    </span>
+                    </mat-select-trigger>
+                    <mat-option *ngFor="let typeListItem of typeList" [value]="typeListItem">{{typeListItem | uppercase}}</mat-option>
+                </mat-select>
+                </div>
+          </div>
+          <button mat-icon-button color="primary" matTooltip="RESET FILTERS" (click)="initFilters()">
+              <mat-icon>tune</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" matTooltip="NEW PRICE" (click)="dialogService.openDialog(['price', {}])">
+              <mat-icon>fiber_new</mat-icon>
+          </button>
+        </div>
+</div>
+<mat-paginator [length]="total_count" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions" (page)="setPagination($event)"></mat-paginator>
+<mat-nav-list>
+    <h3 mat-subheader>Prices</h3>
+    <mat-list-item *ngFor="let price of dataSource" (click)="dialogService.openDialog(['price', {'id' : price['id']}])">
+        <mat-icon mat-list-icon>money</mat-icon>
+        <h4 mat-line>NAME : {{price['name']}}</h4>
+        <p mat-line>TYPE : {{price['type'] | uppercase}} </p>
+        <p mat-line>NUMBER : {{price['number']}} </p>
+    </mat-list-item>
+</mat-nav-list>

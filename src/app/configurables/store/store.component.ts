@@ -1,208 +1,173 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from '../../shared/services/firebase.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from 'src/app/shared/services/user.service';
 import {FormControl, Validators, FormGroup, FormBuilder} from '@angular/forms';
 import { AlgoErrorStateMatcher } from '../../shared/utils/algo-error-state-matcher';
-import { SnackbarService } from '../../shared/services/snackbar.service';
+import { SnackbarService } from 'src/app/shared/services/snackbar.service';
+import { RestService } from 'src/app/shared/services/rest.service';
+import { ActivatedRoute } from '@angular/router';
+import { User } from '../../shared/models/user.model';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 
-
-export interface PricingItem {
-  name: string;
-  price: number;
+export interface SelectInterface {
+  value: string;
+  viewValue: string;
 }
-
-export interface OrderItem {
-  index : number;
-  quantity: number;
-  price: PricingItem[];
-  total: number;
-  unitprice: number;
-}
-
-export interface Order {
-  total: number;
-  userid: string;
-  storeid: string;
-  orderItems: OrderItem[];
-  orderid: string;
-  status: string;
-}
-
 @Component({
   selector: 'app-store',
   templateUrl: './store.component.html',
   styleUrls: ['./store.component.css']
 })
+
 export class StoreComponent implements OnInit {
   storeForm: FormGroup;
-  pricingForm: FormGroup;
   matcher = new AlgoErrorStateMatcher();
-  displayedColumns: string[] = ['name', 'email', 'role', 'edit', 'delete'];
-  dataSource;
-  storeid;
-  store;
-  edit = true;
-  pricing = {};
-  orders : Order[] = [];
-
-  constructor(private firebaseService : FirebaseService, private route : ActivatedRoute, private formBuilder: FormBuilder, private router : Router, private snackbacr : SnackbarService) {
-    this.dataSource = this.firebaseService.getUsers();
+  id;
+  addresses = [];
+  org_id;
+  store = {
+    'name' : '',
+    'type' : 'public',
+    'telephone' : '',
+    'otype' : 'pickup_delivery'
   }
-  
-  ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.storeid = params.get('id');
-      if(this.storeid === null)
-      {
-        this.edit = false;
-      }
+  actionLabel = 'CREATE STORE';
+  typeList: SelectInterface[] = [
+    {value: 'public', viewValue: 'PUBLIC'},
+    {value: 'processing', viewValue: 'PROCESSING'},
+    {value: 'satellite', viewValue: 'SATELLITE'},
+    {value: 'partial_processing', viewValue: 'PARTIAL PROCESSING'}
+  ];
+  otypeList: SelectInterface[] = [
+    {value: 'pickup_delivery', viewValue: 'PICKUP/DELIVERY'},
+    {value: 'in_store', viewValue: 'IN STORE'}
+  ];
+  groups = [];
+  constructor(
+    public userService : UserService, 
+    private formBuilder: FormBuilder,
+    private snackbarService: SnackbarService,
+    private restService: RestService,
+    private route : ActivatedRoute,
+    private dialogService : DialogService,
+  ) 
+  { 
+    this.route.params.subscribe( params => {
+      this.id = params['id']
+      this.org_id = params['org_id'];
+      this.loadStore();
     });
-    this.loadStore();
-    this.getOrders();
+  }
+
+  ngOnInit() {
+    this.resetForm();
+    this.loadAddresses();
+    this.userService.successEmitter.subscribe(
+      (data) => {
+        var code = data['code'];
+        if(code == 'address')
+        {
+          this.loadAddresses();
+        }
+      }
+    );
+  }
+
+  loadAddresses()
+  {
+    if(this.id != null)
+    {
+      this.restService.get('S_ADDRESSES', null, {'id': this.id}).subscribe(
+        (data) => {
+          this.addresses = data['data'];
+          console.log('****');
+          console.log(data);
+        }
+      );
+    }
+  }
+
+  resetForm()
+  {
+    if(this.id == null)
+    {
+      this.actionLabel = 'CREATE STORE';
+    }
+    else
+    {
+      this.actionLabel = 'UPDATE STORE';
+    }
+    this.storeForm  =  this.formBuilder.group({
+      telephone: new FormControl(this.store['telephone'], {validators: []}),
+      name: new FormControl(this.store['name'], {validators: []}),
+      type: new FormControl(this.store['type'], {validators: []}),
+      otype: new FormControl(this.store['otype'], {validators: []}),
+      cash: new FormControl(true, {validators: []}),
+      ewallet: new FormControl(true, {validators: []}),
+      card: new FormControl(true, {validators: []}),
+      chque: new FormControl(true, {validators: []}),
+      dd: new FormControl(true, {validators: []}),
+      imps: new FormControl(true, {validators: []}),
+      neft: new FormControl(true, {validators: []}),
+      rtgs: new FormControl(true, {validators: []}),
+    });
+  }
+
+  get formControls() { return this.storeForm.controls; }
+
+  onSubmit(form)
+  {
+    if(form.invalid)
+    {
+      return;
+    }
+    else
+    {
+      this.upsertStore();
+    }
+  }
+
+  upsertStore()
+  {
+    console.log('update profile ********');
+    if(this.storeForm.valid)
+    {
+      var data = this.storeForm.value;
+      data['id'] = this.id;
+      data['org'] = this.org_id;
+      this.userService.loading = true;
+      this.restService.post('UPSERT_STORE', null, null, data).subscribe(
+        (data) =>
+        {
+          this.snackbarService.afterRequest(data);
+          this.id = data['data']['id'];
+          this.userService.loading = false;
+        },
+        (data) =>
+        {
+          this.snackbarService.afterRequestFailure(data);
+          this.userService.loading = false;
+        },
+      );
+    }
   }
 
   loadStore()
   {
-    this.pricingForm  =  this.formBuilder.group({
-      name: new FormControl('', {validators: [Validators.required], updateOn: 'blur'}),
-      price: new FormControl('', {validators: [Validators.required, Validators.min(1)]} ),
-    });
-    this.storeForm  =  this.formBuilder.group({
-      name: new FormControl('', {validators: [Validators.required], updateOn: 'blur'}),
-      phone: new FormControl('', {validators: [Validators.required]} ),
-      address: new FormControl('', {validators: [Validators.required]} )
-    });
-    if(this.edit)
+    if(this.id != null)
     {
-      this.firebaseService.get('stores', this.storeid).subscribe(
+      this.userService.loading = true;
+      this.restService.get('STORE', null, {'id' : this.id}).subscribe(
         (data) => {
-          var payloadData = data.payload.data();
-          this.storeForm  =  this.formBuilder.group({
-            name: new FormControl(payloadData['name'], {validators: [Validators.required], updateOn: 'blur'}),
-            phone: new FormControl(payloadData['phone'], {validators: [Validators.required]} ),
-            address: new FormControl(payloadData['address'], {validators: [Validators.required]} )
-          });
-          this.pricing = payloadData['pricing'];
-          if(this.pricing == null || this.pricing === undefined)
-          {
-            this.pricing = {};
-          }
-        }
-      ); 
-    }
-  }
-
-  onStoreSubmit()
-  {
-    if(this.edit)
-    {
-      this.onStoreUpdate();
-    }
-    else
-    {
-      this.onStoreCreate();
-    }
-  }
-
-  onStoreUpdate()
-  {
-    if(this.storeForm.invalid)
-    {
-      return;
-    }
-    else
-    {
-      var st = this.firebaseService.update('stores', this.storeid, this.storeForm.value)
-        .then(
-          (data) => {
-            this.snackbacr.show_snackbar('store details updated successfully');
-          }
-        );
-    }
-  }
-
-  onStoreCreate()
-  {
-    if(this.storeForm.invalid)
-    {
-      return;
-    }
-    else
-    {
-      var storeData = this.storeForm.value;
-      storeData['pricing'] = {};
-      this.firebaseService.create('stores', storeData)
-      .then(
+          this.store = data['data'];
+          this.resetForm();
+          this.userService.loading = false;
+          console.log(this.store);
+        },
         (data) => {
-          this.router.navigate(['/store/'+data.id]);
-          this.snackbacr.show_snackbar('store got created successfully');
+          this.snackbarService.afterRequestFailure(data);
+          this.userService.loading = false;
         }
-      )
-
+      );
     }
   }
-
-  addPrice()
-  {
-    if(this.edit)
-    {
-      var pricingKeyVal = this.pricingForm.value;
-      var name = pricingKeyVal['name'];
-      var price = pricingKeyVal['price'];
-      this.pricing[name] = {'name' : name, 'price' : price};
-      var storedata = this.storeForm.value;
-      storedata['pricing'] = this.pricing;
-      console.log(storedata);
-      this.firebaseService.update('stores', this.storeid, this.storeForm.value)
-        .then(
-          (data) => {
-            this.snackbacr.show_snackbar('pricing for store updated successfully');
-            this.pricingForm.reset();
-            this.pricingForm.clearValidators();
-          }
-        );
-    }
-    else
-    {
-      this.snackbacr.show_snackbar('Please create store before adding pricing');
-    }
-  }
-
-  getOrders()
-  {
-    if(this.edit)
-    {
-      this.firebaseService.getAll('orders')
-        .subscribe(
-          (data) => {
-            console.log(data);
-            for (var _i = 0; _i < data.length; _i++) {
-              var order = data[_i];
-              var orderData = order.payload.doc.data();
-              console.log(orderData);
-              console.log('************');
-              console.log(orderData);
-              console.log('************');
-              var newOrder : Order = {
-                orderid : order.payload.doc.id,
-                total: orderData['total'],
-                userid: orderData['userid'],
-                storeid: orderData['storeid'],
-                orderItems: orderData['orderItems'],
-                status: orderData['status']
-              };
-              if(newOrder.storeid === this.storeid)
-              {
-                this.orders.push(newOrder);
-              }
-              console.log('next');
-            }
-            console.log(this.orders);
-          }
-        );
-    }
-  }
-
-  
-
 }

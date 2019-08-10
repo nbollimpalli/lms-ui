@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RestService } from '../../../shared/services/rest.service';
 import { SnackbarService } from '../../../shared/services/snackbar.service';
+import { FormControl } from '@angular/forms';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-permissions',
@@ -13,9 +15,22 @@ export class PermissionsComponent implements OnInit {
   permissions = {};
   groups_loaded = false;
   content_types_loaded = false;
-  constructor(private restService : RestService, private snackbarService : SnackbarService) { }
+  name = new FormControl();
+  constructor(private restService : RestService, private snackbarService : SnackbarService, private userService : UserService) { }
 
   ngOnInit() {
+    this.loadGroups();
+    this.loadContentTypes();
+  }
+
+  reload()
+  {
+    this.groups = [];
+    this.content_types = []
+    this.permissions = {};
+    this.groups_loaded = false;
+    this.content_types_loaded = false;
+    this.name = new FormControl();
     this.loadGroups();
     this.loadContentTypes();
   }
@@ -40,6 +55,21 @@ export class PermissionsComponent implements OnInit {
         this.content_types = data['data'];
       },
       (data) => {
+        this.snackbarService.afterRequestFailure(data);
+      }
+    );
+  }
+
+  addGroup(){
+    this.userService.loading = true;
+    this.restService.post('CREATE_GROUP', null, null, {'name' : this.name.value}).subscribe(
+      (data) => {
+        this.userService.loading = false;
+        this.snackbarService.afterRequest(data);
+        this.reload();
+      },
+      (data) => {
+        this.userService.loading = false;
         this.snackbarService.afterRequestFailure(data);
       }
     );
@@ -76,6 +106,11 @@ export class PermissionsComponent implements OnInit {
         this.snackbarService.afterRequestFailure(data);
       }
     );
+  }
+
+  createGroup()
+  {
+
   }
 
 }

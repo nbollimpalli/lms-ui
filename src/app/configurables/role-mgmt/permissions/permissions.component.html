@@ -1,3 +1,14 @@
+<div class="tool-bar-container">
+<div class="filter-tool-bar">
+    <mat-icon class="filter-icon">store</mat-icon>
+    <div>
+        <div class="input-element-label">NAME</div>
+        <div class="input-element"><input autocomplete="rutjdskjde" [formControl]="name" class="filter-tool-bar-input" type="text"></div>
+    </div>
+    <button mat-icon-button color="primary" matTooltip="ADD GROUP" (click)="addGroup()">
+            <mat-icon>group_add</mat-icon>
+    </button>
+</div></div>
 <mat-tab-group mat-align-tabs="center">
 <mat-tab  *ngFor="let group of groups" [label]="group['name'] | uppercase">
     <mat-accordion *ngFor="let content_type of content_types">

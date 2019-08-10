@@ -1,0 +1,23 @@
+<div class="tool-bar-container">
+        <div class="filter-tool-bar">
+            <mat-icon class="filter-icon">money</mat-icon>
+            <div>
+                <div class="input-element-label">NAME</div>
+                <div class="input-element"><input autocomplete="rutjdskjde" [formControl]="name" class="filter-tool-bar-input" type="text"></div>
+            </div>
+          <button mat-icon-button color="primary" matTooltip="RESET FILTERS" (click)="initFilters()">
+              <mat-icon>tune</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" matTooltip="NEW PRICE" (click)="dialogService.openDialog(['addon', {}])">
+              <mat-icon>fiber_new</mat-icon>
+          </button>
+        </div>
+</div>
+<mat-paginator [length]="total_count" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions" (page)="setPagination($event)"></mat-paginator>
+<mat-nav-list>
+    <h3 mat-subheader>Addons</h3>
+    <mat-list-item *ngFor="let price of dataSource" (click)="dialogService.openDialog(['addon', {'id' : price['id']}])">
+        <mat-icon mat-list-icon>trip_origin</mat-icon>
+        <h4 mat-line>{{price['name']}}</h4>
+    </mat-list-item>
+</mat-nav-list>

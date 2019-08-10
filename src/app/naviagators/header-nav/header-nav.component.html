@@ -54,7 +54,6 @@
       <button
         type="button"
         mat-icon-button
-        matBadge="1" 
         matBadgePosition="before"
         matBadgeColor="warn"
         [matMenuTriggerFor]="menu"
@@ -62,6 +61,28 @@
       >
         <mat-icon class="toggle-icon white-color" aria-label="notifications" >notifications_active</mat-icon>
       </button>
+
+      <!-- <button
+        type="button"
+        mat-icon-button
+        matBadgePosition="before"
+        matBadgeColor="warn"
+        [matMenuTriggerFor]="messages"
+        *ngIf="userService.user.LoggedIn"
+      >
+        <mat-icon class="toggle-icon white-color" aria-label="messages" >message</mat-icon>
+      </button>
+
+      <mat-menu #messages="matMenu">
+          <button *ngFor="let n of userService.notifications" mat-menu-item (click)="onClickOfNotification(n,[])">
+            <mat-icon>{{n['icon']}}</mat-icon>
+            <span>{{n['name']}}</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>message</mat-icon>
+            <span>Disable alerts</span>
+          </button>
+        </mat-menu> -->
 
       <mat-menu #menu="matMenu">
           <button *ngFor="let n of userService.notifications" mat-menu-item (click)="onClickOfNotification(n,[])">

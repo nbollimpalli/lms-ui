@@ -62,7 +62,50 @@
             </div>
           </div>
       </mat-tab>
-
+      <mat-tab (click)="loadAddresses()" >
+          <ng-template mat-tab-label>
+          <mat-icon class="tab-icon">location_on</mat-icon>
+          Address
+          </ng-template>
+          <div class="tool-bar-container">
+            <div class="filter-tool-bar">
+              
+            </div>
+            </div>
+          <div class='addresses'>
+            <mat-nav-list class="address-item">
+              <h3 mat-subheader>
+                  <button mat-button color="primary" matTooltip="NEW ADDRESS" (click)="dialogService.openDialog(['address', {}])">
+                      <mat-icon>add_location</mat-icon> ADD ADDRESS
+                  </button>
+              </h3>
+              <mat-divider></mat-divider>
+              <mat-list-item *ngFor="let address of addresses" (click)="dialogService.openDialog(['address', {'id':address['id']}])">
+                <!-- <mat-icon mat-list-icon>location_on</mat-icon> -->
+                <h4 mat-line class="address-name">
+                  {{address['name'] | uppercase}}
+                </h4>
+                <p mat-line>
+                  {{address['flat']}}
+                </p>
+                <p mat-line>
+                  {{address['landmark']}}
+                </p>
+                <p mat-line>
+                  {{address['street']}}
+                </p>
+                <p mat-line>
+                  {{address['area']}}
+                </p>
+                <p mat-line>
+                  {{ address['city'] }} {{ address['state'] }} {{ address['country'] }} {{ address['zipcode'] }}
+                  </p>
+                <mat-divider></mat-divider>
+              </mat-list-item>
+              
+            </mat-nav-list>
+            </div>
+      </mat-tab>
       <mat-tab >
       <ng-template mat-tab-label>
       <mat-icon class="tab-icon">vpn_key</mat-icon>
@@ -70,7 +113,6 @@
       </ng-template>
       <div class="center-form-container-by-row root-signup-container">
           <div class="signup-form-enclosure">
-      
           <form class="center-form-container-by-col signup-form" (ngSubmit)="onSubmit(passwordResetForm)" [formGroup]="passwordResetForm">
 
             <mat-form-field class="mat-form-input">
@@ -88,7 +130,6 @@
                     New Password is <strong>required</strong>
                   </mat-error>
                 </mat-form-field>
-
             <mat-divider></mat-divider>
             <!-- <mat-checkbox class="mat-form-input" formControlName="subscribe_newsletter">Subscribe To News Letter</mat-checkbox> -->
                       

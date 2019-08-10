@@ -9,7 +9,21 @@ DRIBBBLE: https://dribbble.com/shots/4330167-404-Page-Lost-In-Space
 <div class="body bg-purple">
     <div class="stars">
         <div class="central-body">
-            <a [routerLink]="" class="btn-go-home" target="_self">REQUEST FOR PICKUP</a>
+            <a [matMenuTriggerFor]="menu" [routerLink]="" class="btn-go-home" target="_self">REQUEST FOR PICKUP</a>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item>
+                    <mat-icon>store</mat-icon>
+                    <span>Redial (Rajajinagar) Redial (Rajajinagar) Redial (Rajajinagar) Redial (Rajajinagar) Redial (Rajajinagar) Redial (Rajajinagar) Redial (Rajajinagar) Redial (Rajajinagar) </span>
+                </button>
+                <button mat-menu-item disabled>
+                    <mat-icon>store</mat-icon>
+                    <span>Redial (Marathalli)</span>
+                </button>
+                <button mat-menu-item>
+                    <mat-icon>store</mat-icon>
+                    <span>Redial (Whitefield)</span>
+                </button>
+                </mat-menu>
         </div>
         <div class="objects">
             <img class="object_rocket" src="https://algovent-static.s3.ap-south-1.amazonaws.com/rocket.svg" width="40px">

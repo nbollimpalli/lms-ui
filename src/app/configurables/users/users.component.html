@@ -1,58 +1,55 @@
-<div class="users-container">
-  <div class="users">
-    <mat-paginator [length]="total_count" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions" (page)="setPagination($event)"></mat-paginator>
-    <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>
-          <mat-form-field >
-              <input matInput placeholder="NAME" [formControl]="name">
-          </mat-form-field>
-      </th>
-      <td mat-cell *matCellDef="let element"> {{element['name']}} </td>
-    </ng-container>
 
-    <ng-container matColumnDef="mobile">
-      <th mat-header-cell *matHeaderCellDef> 
-          <mat-form-field >
-              <input matInput placeholder="MOBILE" [formControl]="mobile">
-          </mat-form-field> 
-      </th>
-      <td mat-cell *matCellDef="let element"> {{element['mobile']}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef> 
-          <mat-form-field >
-              <input matInput placeholder="EMAIL" [formControl]="email">
-          </mat-form-field> 
-      </th>
-      <td mat-cell *matCellDef="let element"> {{element['email']}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef> 
-          <mat-form-field>
-              <mat-select placeholder="STATUS" [formControl]="status" multiple>
-                <mat-select-trigger>
-                  {{status.value ? status.value[0] : ''}}
-                  <span *ngIf="status.value?.length > 1" >
-                    (+{{status.value.length - 1}} {{status.value?.length === 2 ? 'other' : 'others'}})
-                  </span>
-                </mat-select-trigger>
-                <mat-option *ngFor="let statusListItem of statusList" [value]="statusListItem">{{statusListItem | uppercase}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-      </th>
-      <td mat-cell *matCellDef="let element"> {{element['status'] | uppercase}} </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-    <tr mat-row [routerLink]="['/user/'+element['id']]" *matRowDef="let element; columns: columnsToDisplay;"
-        class="example-element-row"
-        >
-    </tr>
-    <!-- <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr> -->
-  </table>
-
+<div class="tool-bar-container">
+<div class="filter-tool-bar">
+  <mat-icon class="filter-icon">people</mat-icon>
+  <div>
+    <div class="input-element-label">MOBILE</div>
+    <div class="input-element"><input autocomplete="rdsk-dstjfkde" [formControl]="mobile" class="filter-tool-bar-input" type="text"></div>
   </div>
+  <div>
+    <div class="input-element-label">NAME</div>
+    <div class="input-element"><input autocomplete="rutjdskjde" [formControl]="name" class="filter-tool-bar-input" type="text"></div>
+  </div>
+  <div>
+    <div class="input-element-label">EMAIL</div>
+    <div class="input-element"><input autocomplete="dsknjjfkde" [formControl]="email" class="filter-tool-bar-input" type="text"></div>
+  </div>
+  <div>
+    <div class="input-element-label">STATUS</div>
+    <div class="input-element">
+      <mat-select [formControl]="status" multiple>
+        <mat-select-trigger>
+          {{status.value ? status.value[0] : ''}}
+          <span *ngIf="status.value?.length > 1" >
+            (+{{status.value.length - 1}} {{status.value?.length === 2 ? 'other' : 'others'}})
+          </span>
+        </mat-select-trigger>
+        <mat-option *ngFor="let statusListItem of statusList" [value]="statusListItem">{{statusListItem | uppercase}}</mat-option>
+      </mat-select>
+    </div>
+  </div>
+  <div>
+    <div class="input-element-label">GROUP</div>
+    <div class="input-element"><input autocomplete="98uuns" class="filter-tool-bar-input" type="text"></div>
+  </div>
+  <button mat-icon-button color="primary" matTooltip="RESET FILTERS" (click)="initFilters()">
+      <mat-icon>tune</mat-icon>
+  </button>
+  <button mat-icon-button color="primary" matTooltip="NEW USER" [routerLink]="base_url">
+      <mat-icon>person_add</mat-icon>
+  </button>
+</div>
+</div>
+<mat-paginator [length]="total_count" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions" (page)="setPagination($event)"></mat-paginator>
+<div class="article-card-container">
+  <article class="card" *ngFor="let user of dataSource" [routerLink]="[base_url+user['id']]">
+    <div class="thumb"></div>
+    <div class="infos">
+      <div class="item">{{ user['mobile'] + ' (' +user['status']+ ') ' | uppercase }}</div>
+      <mat-divider></mat-divider>
+      <div class="item">{{ user['name'] | uppercase }}</div>
+      <mat-divider></mat-divider>
+      <div class="item">{{ user['email'] | lowercase }}</div>
+    </div>
+  </article>
 </div>

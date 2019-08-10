@@ -1,0 +1,57 @@
+<div class="dialog-close-button-with-title">
+        <!-- <img src="https://algovent-static.s3.ap-south-1.amazonaws.com/algovent.png" alt="Avatar" class="avatar"> -->
+        <div class="letters">
+                <span class="letter"><mat-icon>location_on</mat-icon></span><span class="letter">A</span><span class="letter">D</span><span class="letter">D</span><span class="letter">R</span><span class="letter">E</span><span class="letter">S</span><span class="letter">S</span>
+        </div>
+        <button mat-dialog-close  mat-icon-button><mat-icon class="cancel-dialog-icon">cancel</mat-icon></button>
+      </div>
+      <div class="center-form-container-by-row root-signup-container">
+          <div class="signup-form-enclosure">
+            <form class="center-form-container-by-col signup-form" (ngSubmit)="onSubmit()" [formGroup]="addressForm">
+            <mat-form-field class="mat-form-input">
+                <input matInput placeholder="Name*" formControlName="name"
+                        type="text" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="addressForm.controls['name'].hasError('required')">
+                Name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="mat-form-input">
+                <input matInput placeholder="Door No*" formControlName="flat"
+                        type="text" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="addressForm.controls['flat'].hasError('required')">
+                Flat is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="mat-form-input">
+                <input matInput placeholder="Landmark" formControlName="landmark"
+                        type="text" [errorStateMatcher]="matcher">
+            </mat-form-field>
+            <mat-form-field class="mat-form-input">
+                <input matInput placeholder="Street*" formControlName="street"
+                        type="text" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="addressForm.controls['street'].hasError('required')">
+                Street is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="mat-form-input">
+                <input matInput placeholder="Area*" formControlName="area"
+                        type="text" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="addressForm.controls['area'].hasError('required')">
+                Area is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="mat-form-input">
+                <input matInput placeholder="Zipcode*" formControlName="zipcode"
+                        type="text" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="addressForm.controls['zipcode'].hasError('required')">
+                zipcode is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <!-- <mat-form-field class="mat-form-input">
+                Bangalore, Karnataka, India
+            </mat-form-field> -->
+            <button [disabled]="addressForm.invalid" class="signup-button" mat-raised-button type="submit">SUBMIT</button>
+            </form>
+          </div>
+        </div>
+            

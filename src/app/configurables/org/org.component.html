@@ -1,0 +1,100 @@
+<mat-tab-group mat-align-tabs="center">
+    <mat-tab >
+      <ng-template mat-tab-label>
+      <mat-icon class="tab-icon">domain</mat-icon>
+      Org
+      </ng-template>
+
+      <div class="center-form-container-by-row root-signup-container">
+          <div class="single-form-enclosure">
+            <form class="center-form-container-by-col signup-form" (ngSubmit)="onSubmit(storeForm)" [formGroup]="storeForm">
+            <mat-form-field class="mat-form-input">
+                <input matInput placeholder="Name" formControlName="name"
+                        type="text" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="storeForm.controls['name'].hasError('name') && !storeForm.controls['name'].hasError('required')">
+                    Please enter a valid name
+                </mat-error>
+                <mat-error *ngIf="storeForm.controls['name'].hasError('required')">
+                    Name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+              <mat-form-field class="mat-form-input">
+                <input matInput placeholder="Telephone" formControlName="telephone"
+                        type="text" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="storeForm.controls['telephone'].hasError('telephone') && !storeForm.controls['telephone'].hasError('required')">
+                  Please enter a valid Telephone
+                </mat-error>
+                <mat-error *ngIf="storeForm.controls['telephone'].hasError('required')">
+                  Telephone is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <br>
+              <button [disabled]="storeForm.invalid" class="signup-button" mat-raised-button type="submit">{{ actionLabel }}</button>
+            </form>
+          </div>
+        </div>
+    </mat-tab>
+
+    <mat-tab *ngIf="id != null">
+      <ng-template mat-tab-label>
+      <mat-icon class="tab-icon">group</mat-icon>
+      Staff
+      </ng-template>
+      <app-users [org_id]="id" [is_staff]="'True'"></app-users>
+  </mat-tab>
+
+    <mat-tab *ngIf="id != null">
+        <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">store</mat-icon>
+        Stores
+        </ng-template>
+        <app-stores [org_id]="id"></app-stores>
+    </mat-tab>
+
+    <mat-tab (click)="loadAddresses()" *ngIf="id != null">
+            <ng-template mat-tab-label>
+            <mat-icon class="tab-icon">location_on</mat-icon>
+            Address
+            </ng-template>
+            <div class="tool-bar-container">
+              <div class="filter-tool-bar">
+                
+              </div>
+              </div>
+            <div class='addresses'>
+              <mat-nav-list class="address-item">
+                <h3 mat-subheader>
+                    <button mat-button color="primary" matTooltip="NEW ADDRESS" (click)="dialogService.openDialog(['address', {'org_id' : id}])">
+                        <mat-icon>add_location</mat-icon> ADD ADDRESS
+                    </button>
+                </h3>
+                <mat-divider></mat-divider>
+                <mat-list-item *ngFor="let address of addresses" (click)="dialogService.openDialog(['address', {'id':address['id'], 'org_id' : id}])">
+                  <!-- <mat-icon mat-list-icon>location_on</mat-icon> -->
+                  <h2 mat-line class="address-name">
+                    {{address['name'] | uppercase}}
+                  </h2>
+                  <p mat-line>
+                    {{address['flat']}}
+                  </p>
+                  <p mat-line>
+                    {{address['landmark']}}
+                  </p>
+                  <p mat-line>
+                    {{address['street']}}
+                  </p>
+                  <p mat-line>
+                    {{address['area']}}
+                  </p>
+                  <p mat-line>
+                    {{ address['city'] }} {{ address['state'] }} {{ address['country'] }} {{ address['zipcode'] }}
+                    </p>
+                  <mat-divider></mat-divider>
+                </mat-list-item>
+                
+              </mat-nav-list>
+              </div>
+        </mat-tab>
+       
+</mat-tab-group>
+

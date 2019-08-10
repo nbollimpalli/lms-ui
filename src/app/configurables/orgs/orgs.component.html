@@ -1,0 +1,45 @@
+
+<div class="tool-bar-container">
+    <div class="filter-tool-bar">
+      <mat-icon class="filter-icon">store</mat-icon>
+      <div>
+        <div class="input-element-label">NAME</div>
+        <div class="input-element"><input autocomplete="rutjdskjde" [formControl]="name" class="filter-tool-bar-input" type="text"></div>
+        </div>
+      <div>
+        <div class="input-element-label">TELEPHONE</div>
+        <div class="input-element"><input autocomplete="rdsk-dstjfkde" [formControl]="telephone" class="filter-tool-bar-input" type="text"></div>
+      </div>
+      <div>
+        <div class="input-element-label">STATUS</div>
+        <div class="input-element">
+          <mat-select [formControl]="status" multiple>
+            <mat-select-trigger>
+              {{status.value ? status.value[0] : ''}}
+              <span *ngIf="status.value?.length > 1" >
+                (+{{status.value.length - 1}} {{status.value?.length === 2 ? 'other' : 'others'}})
+              </span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let statusListItem of statusList" [value]="statusListItem">{{statusListItem | uppercase}}</mat-option>
+          </mat-select>
+        </div>
+      </div>
+      <button mat-icon-button color="primary" matTooltip="RESET FILTERS" (click)="initFilters()">
+          <mat-icon>tune</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" matTooltip="NEW ORG" routerLink="/org">
+          <mat-icon>fiber_new</mat-icon>
+      </button>
+    </div>
+    </div>
+    <mat-paginator [length]="total_count" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions" (page)="setPagination($event)"></mat-paginator>
+    <div class="article-card-container">
+      <article class="card" *ngFor="let store of dataSource" [routerLink]="['/org/'+store['id']]">
+        <div class="thumb"></div>
+        <div class="infos">
+          <div class="item">{{ store['name'] }}</div>
+          <mat-divider></mat-divider>
+          <div class="item">{{ store['telephone'] | uppercase }}</div>
+        </div>
+      </article>
+    </div>

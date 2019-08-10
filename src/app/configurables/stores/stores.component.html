@@ -1,19 +1,45 @@
-<!-- <div class="banner-container">
-    <div class="banner">
-        <button routerLink="/store" matTooltip="Add Store">Add Store</button>
-    </div>
-</div> -->
-<br/>
-<div class="ucard-container">
-  <div *ngFor="let store of stores" [routerLink]="['/store/'+store.payload.doc.id]" class="ucard">
-      <img class="ucard-img" src="https://algovent-s3-static.s3.ap-south-1.amazonaws.com/storefront.png" alt="Avatar">
-      <div class="ucontainer">
-          
-          <h4><b>{{ store.payload.doc.data().name }}</b></h4> 
-          <mat-divider></mat-divider>
-          <p><mat-icon>call</mat-icon> {{ store.payload.doc.data().phone }}</p>
-          <mat-divider></mat-divider>
-          <p><mat-icon>location_on</mat-icon> {{ store.payload.doc.data().address }}</p> 
-      </div>
-  </div>
-</div>
+
+<div class="tool-bar-container">
+        <div class="filter-tool-bar">
+          <mat-icon class="filter-icon">store</mat-icon>
+          <div>
+            <div class="input-element-label">NAME</div>
+            <div class="input-element"><input autocomplete="rutjdskjde" [formControl]="name" class="filter-tool-bar-input" type="text"></div>
+            </div>
+          <div>
+            <div class="input-element-label">TELEPHONE</div>
+            <div class="input-element"><input autocomplete="rdsk-dstjfkde" [formControl]="telephone" class="filter-tool-bar-input" type="text"></div>
+          </div>
+          <div>
+            <div class="input-element-label">TYPE</div>
+            <div class="input-element">
+              <mat-select [formControl]="type" multiple>
+                <mat-select-trigger>
+                  {{type.value ? type.value[0] : ''}}
+                  <span *ngIf="type.value?.length > 1" >
+                    (+{{type.value.length - 1}} {{type.value?.length === 2 ? 'other' : 'others'}})
+                  </span>
+                </mat-select-trigger>
+                <mat-option *ngFor="let typeListItem of typeList" [value]="typeListItem">{{typeListItem | uppercase}}</mat-option>
+              </mat-select>
+            </div>
+          </div>
+          <button mat-icon-button color="primary" matTooltip="RESET FILTERS" (click)="initFilters()">
+              <mat-icon>tune</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" matTooltip="NEW STORE" [routerLink]="'/org/'+ org_id +'/store'">
+              <mat-icon>fiber_new</mat-icon>
+          </button>
+        </div>
+        </div>
+        <mat-paginator [length]="total_count" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions" (page)="setPagination($event)"></mat-paginator>
+        <div class="article-card-container">
+          <article class="card" *ngFor="let store of dataSource" [routerLink]="['/org/'+ org_id +'/store/'+store['id']]">
+            <div class="thumb"></div>
+            <div class="infos">
+              <div class="item">{{ store['name'] + ' (' +store['type']+ ') ' | uppercase }}</div>
+              <mat-divider></mat-divider>
+              <div class="item">{{ store['telephone'] | uppercase }}</div>
+            </div>
+          </article>
+        </div>

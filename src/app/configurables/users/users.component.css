@@ -1,87 +1,54 @@
-.filters{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-content: space-between;
-    background-color: #e4e4e4;
-}
-
-.users-table {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
-    min-height: 60vh;
-}
-
-table {
-    width: 100%;
-}
-
-.users-container {
+.tool-bar-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  align-content: center;
+  align-items: center;
   width: 100%;
 }
 
-.users {
-  width: 80%;
-  padding-top: 5vh;
+.filter-tool-bar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  background-color: #f3f3f3;
+  padding: 20px;
 }
-  
+.filter-tool-bar-input{
+  border:none;
+  background-image:none;
+  background-color:transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  outline: none;
+}
 
-table {
-    width: 100%;
-  }
-  
-  tr.example-detail-row {
-    height: 0;
-  }
-  
-  tr.example-element-row:not(.example-expanded-row):hover {
-    background: #eae5e5;
-    cursor: pointer;
-  }
-  
-  tr.example-element-row:not(.example-expanded-row):active {
-    background: #efefef;
-    cursor: pointer;
-  }
-  
-  .example-element-row td {
-    border-bottom-width: 0;
-  }
-  
-  .example-element-detail {
-    overflow: hidden;
-    display: flex;
-  }
-  
-  .example-element-diagram {
-    min-width: 80px;
-    border: 2px solid black;
-    padding: 8px;
-    font-weight: lighter;
-    margin: 8px 0;
-    height: 104px;
-  }
-  
-  .example-element-symbol {
-    font-weight: bold;
-    font-size: 40px;
-    line-height: normal;
-  }
-  
-  .example-element-description {
-    padding: 16px;
-  }
-  
-  .example-element-description-attribution {
-    opacity: 0.5;
-  }
-  
+.filter-icon {
+  font-size: 25px;
+  border: 1px;
+  padding: 5px;
+}
+
+.input-element{
+  border: 1px;
+  box-shadow: 3px;
+  background-color: #e6e6e6;
+  padding: 5px;
+  width: 120px;
+}
+
+.input-element, .input-element-label {
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 0px;
+  border-radius: 3px;
+}
+
+.input-element-label {
+  color: rgba(96, 96, 96, 0.87);
+  font-size: 0.6em;
+}

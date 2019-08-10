@@ -34,7 +34,7 @@ export class HeaderNavComponent implements OnInit {
       { 
         title: 'Profile',
         icon: 'account_box',
-        path: '/user/profile'
+        path: '/profile'
       },
       { 
         title: 'Wallet',
