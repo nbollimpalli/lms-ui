@@ -24,7 +24,18 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "src/styles.css"
+              "src/styles.css",
+              "src/list.css",
+              "src/filters.css",
+              "src/acard.css",
+              "src/avatars.css",
+              "src/banners.css",
+              "src/buttons.css",
+              "src/forms.css",
+              "src/minicard.css",
+              "src/ucard.css",
+              "src/title.css",
+              "src/dialog.css"
             ],
             "scripts": []
           },

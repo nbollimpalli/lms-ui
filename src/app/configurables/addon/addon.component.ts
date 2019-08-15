@@ -15,6 +15,8 @@ export class AddonComponent implements OnInit {
 
   priceForm: FormGroup;
   matcher = new AlgoErrorStateMatcher();
+  title = ['A','D','D','O','N'];
+  title_logo = 'texture';
   id;
   fid;
   price = {

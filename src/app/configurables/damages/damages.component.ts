@@ -10,9 +10,9 @@ import { debounceTime, tap } from 'rxjs/operators';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 
 @Component({
-  selector: 'app-fabrics',
-  templateUrl: './fabrics.component.html',
-  styleUrls: ['./fabrics.component.css'],
+  selector: 'app-damages',
+  templateUrl: './damages.component.html',
+  styleUrls: ['./damages.component.css'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({height: '0px', minHeight: '0'})),
@@ -22,7 +22,7 @@ import { DialogService } from 'src/app/shared/services/dialog.service';
   ],
 })
 
-export class FabricsComponent implements OnInit, OnDestroy {
+export class DamagesComponent implements OnInit, OnDestroy {
   // MatPaginator Inputs
   current_page = 1;
   total_count = 10;
@@ -31,7 +31,6 @@ export class FabricsComponent implements OnInit, OnDestroy {
   pageSizeOptions: number[] = [5, 10, 25, 100];
 
   name = new FormControl();
-  type = new FormControl();
   subscriptions : Subscription[] = [];
 
   dataSource;
@@ -48,18 +47,18 @@ export class FabricsComponent implements OnInit, OnDestroy {
     console.log(pageEvent);
     this.current_page = pageEvent.pageIndex + 1;
     this.page_size = pageEvent.pageSize;
-    this.loadPrices();
+    this.loadDamages();
   }
   
   ngOnInit() {
-    this.loadPrices()
+    this.loadDamages()
     this.initFilters();
     this.userService.successEmitter.subscribe(
       (data) => {
         var code = data['code'];
-        if(code == 'fabric')
+        if(code == 'damage')
         {
-          this.loadPrices();
+          this.loadDamages();
         }
       }
     );
@@ -69,10 +68,8 @@ export class FabricsComponent implements OnInit, OnDestroy {
   {
     this.unsubscribe();
     this.name = new FormControl();
-    this.type = new FormControl();
     this.setDebouncers(this.name);
-    this.setDebouncers(this.type);
-    this.loadPrices();
+    this.loadDamages();
   }
 
   setDebouncers(frmctrl)
@@ -82,7 +79,7 @@ export class FabricsComponent implements OnInit, OnDestroy {
         debounceTime(500), tap(data => { console.log(data) })
       )
       .subscribe((data) => {
-        this.loadPrices();
+        this.loadDamages();
       });
     this.subscriptions.push(sub);
   }
@@ -97,9 +94,8 @@ export class FabricsComponent implements OnInit, OnDestroy {
     } );
   }
 
-  loadPrices()
+  loadDamages()
   {
-    console.log(this.type.value);
     var filters = [];
     (this.name.value == null || this.name.value.trim().length == 0) ? '' : filters.push('name__icontains-'+this.name.value);
     var filters_Str = filters.join(',');
@@ -108,9 +104,9 @@ export class FabricsComponent implements OnInit, OnDestroy {
     {
       query_params['filters'] = filters_Str;
     }
-    this.restService.get('FABRICS', null, query_params).subscribe(
+    this.restService.get('DAMAGES', null, query_params).subscribe(
       (data) => {
-        this.dataSource = data['data']['fabrics']
+        this.dataSource = data['data']['damages']
         this.total_count = data['data']['total_count']
         console.log(this.dataSource);
       },

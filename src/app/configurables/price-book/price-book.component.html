@@ -1,0 +1,23 @@
+<div class="dialog-close-button-with-title">
+    <!-- <img src="https://algovent-static.s3.ap-south-1.amazonaws.com/algovent.png" alt="Avatar" class="avatar"> -->
+    <div class="letters">
+            <span class="letter"><mat-icon>{{ title_logo }}</mat-icon></span>
+            <span class="letter" *ngFor="let c of title">{{c}}</span>
+    </div>
+    <button mat-dialog-close  mat-icon-button><mat-icon class="cancel-dialog-icon">cancel</mat-icon></button>
+    </div>
+    <div class="center-form-container-by-row root-signup-container">
+        <div class="signup-form-enclosure">
+        <form class="center-form-container-by-col signup-form" (ngSubmit)="onSubmit()" [formGroup]="pricebookForm">
+        <mat-form-field class="mat-form-input">
+            <input matInput placeholder="Name*" formControlName="name"
+                    type="text" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="pricebookForm.controls['name'].hasError('required')">
+            Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <button [disabled]="pricebookForm.invalid" class="signup-button" mat-raised-button type="submit">SUBMIT</button>
+        </form>
+        </div>
+    </div>
+        

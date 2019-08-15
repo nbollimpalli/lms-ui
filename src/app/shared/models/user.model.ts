@@ -1,18 +1,21 @@
 export class User {
-    Email: string;
+    Id : string = null;
+    Email: string = '';
     Name: String;
-    Mobile: string;
-    LoggedIn : Boolean;
-    AgreeTerms : boolean;
-    Subscribe : boolean;
+    Mobile: string = '';
+    LoggedIn : Boolean = false;
+    AgreeTerms : boolean = true;
+    Subscribe : boolean = true;
     Status : String;
-    SuperUser : boolean;
-    Staff : Boolean;
-    SubscribeTransactions : boolean;
-    HomeUrl;
-    Permissions;
-    PermissionsList;
-    Group;
+    SuperUser : boolean = false;
+    Staff : Boolean = false;
+    SubscribeTransactions : boolean = true;
+    HomeUrl = '/chome';
+    Permissions = {};
+    PermissionsList = [];
+    Group = null;
+    Stores = [];
+    DashboardInfo = [];
 
     constructor()
     {
@@ -21,38 +24,14 @@ export class User {
 
     setupNewUser()
     {
-      this.Email = '';
       this.Name = '';
-      this.Mobile = '';
-      this.LoggedIn = false;
-      this.AgreeTerms = true;
-      this.Subscribe = true;
-      this.SubscribeTransactions = true;
       this.Status = 'pending';
-      this.SuperUser = false;
-      this.Staff = false;
-      this.HomeUrl = '/chome';
-      this.Permissions = {};
-      this.PermissionsList = [];
-      this.Group = null;
     }
 
     setupGuestUser()
     {
-      this.Email = '';
       this.Name = 'Guest';
-      this.Mobile = '';
-      this.LoggedIn = false;
-      this.AgreeTerms = true;
-      this.Subscribe = true;
-      this.SubscribeTransactions = true;
       this.Status = 'active';
-      this.SuperUser = false;
-      this.Staff = false;
-      this.HomeUrl = '/chome';
-      this.Permissions = {};
-      this.PermissionsList = [];
-      this.Group = null;
     }
 
     setupLoggedInUser(data)
@@ -72,6 +51,11 @@ export class User {
       this.Permissions = data['permissions'];
       this.PermissionsList = data['permissions_list'];
       this.Group = data['group'];
+      this.Id = data['id'];
+      this.Stores = data['stores'];
+      this.DashboardInfo = data['dashboard_info'];
+      console.log('*****');
+      console.log(this.DashboardInfo);
       if(data['is_staff'] == true)
       {
         this.HomeUrl = '/dashboard';

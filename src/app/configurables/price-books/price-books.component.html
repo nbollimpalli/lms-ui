@@ -1,0 +1,24 @@
+<div class="tool-bar-container">
+    <div class="filter-tool-bar">
+        <mat-icon class="filter-icon">book</mat-icon>
+        <div>
+            <div class="input-element-label">NAME</div>
+            <div class="input-element"><input autocomplete="rutjdskjde" [formControl]="name" class="filter-tool-bar-input" type="text"></div>
+        </div>
+        <button mat-icon-button color="primary" matTooltip="RESET FILTERS" (click)="initFilters()">
+            <mat-icon>tune</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" matTooltip="NEW PRICE BOOK" (click)="dialogService.openDialog(['pricebook', {}])">
+            <mat-icon>fiber_new</mat-icon>
+        </button>
+    </div>
+</div>
+<mat-tab-group mat-align-tabs="center">
+    <mat-tab *ngFor="let pb of dataSource">
+        <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">book</mat-icon>
+        {{ pb['name'] }}
+        </ng-template>
+        <app-price-book-entries [pricebook]="pb"></app-price-book-entries>
+    </mat-tab>
+</mat-tab-group>

@@ -1,3 +1,5 @@
+/* for search and filtering of simple elements */
+
 .tool-bar-container {
     display: flex;
     flex-direction: row;
@@ -52,3 +54,5 @@
     color: rgba(96, 96, 96, 0.87);
     font-size: 0.6em;
   }
+  
+  /* for search and filtering of simple elements */

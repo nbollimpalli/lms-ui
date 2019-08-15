@@ -29,13 +29,13 @@
                 </mat-error>
               </mat-form-field>
               <br>
-              <button [disabled]="storeForm.invalid" class="signup-button" mat-raised-button type="submit">{{ actionLabel }}</button>
+              <button *ngIf="this.userService.hasPermission('modify_org')" [disabled]="storeForm.invalid" class="signup-button" mat-raised-button type="submit">{{ actionLabel }}</button>
             </form>
           </div>
         </div>
     </mat-tab>
 
-    <mat-tab *ngIf="id != null">
+  <mat-tab *ngIf="id != null && userService.hasPermission('modify_user')">
       <ng-template mat-tab-label>
       <mat-icon class="tab-icon">group</mat-icon>
       Staff
@@ -51,7 +51,7 @@
         <app-stores [org_id]="id"></app-stores>
     </mat-tab>
 
-    <mat-tab (click)="loadAddresses()" *ngIf="id != null">
+    <mat-tab (click)="loadAddresses()" *ngIf="id != null && this.userService.hasPermission('view_org')">
             <ng-template mat-tab-label>
             <mat-icon class="tab-icon">location_on</mat-icon>
             Address
@@ -63,14 +63,13 @@
               </div>
             <div class='addresses'>
               <mat-nav-list class="address-item">
-                <h3 mat-subheader>
+                <h3 mat-subheader *ngIf="this.userService.hasPermission('modify_org')">
                     <button mat-button color="primary" matTooltip="NEW ADDRESS" (click)="dialogService.openDialog(['address', {'org_id' : id}])">
                         <mat-icon>add_location</mat-icon> ADD ADDRESS
                     </button>
                 </h3>
                 <mat-divider></mat-divider>
-                <mat-list-item *ngFor="let address of addresses" (click)="dialogService.openDialog(['address', {'id':address['id'], 'org_id' : id}])">
-                  <!-- <mat-icon mat-list-icon>location_on</mat-icon> -->
+                <mat-list-item *ngFor="let address of addresses" (click)="dialogService.openDialog(['address', {'id':address['id'], 'org_id' : id}, 'modify_org'])">
                   <h2 mat-line class="address-name">
                     {{address['name'] | uppercase}}
                   </h2>

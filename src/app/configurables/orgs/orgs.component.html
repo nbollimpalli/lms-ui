@@ -27,7 +27,7 @@
       <button mat-icon-button color="primary" matTooltip="RESET FILTERS" (click)="initFilters()">
           <mat-icon>tune</mat-icon>
       </button>
-      <button mat-icon-button color="primary" matTooltip="NEW ORG" routerLink="/org">
+      <button mat-icon-button color="primary" matTooltip="NEW ORG" routerLink="/org" *ngIf="userService.hasPermission('add_org')">
           <mat-icon>fiber_new</mat-icon>
       </button>
     </div>

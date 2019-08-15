@@ -17,6 +17,8 @@ export class PriceComponent implements OnInit {
   matcher = new AlgoErrorStateMatcher();
   typeList: string[] = ['amount', 'percentage'];
   id;
+  title = ['P','R','I','C', 'E'];
+  title_logo = 'money';
   price = {
     'name': '',
     'number' : 0,

@@ -74,6 +74,7 @@
           <mat-icon class="tab-icon">store</mat-icon>
           Stores
           </ng-template>
+          <app-user-store [user]="user" [org_id]="org_id"></app-user-store>
         </mat-tab>
         <mat-tab (click)="loadAddresses()" *ngIf="id != null">
             <ng-template mat-tab-label>

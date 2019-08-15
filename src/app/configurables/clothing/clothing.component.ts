@@ -13,13 +13,14 @@ import { SnackbarService } from '../../shared/services/snackbar.service';
 })
 export class ClothingComponent implements OnInit {
 
-  priceForm: FormGroup;
+  clothingForm: FormGroup;
   matcher = new AlgoErrorStateMatcher();
   id;
-  fid;
-  price = {
+  clothing = {
     'name': ''
   }
+  title = ['C','L','O','T','H','I', 'N' ,'G'];
+  title_logo = 'texture';
   constructor(
                 private userService : UserService, 
                 private formBuilder: FormBuilder, 
@@ -32,35 +33,33 @@ export class ClothingComponent implements OnInit {
     console.log('****');
     console.log(data);
     this.id = data['id'];
-    this.fid = data['fid'];
   }
 
   ngOnInit() {
     this.setupPrice();
-    this.loadPrice();
+    this.loadClothing();
   }
 
   setupPrice()
   {
-    this.priceForm  =  this.formBuilder.group({
-      name: new FormControl(this.price['name'], {validators: [Validators.required]})
+    this.clothingForm  =  this.formBuilder.group({
+      name: new FormControl(this.clothing['name'], {validators: [Validators.required]})
     });
   }
 
-  get formControls() { return this.priceForm.controls; }
+  get formControls() { return this.clothingForm.controls; }
 
   onSubmit()
   {
-    if(this.priceForm.invalid)
+    if(this.clothingForm.invalid)
     {
       return;
     }
     else
     {
       this.userService.loading = true;
-      var body = this.priceForm.value;
+      var body = this.clothingForm.value;
       var destination = 'UPSERT_CLOTHING';
-      body['fabric'] = this.fid;
       console.log()
       if(this.id != null)
       {
@@ -81,13 +80,13 @@ export class ClothingComponent implements OnInit {
     }
   }
 
-  loadPrice()
+  loadClothing()
   {
     if(this.id != null)
     {
       this.restService.get('CLOTHING', null, {'id' : this.id}).subscribe(
         (data) => {
-          this.price = data['data'];
+          this.clothing = data['data'];
           this.setupPrice();
         }
       );

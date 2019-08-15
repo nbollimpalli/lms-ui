@@ -35,6 +35,8 @@ export class LoginComponent implements OnInit {
     'Linked-In' : 'https://s3.ap-south-1.amazonaws.com/algovent-static/algo-linkedin.svg',
     'Google' : 'https://s3.ap-south-1.amazonaws.com/algovent-static/algo-google.svg'
   };
+  title_logo = 'local_laundry_service';
+  title = ['L','O','G','I','N'];
   constructor(
               public userService : UserService, 
               private formBuilder: FormBuilder,

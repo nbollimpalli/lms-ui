@@ -52,3 +52,13 @@
     color: rgba(96, 96, 96, 0.87);
     font-size: 0.6em;
   }
+
+  .pem-action {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 10px;
+  }

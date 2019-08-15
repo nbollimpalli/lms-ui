@@ -13,54 +13,64 @@ import { FabricComponent } from '../../configurables/fabric/fabric.component';
 import { ClothingComponent } from '../../configurables/clothing/clothing.component';
 import { ServiceComponent } from '../../configurables/service/service.component';
 import { AddonComponent } from '../../configurables/addon/addon.component';
+import { DamageComponent } from 'src/app/configurables/damage/damage.component';
+import { PriceBookComponent } from 'src/app/configurables/price-book/price-book.component';
 
 const dialog_sizes = {
     'auth' : {
-        'xl' : {'w' : '25vw', 'h' : '30vh'},
-        'lg' : {'w' : '35vw', 'h' : '30vh'},
-        'md' : {'w' : '40vw', 'h' : '40vh'},
+        'xl' : {'w' : '35vw', 'h' : '30vh'},
+        'lg' : {'w' : '40vw', 'h' : '30vh'},
+        'md' : {'w' : '45vw', 'h' : '40vh'},
         'sm' : {'w' : '60vw', 'h' : '50vh'},
         'xs' : {'w' : '100vw', 'h' : '70vh'},
     }
 }
-const authDimension : Dimension = dialog_sizes['auth']['xl'];
+const commonDimension : Dimension = dialog_sizes['auth']['xl'];
 
 const dialogComponents = {
     'login' : {
         'c' : LoginComponent,
-        'd' : authDimension
+        'd' : commonDimension
     },
     'signup' : {
         'c' : SignupComponent,
-        'd' : authDimension
+        'd' : commonDimension
     },
     'verify' : {
         'c' : VerifyComponent,
-        'd' : authDimension
+        'd' : commonDimension
     },
     'address' : {
       'c' : AddAddressComponent,
-      'd' : authDimension
+      'd' : commonDimension
     },
     'price' : {
       'c' : PriceComponent,
-      'd' : authDimension
+      'd' : commonDimension
     },
     'fabric' : {
       'c' : FabricComponent,
-      'd' : authDimension
+      'd' : commonDimension
     },
     'clothing' : {
       'c' : ClothingComponent,
-      'd' : authDimension
+      'd' : commonDimension
     },
     'service' : {
       'c' : ServiceComponent,
-      'd' : authDimension
+      'd' : commonDimension
     },
     'addon' : {
       'c' : AddonComponent,
-      'd' : authDimension
+      'd' : commonDimension
+    },
+    'damage' : {
+      'c' : DamageComponent,
+      'd' : commonDimension
+    },
+    'pricebook' : {
+      'c' : PriceBookComponent,
+      'd' : commonDimension
     }
   };
 
@@ -87,8 +97,8 @@ export class DialogService {
         (data) => {
             console.log('********************');
             console.log(data);
-            authDimension.w = dialog_sizes['auth'][data]['w'];
-            authDimension.h = dialog_sizes['auth'][data]['h'];
+            commonDimension.w = dialog_sizes['auth'][data]['w'];
+            commonDimension.h = dialog_sizes['auth'][data]['h'];
         }
     );
   }
@@ -122,7 +132,15 @@ export class DialogService {
     }
     var dialogName = params[0];
     var dialogData = params[1];
-    const dialogRef = this.dialog.open(dialogComponents[dialogName]['c'], {
+    // if (params.length == 3)
+    // {
+    //   var pem = params[2];
+    //   if(!this.userService.hasPermission(pem))
+    //   {
+    //     return;
+    //   }
+    // }
+      const dialogRef = this.dialog.open(dialogComponents[dialogName]['c'], {
       width: dialogComponents[dialogName]['d'].w,
       data: dialogData
     });

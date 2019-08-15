@@ -1,0 +1,99 @@
+<div class="lists-container" disabled>
+        <div class="list">
+            <div class="list-header">
+                <span class="list-title-text">CLOTHINGS</span>
+                <button mat-icon-button color="primary" matTooltip="RESET FILTERS" (click)="initFilters()">
+                    <mat-icon>tune</mat-icon>
+                </button>
+            </div>
+            <div class="list-search-element"><input autocomplete="rutjdskjde" placeholder="Search Clothings" [formControl]="name" class="list-search-input" type="text"></div>
+            <div class="vspacer"></div>
+            <div class="selected-list-item" *ngIf="sclothing">
+                <div class="list-item-label">{{ sclothing['name'] | uppercase }}</div>
+                <div class="list-item-actions">
+                    <button color="primary" mat-icon-button><mat-icon>arrow_forward_ios</mat-icon></button>
+                </div>
+            </div>
+            <div *ngIf="sclothing" class="hdivider"></div>
+            <div class="list-item" *ngFor="let data of clothings">
+                <div class="list-item-label" (click)="selectClothing(data)">{{ data['name'] | uppercase }}</div>
+                <div class="list-item-actions">
+                    <button mat-icon-button><mat-icon>more_vert</mat-icon></button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="list">
+            <div class="list-header">
+                <span class="list-title-text">FABRICS</span>
+                <button mat-icon-button color="primary" matTooltip="RESET FILTERS" (click)="initFilters()">
+                    <mat-icon>tune</mat-icon>
+                </button>
+            </div>
+            <div class="list-search-element"><input autocomplete="rutjdskjde" placeholder="Search Fabrics" [formControl]="name" class="list-search-input" type="text"></div>
+            <div class="vspacer"></div>
+            <div class="selected-list-item" *ngIf="sfabric">
+                <div class="list-item-label">{{ sfabric['name'] | uppercase }}</div>
+                <div class="list-item-actions">
+                    <button color="primary" mat-icon-button><mat-icon>arrow_forward_ios</mat-icon></button>
+                </div>
+            </div>
+            <div *ngIf="sfabric" class="hdivider"></div>
+            <div class="list-item" *ngFor="let data of fabrics" (click)="selectFabric(data)">
+                <div class="list-item-label">{{ data['name'] | uppercase }}</div>
+                <div class="list-item-actions">
+                    <button mat-icon-button><mat-icon>more_vert</mat-icon></button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="list">
+            <div class="list-header">
+                <span class="list-title-text">SERVICES</span>
+                <button mat-icon-button color="primary" matTooltip="RESET FILTERS" (click)="initFilters()">
+                    <mat-icon>tune</mat-icon>
+                </button>
+                <button mat-icon-button *ngIf="sclothing && sfabric" color="primary" matTooltip="LINK PRICE TO ALL SERVICES" (click)="dialogService.openDialog(['service', {}])">
+                    <mat-icon>link</mat-icon>
+                </button>
+            </div>
+            <div class="list-search-element"><input autocomplete="rutjdskjde" placeholder="Search Services" [formControl]="name" class="list-search-input" type="text"></div>
+            <div class="vspacer"></div>
+    
+            <div class="selected-list-item" *ngIf="sfabricService">
+                <div class="list-item-label">{{ sfabricService['name'] | uppercase }}</div>
+                <div class="list-item-actions">
+                    <button color="primary" mat-icon-button><mat-icon>arrow_forward_ios</mat-icon></button>
+                </div>
+            </div>
+            <div *ngIf="sfabricService" class="hdivider"></div>
+            
+            <div class="list-item" *ngFor="let data of fabricServices['assigned']">
+                <div class="list-item-label" (click)="selectFabricService(data)">{{ data['name'] | uppercase }}</div>
+                <div class="list-item-actions">
+                    <button matTooltip="LINK PRICE" color="primary" mat-icon-button><mat-icon>link</mat-icon></button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="list">
+            <div class="list-header">
+                <span class="list-title-text">ADDONS</span>
+                <button mat-icon-button color="primary" matTooltip="RESET FILTERS" (click)="initFilters()">
+                    <mat-icon>tune</mat-icon>
+                </button>
+                <button *ngIf="sclothing && sfabric && sfabricService" mat-icon-button color="primary" matTooltip="LINK PRICES TO ALL ADDONS" (click)="dialogService.openDialog(['addon', {}])">
+                    <mat-icon>link</mat-icon>
+                </button>
+            </div>
+            <div class="list-search-element"><input autocomplete="rutjdskjde" placeholder="Search Addons" [formControl]="name" class="list-search-input" type="text"></div>
+            <div class="vspacer"></div>
+    
+            <div class="list-item" *ngFor="let data of fabricServiceAddons['assigned']">
+                <div class="list-item-label">{{ data['name'] | uppercase }}</div>
+                <div class="list-item-actions">
+                    <button matTooltip="LINK PRICE" color="primary" mat-icon-button><mat-icon>link</mat-icon></button>
+                </div>
+            </div>
+        </div>
+    </div>

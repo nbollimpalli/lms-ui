@@ -1,7 +1,8 @@
 <div class="dialog-close-button-with-title">
         <!-- <img src="https://algovent-static.s3.ap-south-1.amazonaws.com/algovent.png" alt="Avatar" class="avatar"> -->
         <div class="letters">
-                <span class="letter"><mat-icon>money</mat-icon></span><span class="letter">P</span><span class="letter">R</span><span class="letter">I</span><span class="letter">C</span><span class="letter">E</span>
+                <span class="letter"><mat-icon>{{ title_logo }}</mat-icon></span>
+                <span class="letter" *ngFor="let c of title">{{c}}</span>
         </div>
         <button mat-dialog-close  mat-icon-button><mat-icon class="cancel-dialog-icon">cancel</mat-icon></button>
       </div>

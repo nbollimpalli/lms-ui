@@ -18,25 +18,21 @@ import { SupportComponent } from './company/support/support.component';
 import { PageNotFoundComponent } from './company/page-not-found/page-not-found.component';
 import { CustomerHomeComponent } from './customer-home/customer-home.component';
 import { PermissionsComponent } from './configurables/role-mgmt/permissions/permissions.component';
-import { RolesComponent } from './configurables/role-mgmt/roles/roles.component';
 import { WalletComponent } from './profile/wallet/wallet.component';
 import { HistoryComponent } from './profile/history/history.component';
 import { UserComponent } from './configurables/user/user.component';
 import { PricesComponent } from './configurables/prices/prices.component';
-
-import { FabricsComponent } from './configurables/fabrics/fabrics.component';
 import { ClothingsComponent } from './configurables/clothings/clothings.component';
-import { ServicesComponent } from './configurables/services/services.component';
-import { AddonsComponent } from './configurables/addons/addons.component';
-
+import { DamagesComponent } from './configurables/damages/damages.component';
 import { OrgsComponent } from './configurables/orgs/orgs.component';
 import { OrgComponent } from './configurables/org/org.component';
+import { PriceBooksComponent } from './configurables/price-books/price-books.component';
+import { PriceBookComponent } from './configurables/price-book/price-book.component';
 
 export const appRoutes: Routes = [
   { path: '', component: CustomerHomeComponent , pathMatch: 'full'},
   { path: 'dashboard', component: AlgoDashboardComponent },
   { path: 'chome', component: CustomerHomeComponent },
-  { path: 'roles', component: RolesComponent },
   { path: 'prices', component: PricesComponent },
   { path: 'permissions', component: PermissionsComponent },
   { path: 'wallet', component: WalletComponent },
@@ -53,10 +49,9 @@ export const appRoutes: Routes = [
   { path: 'orgs', component: OrgsComponent },
   { path: 'org', component: OrgComponent },
   { path: 'org/:id', component: OrgComponent },
-  { path: 'fabrics', component: FabricsComponent },
-  { path: 'fabric/:fid/clothings', component: ClothingsComponent },
-  { path: 'fabric/:fid/clothing/:cid/services', component: ServicesComponent },
-  { path: 'addons', component: AddonsComponent },
+  { path: 'pricebooks', component: PriceBooksComponent },
+  { path: 'clothings', component:  ClothingsComponent},
+  { path: 'reservations', component: DamagesComponent },
   { path: 'orders', component: OrdersComponent },
   { path: 'store/:storeid/order', component: OrderComponent },
   { path: 'store/:storeid/order/:id', component: OrderComponent },
@@ -68,6 +63,6 @@ export const appRoutes: Routes = [
   { path: 'policy', component: PolicyComponent },
   { path: 'reports', component: ReportsComponent },
   { path: 'support', component: SupportComponent },
-  { path: '404', component: PageNotFoundComponent },  
+  { path: '404', component: PageNotFoundComponent },
   { path: '**', component: PageNotFoundComponent }
 ];

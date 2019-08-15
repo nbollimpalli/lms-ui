@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../../shared/services/user.service';
+import {PageEvent} from '@angular/material';
 import { RestService } from '../../shared/services/rest.service';
 import { SnackbarService } from '../../shared/services/snackbar.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
@@ -10,9 +11,9 @@ import { debounceTime, tap } from 'rxjs/operators';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 
 @Component({
-  selector: 'app-services',
-  templateUrl: './services.component.html',
-  styleUrls: ['./services.component.css'],
+  selector: 'app-price-books',
+  templateUrl: './price-books.component.html',
+  styleUrls: ['./price-books.component.css'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({height: '0px', minHeight: '0'})),
@@ -22,25 +23,24 @@ import { DialogService } from 'src/app/shared/services/dialog.service';
   ],
 })
 
-export class ServicesComponent implements OnInit, OnDestroy {
+export class PriceBooksComponent implements OnInit, OnDestroy {
   // MatPaginator Inputs
   current_page = 1;
   total_count = 10;
   length = 100;
   page_size = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
-
+  pbSelection = {};
   name = new FormControl();
+  type = new FormControl();
   subscriptions : Subscription[] = [];
+  spricebook;
+  
+  typeList: string[] = ['amount', 'percentage'];
+
   dataSource;
-  fid;
-  cid;
 
   constructor(private dialogService : DialogService, private userService : UserService, private restService : RestService, private snackbarService : SnackbarService, private route: ActivatedRoute) { 
-    this.route.params.subscribe( params => {
-      this.fid = params['fid'];
-      this.cid = params['cid'];
-    });
   }
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
@@ -52,18 +52,18 @@ export class ServicesComponent implements OnInit, OnDestroy {
     console.log(pageEvent);
     this.current_page = pageEvent.pageIndex + 1;
     this.page_size = pageEvent.pageSize;
-    this.loadPrices();
+    this.loadPriceBooks();
   }
   
   ngOnInit() {
-    this.loadPrices()
+    this.loadPriceBooks()
     this.initFilters();
     this.userService.successEmitter.subscribe(
       (data) => {
         var code = data['code'];
-        if(code == 'service')
+        if(code == 'pricebook')
         {
-          this.loadPrices();
+          this.loadPriceBooks();
         }
       }
     );
@@ -73,8 +73,10 @@ export class ServicesComponent implements OnInit, OnDestroy {
   {
     this.unsubscribe();
     this.name = new FormControl();
+    this.type = new FormControl();
     this.setDebouncers(this.name);
-    this.loadPrices();
+    this.setDebouncers(this.type);
+    this.loadPriceBooks();
   }
 
   setDebouncers(frmctrl)
@@ -84,7 +86,7 @@ export class ServicesComponent implements OnInit, OnDestroy {
         debounceTime(500), tap(data => { console.log(data) })
       )
       .subscribe((data) => {
-        this.loadPrices();
+        this.loadPriceBooks();
       });
     this.subscriptions.push(sub);
   }
@@ -99,26 +101,34 @@ export class ServicesComponent implements OnInit, OnDestroy {
     } );
   }
 
-  loadPrices()
+  loadPriceBooks()
   {
+    console.log(this.type.value);
     var filters = [];
     (this.name.value == null || this.name.value.trim().length == 0) ? '' : filters.push('name__icontains-'+this.name.value);
     var filters_Str = filters.join(',');
-    var query_params = { 'page' : this.current_page, 'count_per_page' : this.page_size, 'fabric_id' : this.fid, 'clothing_id' : this.cid }
+    var query_params = { 'page' : this.current_page, 'count_per_page' : this.page_size }
     if(filters_Str != null && filters_Str.length != 0)
     {
       query_params['filters'] = filters_Str;
     }
-    this.restService.get('SERVICES', null, query_params).subscribe(
+    this.restService.get('PRICEBOOKS', null, query_params).subscribe(
       (data) => {
-        this.dataSource = data['data']['services']
+        this.dataSource = data['data']['pricebooks']
         this.total_count = data['data']['total_count']
-        console.log(this.dataSource);
       },
       (data) => {
         this.snackbarService.afterRequest(data);
       }
     );
+  }
+
+  selectPriceBook(pb)
+  {
+    var pbid = pb['id'];
+    this.pbSelection = {};
+    this.pbSelection[pbid] = true;
+    this.spricebook = pb;
   }
 
 }

@@ -1,25 +1,229 @@
-<div class="tool-bar-container">
-        <div class="filter-tool-bar">
-            <mat-icon class="filter-icon">texture</mat-icon>
-            <div>
-                <div class="input-element-label">NAME</div>
-                <div class="input-element"><input autocomplete="rutjdskjde" [formControl]="name" class="filter-tool-bar-input" type="text"></div>
+<mat-tab-group mat-align-tabs="center">
+    <mat-tab>
+        <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">group</mat-icon>
+        Clothings
+        </ng-template>
+        <div class="vspacer"></div>
+        <div class="lists-container" disabled>
+                <div class="list">
+                    <div class="list-header">
+                        <span class="list-title-text">CLOTHINGS</span>
+                        <button mat-icon-button color="primary" matTooltip="RESET FILTERS" (click)="initFilters()">
+                            <mat-icon>tune</mat-icon>
+                        </button>
+                        <button mat-icon-button color="primary" matTooltip="NEW CLOTHING" (click)="dialogService.openDialog(['clothing', {}])">
+                            <mat-icon>fiber_new</mat-icon>
+                        </button>
+                    </div>
+                    <div class="list-search-element"><input autocomplete="rutjdskjde" placeholder="Search Clothings" [formControl]="name" class="list-search-input" type="text"></div>
+                    <div class="vspacer"></div>
+                    <div class="selected-list-item" *ngIf="sclothing">
+                        <div class="list-item-label">{{ sclothing['name'] | uppercase }}</div>
+                        <div class="list-item-actions">
+                            <button [matMenuTriggerFor]="menu" mat-icon-button><mat-icon>more_vert</mat-icon></button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item (click)="dialogService.openDialog(['clothing', {'id' : sclothing['id']}])">
+                                    <mat-icon>edit</mat-icon>
+                                    <span>EDIT</span>
+                                </button>
+                                <button mat-menu-item>
+                                    <mat-icon>close</mat-icon>
+                                    <span>DELETE</span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </div>
+                    <div *ngIf="sclothing" class="hdivider"></div>
+                    <div class="list-item" *ngFor="let data of clothings">
+                        <div class="list-item-label" (click)="selectClothing(data)">{{ data['name'] | uppercase }}</div>
+                        <div class="list-item-actions">
+                            <button [matMenuTriggerFor]="menu" mat-icon-button><mat-icon>more_vert</mat-icon></button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item>
+                                    <mat-icon>edit</mat-icon>
+                                    <span>EDIT</span>
+                                </button>
+                                <button mat-menu-item>
+                                    <mat-icon>close</mat-icon>
+                                    <span>DELETE</span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="list">
+                    <div class="list-header">
+                        <span class="list-title-text">FABRICS</span>
+                        <button mat-icon-button color="primary" matTooltip="RESET FILTERS" (click)="initFilters()">
+                            <mat-icon>tune</mat-icon>
+                        </button>
+                        <button mat-icon-button *ngIf="sclothing" color="primary" matTooltip="NEW FABRIC" (click)="dialogService.openDialog(['fabric', {'cid' : sclothing['id']}])">
+                            <mat-icon>fiber_new</mat-icon>
+                        </button>
+                    </div>
+                    <div class="list-search-element"><input autocomplete="rutjdskjde" placeholder="Search Fabrics" [formControl]="name" class="list-search-input" type="text"></div>
+                    <div class="vspacer"></div>
+                    <div class="selected-list-item" *ngIf="sfabric">
+                        <div class="list-item-label">{{ sfabric['name'] | uppercase }}</div>
+                        <div class="list-item-actions">
+                            <button [matMenuTriggerFor]="menu" mat-icon-button><mat-icon>more_vert</mat-icon></button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item (click)="dialogService.openDialog(['clothing', {'id' : sfabric['id']}])">
+                                    <mat-icon>edit</mat-icon>
+                                    <span>EDIT</span>
+                                </button>
+                                <button mat-menu-item>
+                                    <mat-icon>close</mat-icon>
+                                    <span>DELETE</span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </div>
+                    <div *ngIf="sfabric" class="hdivider"></div>
+                    <div class="list-item" *ngFor="let data of fabrics" (click)="selectFabric(data)">
+                        <div class="list-item-label">{{ data['name'] | uppercase }}</div>
+                        <div class="list-item-actions">
+                            <button [matMenuTriggerFor]="menu" mat-icon-button><mat-icon>more_vert</mat-icon></button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item>
+                                    <mat-icon>edit</mat-icon>
+                                    <span>EDIT</span>
+                                </button>
+                                <button mat-menu-item>
+                                    <mat-icon>close</mat-icon>
+                                    <span>DELETE</span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="list">
+                    <div class="list-header">
+                        <span class="list-title-text">SERVICES</span>
+                        <button mat-icon-button color="primary" matTooltip="RESET FILTERS" (click)="initFilters()">
+                            <mat-icon>tune</mat-icon>
+                        </button>
+                        <button mat-icon-button *ngIf="sclothing && sfabric" color="primary" matTooltip="NEW SERVICE" (click)="dialogService.openDialog(['service', {}])">
+                            <mat-icon>fiber_new</mat-icon>
+                        </button>
+                    </div>
+                    <div class="list-search-element"><input autocomplete="rutjdskjde" placeholder="Search Services" [formControl]="name" class="list-search-input" type="text"></div>
+                    <div class="vspacer"></div>
+            
+                    <div class="selected-list-item" *ngIf="sfabricService">
+                        <div class="list-item-label">{{ sfabricService['name'] | uppercase }}</div>
+                        <div class="list-item-actions">
+                            <button [matMenuTriggerFor]="menu" mat-icon-button><mat-icon>more_vert</mat-icon></button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item (click)="dialogService.openDialog(['clothing', {'id' : sfabric['id']}])">
+                                    <mat-icon>edit</mat-icon>
+                                    <span>EDIT</span>
+                                </button>
+                                <button mat-menu-item>
+                                    <mat-icon>close</mat-icon>
+                                    <span>DELETE</span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </div>
+                    <div *ngIf="sfabricService" class="hdivider"></div>
+                    
+                    <div class="list-item" *ngFor="let data of fabricServices['assigned']">
+                        <div class="list-item-label" (click)="selectFabricService(data)">{{ data['name'] | uppercase }}</div>
+                        <div class="list-item-actions">
+                            <button mat-icon-button [style.color]="'#ff0000ad'" (click)="upsertServices(data, 'remove')"><mat-icon>remove_circle</mat-icon></button>
+                            <button [matMenuTriggerFor]="menu" mat-icon-button><mat-icon>more_vert</mat-icon></button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item (click)="dialogService.openDialog(['service', {'id':data['id']}])">
+                                    <mat-icon>edit</mat-icon>
+                                    <span>EDIT</span>
+                                </button>
+                                <button mat-menu-item>
+                                    <mat-icon>close</mat-icon>
+                                    <span>DELETE</span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </div>
+            
+                    <div class="list-item" *ngFor="let data of fabricServices['unassigned']">
+                        <div class="list-item-label">{{ data['name'] | uppercase }}</div>
+                        <div class="list-item-actions">
+                            <button color="primary" mat-icon-button (click)="upsertServices(data, 'add')"><mat-icon>add_circle</mat-icon></button>
+                            <button [matMenuTriggerFor]="menu" mat-icon-button><mat-icon>more_vert</mat-icon></button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item (click)="dialogService.openDialog(['service', {'id':data['id']}])">
+                                    <mat-icon>edit</mat-icon>
+                                    <span>EDIT</span>
+                                </button>
+                                <button mat-menu-item>
+                                    <mat-icon>close</mat-icon>
+                                    <span>DELETE</span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="list">
+                    <div class="list-header">
+                        <span class="list-title-text">ADDONS</span>
+                        <button mat-icon-button color="primary" matTooltip="RESET FILTERS" (click)="initFilters()">
+                            <mat-icon>tune</mat-icon>
+                        </button>
+                        <button *ngIf="sclothing && sfabric && sfabricService" mat-icon-button color="primary" matTooltip="NEW ADDON" (click)="dialogService.openDialog(['addon', {}])">
+                            <mat-icon>fiber_new</mat-icon>
+                        </button>
+                    </div>
+                    <div class="list-search-element"><input autocomplete="rutjdskjde" placeholder="Search Addons" [formControl]="name" class="list-search-input" type="text"></div>
+                    <div class="vspacer"></div>
+            
+                    <div class="list-item" *ngFor="let data of fabricServiceAddons['assigned']">
+                        <div class="list-item-label">{{ data['name'] | uppercase }}</div>
+                        <div class="list-item-actions">
+                            <button mat-icon-button [style.color]="'#ff0000ad'" (click)="upsertServiceAddons(data, 'remove')"><mat-icon>remove_circle</mat-icon></button>
+                            <button [matMenuTriggerFor]="menu" mat-icon-button><mat-icon>more_vert</mat-icon></button>
+                            <mat-menu #menu="matMenu">
+                                <button (click)="dialogService.openDialog(['addon', {'id':data['id']}])" mat-menu-item>
+                                    <mat-icon>edit</mat-icon>
+                                    <span>EDIT</span>
+                                </button>
+                                <button mat-menu-item>
+                                    <mat-icon>close</mat-icon>
+                                    <span>DELETE</span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </div>
+            
+                    <div class="list-item" *ngFor="let data of fabricServiceAddons['unassigned']">
+                        <div class="list-item-label">{{ data['name'] | uppercase }}</div>
+                        <div class="list-item-actions">
+                            <button mat-icon-button color="primary" (click)="upsertServiceAddons(data, 'add')"><mat-icon>add_circle</mat-icon></button>
+                            <button [matMenuTriggerFor]="menu" mat-icon-button><mat-icon>more_vert</mat-icon></button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item (click)="dialogService.openDialog(['addon', {'id':data['id']}])">
+                                    <mat-icon>edit</mat-icon>
+                                    <span>EDIT</span>
+                                </button>
+                                <button mat-menu-item>
+                                    <mat-icon>close</mat-icon>
+                                    <span>DELETE</span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </div>
+                </div>
             </div>
-          <button mat-icon-button color="primary" matTooltip="RESET FILTERS" (click)="initFilters()">
-              <mat-icon>tune</mat-icon>
-          </button>
-          <button mat-icon-button color="primary" matTooltip="NEW CLOTHING" (click)="dialogService.openDialog(['clothing', {'fid' : fid}])">
-              <mat-icon>fiber_new</mat-icon>
-          </button>
-        </div>
-</div>
-<mat-paginator [length]="total_count" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions" (page)="setPagination($event)"></mat-paginator>
-<mat-nav-list>
-    <h3 mat-subheader> <a routerLink="/fabrics">Fabric</a> <mat-icon color="primary"> arrow_forward_ios </mat-icon> Clothings</h3>
-    <mat-list-item *ngFor="let price of dataSource">
-        <mat-icon mat-list-icon>texture</mat-icon>
-        <h4 mat-line>{{price['name'] | uppercase}}</h4>
-        <button mat-button [routerLink]="'/fabric/'+fid+'/clothing/'+price['id']+'/services'">SERVICES</button>
-        <button mat-button (click)="dialogService.openDialog(['clothing', {'id':price['id'], 'fid' : fid}])">EDIT</button>
-    </mat-list-item>
-</mat-nav-list>
+    </mat-tab>
+    <mat-tab >
+        <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">domain</mat-icon>
+        Reservations
+        </ng-template>
+        <app-damages></app-damages>
+    </mat-tab>
+</mat-tab-group>

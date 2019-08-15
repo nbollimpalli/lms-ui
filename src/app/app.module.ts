@@ -48,24 +48,25 @@ import { BreakpointObserverService } from './shared/services/breakpoint-observer
 import { DialogService } from './shared/services/dialog.service';
 import { VerifyComponent } from './auth/verify/verify.component';
 import { PermissionsComponent } from './configurables/role-mgmt/permissions/permissions.component';
-import { RolesComponent } from './configurables/role-mgmt/roles/roles.component';
 import { WalletComponent } from './profile/wallet/wallet.component';
 import { HistoryComponent } from './profile/history/history.component';
 import { UserComponent } from './configurables/user/user.component';
 import { AddAddressComponent } from './shared/components/add-address/add-address.component';
 import { PricesComponent } from './configurables/prices/prices.component';
 import { PriceComponent } from './configurables/price/price.component';
-import { FabricsComponent } from './configurables/fabrics/fabrics.component';
 import { FabricComponent } from './configurables/fabric/fabric.component';
 import { ClothingsComponent } from './configurables/clothings/clothings.component';
 import { ClothingComponent } from './configurables/clothing/clothing.component';
-import { ServicesComponent } from './configurables/services/services.component';
 import { ServiceComponent } from './configurables/service/service.component';
-import { AddonsComponent } from './configurables/addons/addons.component';
 import { AddonComponent } from './configurables/addon/addon.component';
 import { OrgsComponent } from './configurables/orgs/orgs.component';
 import { OrgComponent } from './configurables/org/org.component';
-
+import { UserStoreComponent } from './configurables/user-store/user-store.component';
+import { DamagesComponent } from './configurables/damages/damages.component';
+import { DamageComponent } from './configurables/damage/damage.component';
+import { PriceBooksComponent } from './configurables/price-books/price-books.component';
+import { PriceBookComponent } from './configurables/price-book/price-book.component';
+import { PriceBookEntriesComponent } from './configurables/price-book-entries/price-book-entries.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -92,7 +93,6 @@ import { OrgComponent } from './configurables/org/org.component';
     PageNotFoundComponent,
     CustomerHomeComponent,
     VerifyComponent,
-    RolesComponent,
     PermissionsComponent,
     WalletComponent,
     HistoryComponent,
@@ -100,16 +100,19 @@ import { OrgComponent } from './configurables/org/org.component';
     AddAddressComponent,
     PricesComponent,
     PriceComponent,
-    FabricsComponent,
     FabricComponent,
     ClothingsComponent,
     ClothingComponent,
-    ServicesComponent,
     ServiceComponent,
-    AddonsComponent,
     AddonComponent,
     OrgsComponent,
-    OrgComponent
+    OrgComponent,
+    UserStoreComponent,
+    DamagesComponent,
+    DamageComponent,
+    PriceBooksComponent,
+    PriceBookComponent,
+    PriceBookEntriesComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -128,7 +131,7 @@ import { OrgComponent } from './configurables/org/org.component';
     )
   ],
   providers: [BreakpointObserverService, DialogService, SnackbarService, FirebaseService, UserService, RestService, ApiFactoryService, FileManagerService, AuthService, SearchService, SeoService, ConnectionService],
-  entryComponents: [LoginComponent, SignupComponent, VerifyComponent, AddAddressComponent, PriceComponent, FabricComponent,ClothingComponent,ServiceComponent,AddonComponent],
+  entryComponents: [LoginComponent, SignupComponent, VerifyComponent, AddAddressComponent, PriceComponent, FabricComponent,ClothingComponent,ServiceComponent,AddonComponent,DamageComponent, PriceBookComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

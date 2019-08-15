@@ -84,6 +84,10 @@ export class OrgComponent implements OnInit {
       name: new FormControl(this.store['name'], {validators: []}),
       // status: new FormControl('active', {validators: []})
     });
+    if(!this.userService.hasPermission('modify_org'))
+    {
+      this.storeForm.disable();
+    }
   }
 
   get formControls() { return this.storeForm.controls; }

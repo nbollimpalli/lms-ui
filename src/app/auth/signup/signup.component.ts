@@ -41,6 +41,9 @@ export class SignupComponent implements OnInit {
     'Google' : 'https://s3.ap-south-1.amazonaws.com/algovent-static/algo-google.svg'
   };
 
+  title_logo = 'local_laundry_service';
+  title = ['S','I','G','N','U', 'P'];
+
   ngOnInit() {
     this.signupForm  =  this.formBuilder.group({
       mobile: new FormControl('', {validators: [Validators.required]}),

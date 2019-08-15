@@ -13,10 +13,13 @@ import { SnackbarService } from '../../shared/services/snackbar.service';
 })
 export class FabricComponent implements OnInit {
 
-  priceForm: FormGroup;
+  fabricForm: FormGroup;
   matcher = new AlgoErrorStateMatcher();
   id;
-  price = {
+  cid;
+  title = ['F','A','B','R','I','C'];
+  title_logo = 'texture';
+  fabric = {
     'name': ''
   }
   constructor(
@@ -31,36 +34,38 @@ export class FabricComponent implements OnInit {
     console.log('****');
     console.log(data);
     this.id = data['id'];
+    this.cid = data['cid'];
   }
 
   ngOnInit() {
-    this.setupPrice();
-    this.loadPrice();
+    this.setupFabric();
+    this.loadFabric();
   }
 
-  setupPrice()
+  setupFabric()
   {
-    this.priceForm  =  this.formBuilder.group({
-      name: new FormControl(this.price['name'], {validators: [Validators.required]})
+    this.fabricForm  =  this.formBuilder.group({
+      name: new FormControl(this.fabric['name'], {validators: [Validators.required]})
     });
   }
 
-  get formControls() { return this.priceForm.controls; }
+  get formControls() { return this.fabricForm.controls; }
 
   onSubmit()
   {
-    if(this.priceForm.invalid)
+    if(this.fabricForm.invalid)
     {
       return;
     }
     else
     {
       this.userService.loading = true;
-      var body = this.priceForm.value;
+      var body = this.fabricForm.value;
       var destination = 'UPSERT_FABRIC';
+      body['clothing'] = this.cid;
       if(this.id != null)
       {
-        body['id'] = this.id;
+        body['id'] = this.id;        
       }
       this.restService.post(destination, null, null, body).subscribe(
         (data) => {
@@ -77,14 +82,14 @@ export class FabricComponent implements OnInit {
     }
   }
 
-  loadPrice()
+  loadFabric()
   {
     if(this.id != null)
     {
       this.restService.get('FABRIC', null, {'id' : this.id}).subscribe(
         (data) => {
-          this.price = data['data'];
-          this.setupPrice();
+          this.fabric = data['data'];
+          this.setupFabric();
         }
       );
     }

@@ -38,9 +38,13 @@ export class ApiFactoryService {
     this.api_map.set('S_ADDRESS', '/stores/address');
     this.api_map.set('S_UPSERT_ADDRESS', '/stores/address/upsert');
 
-    this.api_map.set('PRICES', '/stores/price/search');
-    this.api_map.set('PRICE', '/stores/price/fetch');
-    this.api_map.set('UPSERT_PRICE', '/stores/price/upsert');
+    this.api_map.set('PRICES', '/pricebooks/price/search');
+    this.api_map.set('PRICE', '/pricebooks/price/fetch');
+    this.api_map.set('UPSERT_PRICE', '/pricebooks/price/upsert');
+
+    this.api_map.set('PRICEBOOKS', '/pricebooks/search');
+    this.api_map.set('PRICEBOOK', '/pricebooks/fetch');
+    this.api_map.set('UPSERT_PRICEBOOK', '/pricebooks/upsert');
 
     this.api_map.set('FABRICS', '/stores/fabric/search');
     this.api_map.set('FABRIC', '/stores/fabric/fetch');
@@ -62,6 +66,16 @@ export class ApiFactoryService {
     this.api_map.set('ADDON', '/stores/addon/fetch');
     this.api_map.set('UPSERT_ADDON', '/stores/addon/upsert');
 
+    this.api_map.set('DAMAGES', '/stores/damage/search');
+    this.api_map.set('DAMAGE', '/stores/damage/fetch');
+    this.api_map.set('UPSERT_DAMAGE', '/stores/damage/upsert');
+
+    this.api_map.set('FABRIC_SERVICES', '/stores/fabric/services/search');
+    this.api_map.set('FABRIC_SERVICES_UPSERT', '/stores/fabric/services/upsert');
+
+    this.api_map.set('FABRIC_SERVICE_ADDONS', '/stores/fabric/service/addons/search');
+    this.api_map.set('FABRIC_SERVICE_ADDONS_UPSERT', '/stores/fabric/service/addons/upsert');
+
     this.api_map.set('ORGS', '/orgs/search');
     this.api_map.set('ORG', '/orgs/fetch');
     this.api_map.set('UPSERT_ORG', '/orgs/upsert');
@@ -81,6 +95,7 @@ export class ApiFactoryService {
     this.api_map.set('U_ADDRESSES', '/management/addresses');
     this.api_map.set('U_ADDRESS', '/management/address');
     this.api_map.set('U_UPSERT_ADDRESS', '/management/address/upsert');
+    this.api_map.set('U_UPDATE_STORES', '/management/user/stores/update');
     
     //file manager services
     this.api_map.set('UPLOAD_FILE', '/file/upload/');

@@ -1,0 +1,109 @@
+.center-form-container
+{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.center-form-container-by-col
+{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.center-form-container-by-row
+{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.form-container {
+    margin-top : 6vh;
+    margin-bottom: 6vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 30%;
+  }
+  
+  .h-form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .hmat-form-input {
+    width: 15vh;
+    margin-left: 2vh; 
+  }
+
+  /* Smartphones (portrait and landscape) ---------- */
+@media screen and (min-width: 320px) and (max-width: 480px){
+    /* styles */
+    .single-form-enclosure {
+        width: 90%;
+    }
+  }
+  
+  @media screen and (min-width: 480) and (max-width: 768px){
+    /* styles */
+    .single-form-enclosure {
+        width: 80%;
+    }
+  }
+  
+  /* Tablets, iPads (portrait and landscape) ---------- */
+  @media screen and (min-width: 768px) and (max-width: 1024px){
+    /* styles */
+    .single-form-enclosure {
+        width: 70%;
+    }
+  }
+  
+  /* Tablets, iPads (portrait and landscape) ---------- */
+  @media screen and (min-width: 1024px){
+    /* styles */
+    .single-form-enclosure {
+        width: 50%;
+    }
+  }
+  
+  /* Desktops and laptops ---------- */
+  @media screen and (min-width: 1224px){
+    /* styles */
+    .single-form-enclosure {
+        width: 30%;
+    }
+  }
+  /* Large screens ---------- */
+  @media screen and (min-width: 1824px){
+    /* styles */
+    .single-form-enclosure {
+        width: 20%;
+    }
+  }

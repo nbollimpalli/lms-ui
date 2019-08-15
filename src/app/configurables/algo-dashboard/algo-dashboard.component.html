@@ -1,10 +1,11 @@
 <div class="grid-container">
   <mat-grid-list cols="3" rowHeight="350px">
-    <mat-grid-tile *ngFor="let card of services_data" [colspan]="position_matrix['cols']" [rowspan]="position_matrix['rows']">
+   
+    <mat-grid-tile *ngFor="let card of userService.user.DashboardInfo" [colspan]="position_matrix['cols']" [rowspan]="position_matrix['rows']">
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
-            <h3 class="app-category">{{card.title}}</h3>
+            <h3 class="app-category">{{card['title']}}</h3>
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">

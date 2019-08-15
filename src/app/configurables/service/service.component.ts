@@ -13,12 +13,11 @@ import { SnackbarService } from '../../shared/services/snackbar.service';
 })
 export class ServiceComponent implements OnInit {
 
-  priceForm: FormGroup;
+  serviceForm: FormGroup;
   matcher = new AlgoErrorStateMatcher();
   id;
-  fid;
-  cid;
-  price = {
+  title = ['S','E','V','I','C','E', 'S'];
+  service = {
     'name': ''
   }
   constructor(
@@ -33,8 +32,6 @@ export class ServiceComponent implements OnInit {
     console.log('****');
     console.log(data);
     this.id = data['id'];
-    this.fid = data['fid'];
-    this.cid = data['cid'];
   }
 
   ngOnInit() {
@@ -44,26 +41,24 @@ export class ServiceComponent implements OnInit {
 
   setupPrice()
   {
-    this.priceForm  =  this.formBuilder.group({
-      name: new FormControl(this.price['name'], {validators: [Validators.required]})
+    this.serviceForm  =  this.formBuilder.group({
+      name: new FormControl(this.service['name'], {validators: [Validators.required]})
     });
   }
 
-  get formControls() { return this.priceForm.controls; }
+  get formControls() { return this.serviceForm.controls; }
 
   onSubmit()
   {
-    if(this.priceForm.invalid)
+    if(this.serviceForm.invalid)
     {
       return;
     }
     else
     {
       this.userService.loading = true;
-      var body = this.priceForm.value;
+      var body = this.serviceForm.value;
       var destination = 'UPSERT_SERVICE';
-      body['fabric'] = this.fid;
-      body['clothing'] = this.cid;
       console.log()
       if(this.id != null)
       {
@@ -90,7 +85,7 @@ export class ServiceComponent implements OnInit {
     {
       this.restService.get('SERVICE', null, {'id' : this.id}).subscribe(
         (data) => {
-          this.price = data['data'];
+          this.service = data['data'];
           this.setupPrice();
         }
       );

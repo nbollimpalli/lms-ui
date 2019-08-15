@@ -1,0 +1,33 @@
+button
+{
+  cursor: pointer;
+}
+
+.toolbar-button {
+  margin-top: 15px !important;
+}
+
+.dialog-close-button-with-title {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .cancel-dialog-icon {
+    color: #626f8882;
+  }
+
+  .dialog-submit-button
+{
+    font: inherit;
+    width: 100%;
+    background-color: #373d65;
+    border-width: 0px;
+    border-radius: 0px;
+    height: 40px;
+    padding: 5px;
+    margin-top: 20px;
+    color: white;
+}

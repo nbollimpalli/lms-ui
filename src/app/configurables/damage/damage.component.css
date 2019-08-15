@@ -1,0 +1,89 @@
+/* .signup-button
+{
+    background-color: white;
+    color: black;
+} */
+
+
+.mat-form-input {
+    width: 100%;
+}
+
+.signup-button
+{
+    font: inherit;
+    width: 100%;
+    background-color: #373d65;
+    border-width: 0px;
+    border-radius: 0px;
+    height: 40px;
+    padding: 5px;
+    margin-top: 20px;
+    color: white;
+}
+
+.social-sso
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.signup-options
+{
+    margin-top: 25px;
+    width: 100%;
+}
+
+.signup-options > button
+{
+    min-width: 40%;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.scoial-icon
+{
+    height: 40px;
+    width: 40px;
+    padding: 5px;
+}
+
+.simple-divider
+{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: #848688e3;
+}
+
+.example-margin {
+    margin: 0 10px;
+  }
+
+.signup-form-enclosure
+{
+    width: 80%;
+}
+
+.root-signup-container
+{
+    height: 100%;
+}
+
+.required-checks {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.avatar {
+    margin: 0;
+}

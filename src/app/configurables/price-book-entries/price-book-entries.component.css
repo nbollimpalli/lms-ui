@@ -1,0 +1,9 @@
+.lists-container {
+    justify-content: space-around;
+    align-items: center;
+}
+
+.list {
+
+    align-items: center;
+}

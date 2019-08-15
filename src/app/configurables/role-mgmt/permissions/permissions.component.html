@@ -11,18 +11,28 @@
 </div></div>
 <mat-tab-group mat-align-tabs="center">
 <mat-tab  *ngFor="let group of groups" [label]="group['name'] | uppercase">
-    <mat-accordion *ngFor="let content_type of content_types">
-        <mat-expansion-panel (opened)="loadPermissions(group, content_type)">
+    <div class="pem-action">
+        <button  mat-raised-button (click)="updatePermission(group, null, null, 'all_readonly', true)">GIVE READ ONLY FOR ALL</button>
+        <button  mat-raised-button (click)="updatePermission(group, null, null, 'all', true)">GIVE ALL</button>
+        <button  mat-raised-button (click)="updatePermission(group, null, null, 'all', false)">REVOKE ALL</button>
+    </div>
+    <mat-accordion>
+        <mat-expansion-panel *ngFor="let content_type of content_types" (opened)="loadPermissions(group, content_type)">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     {{ content_type['model'] | uppercase }}
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <mat-selection-list>
-                <mat-list-option [selected]="permission['has_access']" *ngFor="let permission of permissions[group['id']+'_'+content_type['id']]"  (click)="updatePermission(group, content_type, permission)">
+                <mat-list-option [selected]="permission['has_access']" *ngFor="let permission of permissions[group['id']+'_'+content_type['id']]"  (click)="updatePermission(group, content_type, permission, 'individual', false)">
                     {{permission["name"]}}
                 </mat-list-option>
             </mat-selection-list>
+            <mat-action-row>
+                <button mat-raised-button (click)="updatePermission(group, content_type, null, 'contenttype_readonly', true)">GIVE READ ONLY</button>
+                <button mat-raised-button (click)="updatePermission(group, content_type, null, 'contenttype_all', true)">GIVE ALL</button>
+                <button mat-raised-button (click)="updatePermission(group, content_type, null, 'contenttype_all', false)">REVOKE ALL</button>
+            </mat-action-row>
         </mat-expansion-panel>
     </mat-accordion>
 </mat-tab>

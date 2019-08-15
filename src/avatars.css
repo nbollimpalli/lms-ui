@@ -1,0 +1,13 @@
+.avatar {
+    vertical-align: initial;
+    width: 70px;
+    height: 70px;
+    margin-bottom: 10vh;
+    background-color: #383e65;
+    cursor: pointer;
+    border-radius: 30%;
+  }
+  
+  .avatar:hover {
+    border-radius: 0%;
+  }

@@ -50,12 +50,15 @@ export class PermissionsComponent implements OnInit {
   }
 
   loadContentTypes() {
+    this.userService.loading = true;
     this.restService.get('CONTENT_TYPES', null, null).subscribe(
       (data) => {
         this.content_types = data['data'];
+        this.userService.loading = false;
       },
       (data) => {
         this.snackbarService.afterRequestFailure(data);
+        this.userService.loading = false;
       }
     );
   }
@@ -89,28 +92,34 @@ export class PermissionsComponent implements OnInit {
     );
   }
 
-  updatePermission(group, content_type, permission)
+  updatePermission(group, content_type, permission, pem_level, has_access)
   {
-    permission['has_access'] = (permission['has_access'] == true ? false : true);
     var body = {
-      'permissions' : [permission['id']],
-      'content_type_id' : content_type['id'],
       'group_id' : group['id'],
-      'has_access' : permission['has_access']
+      'has_access' : has_access,
+      'pem_level' : pem_level
     };
+    if(permission != null)
+    {
+      permission['has_access'] = (permission['has_access'] == true ? false : true);
+      body['permissions'] = [permission['id']];
+      body['has_access'] = permission['has_access'];
+    }
+    if(content_type != null)
+    {
+      body['content_type_id'] = content_type['id'];
+    }
+    this.userService.loading = true;
     this.restService.post('UPDATE_PERMISSION', null, null, body).subscribe(
       (data) => {
         this.snackbarService.afterRequest(data);
+        this.loadContentTypes();
       },
       (data) => {
         this.snackbarService.afterRequestFailure(data);
+        this.userService.loading = true;
       }
     );
-  }
-
-  createGroup()
-  {
-
   }
 
 }
