@@ -132,7 +132,7 @@
                     <div *ngIf="sfabricService" class="hdivider"></div>
                     
                     <div class="list-item" *ngFor="let data of fabricServices['assigned']">
-                        <div class="list-item-label" (click)="selectFabricService(data)">{{ data['name'] | uppercase }}</div>
+                        <div class="list-item-label" (click)="selectFabricService(data)">{{ data['name'] | uppercase }} - {{ (data['sequence']) }}</div>
                         <div class="list-item-actions">
                             <button mat-icon-button [style.color]="'#ff0000ad'" (click)="upsertServices(data, 'remove')"><mat-icon>remove_circle</mat-icon></button>
                             <button [matMenuTriggerFor]="menu" mat-icon-button><mat-icon>more_vert</mat-icon></button>

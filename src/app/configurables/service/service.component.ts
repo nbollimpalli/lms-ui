@@ -5,6 +5,7 @@ import { AlgoErrorStateMatcher } from '../../shared/utils/algo-error-state-match
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { RestService } from '../../shared/services/rest.service';
 import { SnackbarService } from '../../shared/services/snackbar.service';
+import { sequence } from '@angular/animations';
 
 @Component({
   selector: 'app-service',
@@ -18,7 +19,8 @@ export class ServiceComponent implements OnInit {
   id;
   title = ['S','E','V','I','C','E', 'S'];
   service = {
-    'name': ''
+    'name': '',
+    'sequence' : '',
   }
   constructor(
                 private userService : UserService, 
@@ -42,7 +44,8 @@ export class ServiceComponent implements OnInit {
   setupPrice()
   {
     this.serviceForm  =  this.formBuilder.group({
-      name: new FormControl(this.service['name'], {validators: [Validators.required]})
+      name: new FormControl(this.service['name'], {validators: [Validators.required]}),
+      sequence: new FormControl(this.service['sequence'], {validators: [Validators.required]})
     });
   }
 

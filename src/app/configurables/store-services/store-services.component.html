@@ -1,0 +1,5 @@
+<mat-selection-list>
+    <mat-list-option *ngFor="let service of services" #cservice [selected]="service['assigned']" (click)="updateServices(service['id'], cservice.selected)">
+        {{service["name"]}}
+    </mat-list-option>
+</mat-selection-list>

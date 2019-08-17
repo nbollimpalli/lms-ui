@@ -15,6 +15,13 @@
                 Name is <strong>required</strong>
                 </mat-error>
             </mat-form-field>
+            <mat-form-field class="mat-form-input">
+                <input matInput placeholder="Sequence*" formControlName="sequence"
+                        type="text" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="serviceForm.controls['sequence'].hasError('required')">
+                Sequence is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
             <button [disabled]="serviceForm.invalid" class="signup-button" mat-raised-button type="submit">SUBMIT</button>
             </form>
           </div>

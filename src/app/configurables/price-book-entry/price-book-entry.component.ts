@@ -13,14 +13,11 @@ import { SnackbarService } from '../../shared/services/snackbar.service';
 })
 export class PriceBookEntryComponent implements OnInit {
 
-  pricebookForm: FormGroup;
+  pricebookentryForm: FormGroup;
   matcher = new AlgoErrorStateMatcher();
-  title = ['P','R','I','C','E','B','O','O','K'];
+  title = ['A','M','O','U','N','T'];
   title_logo = 'texture';
-  id;
-  pricebook = {
-    'name': ''
-  }
+  amount = 0;
   constructor(
                 private userService : UserService, 
                 private formBuilder: FormBuilder, 
@@ -32,61 +29,44 @@ export class PriceBookEntryComponent implements OnInit {
   {
     console.log('****');
     console.log(data);
-    this.id = data['id'];
+    this.amount = data['initial_amount'];
   }
 
   ngOnInit() {
-    this.setupPriceBook();
-    this.loadPriceBook();
+    this.setupPriceBookEntry();
   }
 
-  setupPriceBook()
+  setupPriceBookEntry()
   {
-    this.pricebookForm  =  this.formBuilder.group({
-      name: new FormControl(this.pricebook['name'], {validators: [Validators.required]})
+    this.pricebookentryForm  =  this.formBuilder.group({
+      amount: new FormControl(this.amount, {validators: [Validators.required]})
     });
   }
 
-  get formControls() { return this.pricebookForm.controls; }
+  get formControls() { return this.pricebookentryForm.controls; }
 
   onSubmit()
   {
-    if(this.pricebookForm.invalid)
+    if(this.pricebookentryForm.invalid)
     {
       return;
     }
     else
     {
       this.userService.loading = true;
-      var body = this.pricebookForm.value;
-      var destination = 'UPSERT_PRICEBOOK';
-      if(this.id != null)
-      {
-        body['id'] = this.id;
-      }
-      this.restService.post(destination, null, null, body).subscribe(
+      var body = this.pricebookentryForm.value;
+      var destination = 'UPSERT_PRICEBOOK_ENTRY';
+      this.data['amount'] = this.pricebookentryForm.value['amount'];
+      this.restService.post(destination, null, null, this.data).subscribe(
         (data) => {
           this.userService.loading = false;
-          var emi = {'code' : 'pricebook', 'data' : {}};
+          var emi = {'code' : 'pricebookentry', 'data' : {}};
           this.userService.successEmitter.emit(emi);
           this.snackbarService.afterRequest(data);
         },
         (data) => {
           this.userService.loading = false;
           this.snackbarService.afterRequestFailure(data);
-        }
-      );
-    }
-  }
-
-  loadPriceBook()
-  {
-    if(this.id != null)
-    {
-      this.restService.get('PRICEBOOK', null, {'id' : this.id}).subscribe(
-        (data) => {
-          this.pricebook = data['data'];
-          this.setupPriceBook();
         }
       );
     }

@@ -67,6 +67,9 @@ import { DamageComponent } from './configurables/damage/damage.component';
 import { PriceBooksComponent } from './configurables/price-books/price-books.component';
 import { PriceBookComponent } from './configurables/price-book/price-book.component';
 import { PriceBookEntriesComponent } from './configurables/price-book-entries/price-book-entries.component';
+import { PriceBookEntryComponent } from './configurables/price-book-entry/price-book-entry.component';
+import { StoreServicesComponent } from './configurables/store-services/store-services.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -113,6 +116,8 @@ import { PriceBookEntriesComponent } from './configurables/price-book-entries/pr
     PriceBooksComponent,
     PriceBookComponent,
     PriceBookEntriesComponent,
+    PriceBookEntryComponent,
+    StoreServicesComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -131,7 +136,7 @@ import { PriceBookEntriesComponent } from './configurables/price-book-entries/pr
     )
   ],
   providers: [BreakpointObserverService, DialogService, SnackbarService, FirebaseService, UserService, RestService, ApiFactoryService, FileManagerService, AuthService, SearchService, SeoService, ConnectionService],
-  entryComponents: [LoginComponent, SignupComponent, VerifyComponent, AddAddressComponent, PriceComponent, FabricComponent,ClothingComponent,ServiceComponent,AddonComponent,DamageComponent, PriceBookComponent],
+  entryComponents: [LoginComponent, SignupComponent, VerifyComponent, AddAddressComponent, PriceComponent, FabricComponent,ClothingComponent,ServiceComponent,AddonComponent,DamageComponent, PriceBookComponent, PriceBookEntryComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -15,6 +15,7 @@ import { ServiceComponent } from '../../configurables/service/service.component'
 import { AddonComponent } from '../../configurables/addon/addon.component';
 import { DamageComponent } from 'src/app/configurables/damage/damage.component';
 import { PriceBookComponent } from 'src/app/configurables/price-book/price-book.component';
+import { PriceBookEntryComponent } from 'src/app/configurables/price-book-entry/price-book-entry.component';
 
 const dialog_sizes = {
     'auth' : {
@@ -70,6 +71,10 @@ const dialogComponents = {
     },
     'pricebook' : {
       'c' : PriceBookComponent,
+      'd' : commonDimension
+    },
+    'pricebookentry' : {
+      'c' : PriceBookEntryComponent,
       'd' : commonDimension
     }
   };

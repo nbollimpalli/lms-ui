@@ -46,6 +46,10 @@ export class ApiFactoryService {
     this.api_map.set('PRICEBOOK', '/pricebooks/fetch');
     this.api_map.set('UPSERT_PRICEBOOK', '/pricebooks/upsert');
 
+    this.api_map.set('PRICEBOOK_ENTRIES', '/pricebooks/pbe/search');
+    this.api_map.set('PRICEBOOK_ENTRY', '/pricebooks/pbe/fetch');
+    this.api_map.set('UPSERT_PRICEBOOK_ENTRY', '/pricebooks/pbe/upsert');
+
     this.api_map.set('FABRICS', '/stores/fabric/search');
     this.api_map.set('FABRIC', '/stores/fabric/fetch');
     this.api_map.set('UPSERT_FABRIC', '/stores/fabric/upsert');
@@ -57,6 +61,9 @@ export class ApiFactoryService {
     this.api_map.set('SERVICES', '/stores/service/search');
     this.api_map.set('SERVICE', '/stores/service/fetch');
     this.api_map.set('UPSERT_SERVICE', '/stores/service/upsert');
+
+    this.api_map.set('STORE_SERVICES', '/stores/store-services');
+    this.api_map.set('UPSERT_STORE_SERVICE', '/stores/store-services/upsert');
 
     this.api_map.set('SPS', '/stores/serviceprice/search');
     this.api_map.set('SP', '/stores/serviceprice/fetch');

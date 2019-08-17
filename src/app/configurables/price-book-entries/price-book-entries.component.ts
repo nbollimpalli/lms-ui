@@ -31,8 +31,8 @@ export class PriceBookEntriesComponent implements OnInit, OnDestroy {
   
   clothings = [];
   fabrics = [];
-  fabricServices = {'assigned' : [], 'unassigned' : []};
-  fabricServiceAddons = {'assigned' : [], 'unassigned' : []};
+  fabricServices = [];
+  fabricServiceAddons = [];
   
   sclothing = null;
   sfabric = null;
@@ -59,20 +59,9 @@ export class PriceBookEntriesComponent implements OnInit, OnDestroy {
     this.userService.successEmitter.subscribe(
       (data) => {
         var code = data['code'];
-        if(code == 'clothing')
-        {
-          this.loadClothings();
-        }
-        else if(code == 'fabric')
-        {
-          this.loadFabrics();
-        }
-        else if(code == 'service')
+        if(code == 'pricebookentry')
         {
           this.loadServices();
-        }
-        else if(code == 'addon')
-        {
           this.loadAddons();
         }
       }
@@ -156,11 +145,16 @@ export class PriceBookEntriesComponent implements OnInit, OnDestroy {
 
   loadServices()
   {
+    if(this.sfabric == null)
+    {
+      return;
+    }
     this.userService.loading = true;
-    var query_params = {'fabric_id' : this.sfabric['id']};
-    this.restService.get('FABRIC_SERVICES', null, query_params).subscribe(
+    var query_params = {'fid' : this.sfabric['id'], 'search_for' : 'fs_prices', 'pricebook_id':this.pricebook['id']};
+    this.restService.get('PRICEBOOK_ENTRIES', null, query_params).subscribe(
       (data) => {
         this.fabricServices = data['data']
+        console.log(this.fabricServices);
         this.userService.loading = false;
       },
       (data) => {
@@ -172,9 +166,13 @@ export class PriceBookEntriesComponent implements OnInit, OnDestroy {
 
   loadAddons()
   {
+    if(this.sfabricService == null)
+    {
+      return;
+    }
     this.userService.loading = true;
-    var query_params = {'fabric_id' : this.sfabric['id'], 'service_id' : this.sfabricService['id']};
-    this.restService.get('FABRIC_SERVICE_ADDONS', null, query_params).subscribe(
+    var query_params = {'fsid' : this.sfabricService['fsid'], 'search_for' : 'fsa_prices', 'pricebook_id':this.pricebook['id']};
+    this.restService.get('PRICEBOOK_ENTRIES', null, query_params).subscribe(
       (data) => {
         this.fabricServiceAddons = data['data'];
         this.userService.loading = false;
@@ -189,8 +187,8 @@ export class PriceBookEntriesComponent implements OnInit, OnDestroy {
   selectClothing(clothing)
   {
     this.userService.loading = true;
-    this.fabricServiceAddons = {'assigned' : [], 'unassigned' : []};
-    this.fabricServices = {'assigned' : [], 'unassigned' : []};
+    this.fabricServiceAddons = [];
+    this.fabricServices = [];
     this.sclothing = clothing;
     this.sfabricService = null;
     this.sfabric = null;
@@ -200,7 +198,7 @@ export class PriceBookEntriesComponent implements OnInit, OnDestroy {
   selectFabric(fabric)
   {
     this.userService.loading = true;
-    this.fabricServiceAddons = {'assigned' : [], 'unassigned' : []};
+    this.fabricServiceAddons = [];
     this.sfabric = fabric;
     this.sfabricService = null;
     this.loadServices();
@@ -211,6 +209,22 @@ export class PriceBookEntriesComponent implements OnInit, OnDestroy {
     this.userService.loading = true;
     this.sfabricService = service;
     this.loadAddons();
+  }
+
+  callPbeDialog(type,action,amount,updat_for,fs,fsa,pbeid)
+  {
+    var data = {
+      'type':type, 
+      'action':action, 
+      'initial_amount': (amount == null ? 0 : amount), 
+      'update_for':updat_for, 
+      'fid':this.sfabric['id'], 
+      'fsid':fs['fsid'],
+      'fsaid':fsa['fsaid'],
+      'pbid':this.pricebook['id'],
+      'pbeid':pbeid
+    }
+    this.dialogService.openDialog(['pricebookentry', data])
   }
 }
 

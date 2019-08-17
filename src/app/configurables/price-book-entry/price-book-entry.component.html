@@ -7,15 +7,15 @@
 </div>
 <div class="center-form-container-by-row root-signup-container">
     <div class="signup-form-enclosure">
-    <form class="center-form-container-by-col signup-form" (ngSubmit)="onSubmit()" [formGroup]="pricebookForm">
+    <form class="center-form-container-by-col signup-form" (ngSubmit)="onSubmit()" [formGroup]="pricebookentryForm">
     <mat-form-field class="mat-form-input">
-        <input matInput placeholder="Name*" formControlName="name"
+        <input matInput placeholder="Amount*" formControlName="amount"
                 type="text" [errorStateMatcher]="matcher">
-        <mat-error *ngIf="pricebookForm.controls['name'].hasError('required')">
-        Name is <strong>required</strong>
+        <mat-error *ngIf="pricebookentryForm.controls['amount'].hasError('required')">
+        Amount is <strong>required</strong>
         </mat-error>
     </mat-form-field>
-    <button [disabled]="pricebookForm.invalid" class="signup-button" mat-raised-button type="submit">SUBMIT</button>
+    <button [disabled]="pricebookentryForm.invalid" class="signup-button" mat-raised-button type="submit">UPDATE</button>
     </form>
     </div>
 </div>

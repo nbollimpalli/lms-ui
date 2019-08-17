@@ -53,7 +53,7 @@
                 <button mat-icon-button color="primary" matTooltip="RESET FILTERS" (click)="initFilters()">
                     <mat-icon>tune</mat-icon>
                 </button>
-                <button mat-icon-button *ngIf="sclothing && sfabric" color="primary" matTooltip="LINK PRICE TO ALL SERVICES" (click)="dialogService.openDialog(['service', {}])">
+                <button mat-icon-button *ngIf="sclothing && sfabric" color="primary" matTooltip="LINK PRICE TO ALL SERVICES" (click)="callPbeDialog('all','add',0,'fabricservice',{},{},null)">
                     <mat-icon>link</mat-icon>
                 </button>
             </div>
@@ -68,10 +68,10 @@
             </div>
             <div *ngIf="sfabricService" class="hdivider"></div>
             
-            <div class="list-item" *ngFor="let data of fabricServices['assigned']">
-                <div class="list-item-label" (click)="selectFabricService(data)">{{ data['name'] | uppercase }}</div>
+            <div class="list-item" *ngFor="let data of fabricServices">
+                <div class="list-item-label" (click)="selectFabricService(data)">{{ data['name'] | uppercase }} {{ data['price'] == null ? '' : (' - ' + data['price'])  }}</div>
                 <div class="list-item-actions">
-                    <button matTooltip="LINK PRICE" color="primary" mat-icon-button><mat-icon>link</mat-icon></button>
+                    <button matTooltip="LINK PRICE" (click)="callPbeDialog('single','add',data['price'],'fabricservice',data,{},data['pricebookentry_id'])" color="primary" mat-icon-button><mat-icon>link</mat-icon></button>
                 </div>
             </div>
         </div>
@@ -82,17 +82,17 @@
                 <button mat-icon-button color="primary" matTooltip="RESET FILTERS" (click)="initFilters()">
                     <mat-icon>tune</mat-icon>
                 </button>
-                <button *ngIf="sclothing && sfabric && sfabricService" mat-icon-button color="primary" matTooltip="LINK PRICES TO ALL ADDONS" (click)="dialogService.openDialog(['addon', {}])">
+                <button *ngIf="sclothing && sfabric && sfabricService" mat-icon-button color="primary" matTooltip="LINK PRICES TO ALL ADDONS" (click)="callPbeDialog('all','add',0,'fabricserviceaddon',sfabricService,{},null)">
                     <mat-icon>link</mat-icon>
                 </button>
             </div>
             <div class="list-search-element"><input autocomplete="rutjdskjde" placeholder="Search Addons" [formControl]="name" class="list-search-input" type="text"></div>
             <div class="vspacer"></div>
     
-            <div class="list-item" *ngFor="let data of fabricServiceAddons['assigned']">
-                <div class="list-item-label">{{ data['name'] | uppercase }}</div>
+            <div class="list-item" *ngFor="let data of fabricServiceAddons">
+                <div class="list-item-label">{{ data['name'] | uppercase }} {{ data['price'] == null ? '' : (' - ' + data['price'])  }}</div>
                 <div class="list-item-actions">
-                    <button matTooltip="LINK PRICE" color="primary" mat-icon-button><mat-icon>link</mat-icon></button>
+                    <button matTooltip="LINK PRICE" (click)="callPbeDialog('single','add',data['price'],'fabricserviceaddon',sfabricService,data,data['pricebookentry_id'])" color="primary" mat-icon-button><mat-icon>link</mat-icon></button>
                 </div>
             </div>
         </div>

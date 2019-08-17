@@ -45,6 +45,13 @@
         </mat-tab>
         <mat-tab>
             <ng-template mat-tab-label>
+            <mat-icon class="tab-icon">play_for_work</mat-icon>
+            Services
+            </ng-template>
+            <app-store-services [storeId]="id"></app-store-services>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
             <mat-icon class="tab-icon">rv_hookup</mat-icon>
             Workflow
             </ng-template>
