@@ -1,5 +1,7 @@
-<mat-selection-list>
+<div class="bools-container">
+<mat-selection-list class="bools">
     <mat-list-option *ngFor="let service of services" #cservice [selected]="service['assigned']" (click)="updateServices(service['id'], cservice.selected)">
-        {{service["name"]}}
+        {{service["name"] | uppercase}}
     </mat-list-option>
 </mat-selection-list>
+</div>

@@ -1,16 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 
-.tollbar-splitter
-{
-  flex: 1 1 auto;
-}
-
-.grey-divider
-{
-  border-top-color: #ffffff1f;
-}
-
+/*colors*/
 .white-color {
   color: white;
 }
@@ -22,23 +13,14 @@
 .red-color {
   color: #fb31317d;
 }
+/*colors*/
 
-.verticle-line {
-  padding: 0px;
-  margin: 5vh;
-  border: 0px;
-  border-color: red;
-  min-height: 50vh;
-  width: 1px;
-  background-color: #dcd1d18c;
-}
-
-
-
+/*backgrounds*/
 .grey-bg
 {
   background-color:#e8e6e6;
 }
+/*backgrounds*/
 
 .tab-icon {
   margin-right: 0px;
@@ -52,6 +34,26 @@
   border-bottom-color: #a5a2a261;
   width: 100%;
   margin: 5px 0;
+}
+
+.verticle-line {
+  padding: 0px;
+  margin: 5vh;
+  border: 0px;
+  border-color: red;
+  min-height: 50vh;
+  width: 1px;
+  background-color: #dcd1d18c;
+}
+
+.grey-divider
+{
+  border-top-color: #ffffff1f;
+}
+
+.tollbar-splitter
+{
+  flex: 1 1 auto;
 }
 
 /* dividers */

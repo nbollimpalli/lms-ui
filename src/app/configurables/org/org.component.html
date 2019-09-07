@@ -51,6 +51,13 @@
         <app-stores [org_id]="id"></app-stores>
     </mat-tab>
 
+    <mat-tab >
+      <ng-template mat-tab-label>
+      <mat-icon class="tab-icon">equalizer</mat-icon>
+      Reports
+      </ng-template>
+    </mat-tab>
+
     <mat-tab (click)="loadAddresses()" *ngIf="id != null && this.userService.hasPermission('view_org')">
             <ng-template mat-tab-label>
             <mat-icon class="tab-icon">location_on</mat-icon>

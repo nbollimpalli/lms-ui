@@ -123,6 +123,10 @@ export class ApiFactoryService {
     //complete search apis
     this.api_map.set('SEARCH', '/ecore/search/');
 
+    //workflows
+    this.api_map.set('WORKFLOWS', '/workflows/fetch/');
+    this.api_map.set('UPSERT_WORKFLOW', '/workflows/upsert/');
+
 
   }
 

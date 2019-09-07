@@ -1,0 +1,38 @@
+<div class="workflow-container">
+    <div class="workflow">
+        <div class="workflow-header">
+            <div class="workflow-item">
+                <div class="workflow-src">FROM STORE</div>
+                <div class="workflow-mapper">SERVICE</div>
+                <div class="workflow-dest">TO STORE</div>
+            </div>
+        </div>
+        <div class="workflow-item" *ngFor="let workflow of workflows">
+            <div class="workflow-src">
+                <mat-form-field class="hmat-form-input">
+                    <mat-label>From Store</mat-label>
+                    <mat-select [formControl]="wformcontrols[workflow.service.id+'src']" [disabled]="true">
+                        <mat-option *ngFor="let src of workflow['src']" [value]="src['id']">
+                                {{src["name"] | uppercase}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="workflow-mapper">
+                <div>
+                {{workflow["service"]["name"] | uppercase}}
+                </div>
+            </div>
+            <div class="workflow-dest">
+                <mat-form-field>
+                    <mat-label>To Store</mat-label>
+                    <mat-select [formControl]="wformcontrols[workflow.service.id+'dest']" (selectionChange)="upsertWorkflow(workflow)">
+                        <mat-option *ngFor="let dest of workflow['dest']" [value]="dest['id']">
+                                {{dest["name"] | uppercase}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</div>

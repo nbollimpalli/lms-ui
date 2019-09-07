@@ -1,0 +1,71 @@
+.workflow-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    margin: 20px 0px;
+    min-height: 75vh;
+}
+
+.workflow {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.workflow-header {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid #9c8f8f38;
+    margin: 20px 0px;
+    width: 100%;
+    font-size: 2em;
+    color: burlywood;
+}
+
+.workflow-item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.workflow-src {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    min-width: 25%;
+    height: 80px;
+}
+
+.workflow-mapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    min-width: 25%;
+    height: 80px;
+}
+
+.workflow-dest {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    min-width: 25%;
+    height: 80px;
+}

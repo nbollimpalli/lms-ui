@@ -69,6 +69,7 @@ import { PriceBookComponent } from './configurables/price-book/price-book.compon
 import { PriceBookEntriesComponent } from './configurables/price-book-entries/price-book-entries.component';
 import { PriceBookEntryComponent } from './configurables/price-book-entry/price-book-entry.component';
 import { StoreServicesComponent } from './configurables/store-services/store-services.component';
+import { WorkflowsComponent } from './configurables/workflows/workflows.component';
 
 @NgModule({
   declarations: [
@@ -118,6 +119,7 @@ import { StoreServicesComponent } from './configurables/store-services/store-ser
     PriceBookEntriesComponent,
     PriceBookEntryComponent,
     StoreServicesComponent,
+    WorkflowsComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

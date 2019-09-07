@@ -43,18 +43,25 @@
               </div>
             </div>
         </mat-tab>
-        <mat-tab>
+        <mat-tab *ngIf="id != null">
             <ng-template mat-tab-label>
             <mat-icon class="tab-icon">play_for_work</mat-icon>
             Services
             </ng-template>
             <app-store-services [storeId]="id"></app-store-services>
         </mat-tab>
-        <mat-tab>
+        <mat-tab *ngIf="id != null">
             <ng-template mat-tab-label>
             <mat-icon class="tab-icon">rv_hookup</mat-icon>
             Workflow
             </ng-template>
+            <app-workflows [storeId]="id"></app-workflows>
+        </mat-tab>
+        <mat-tab >
+          <ng-template mat-tab-label>
+          <mat-icon class="tab-icon">equalizer</mat-icon>
+          Reports
+          </ng-template>
         </mat-tab>
         <mat-tab (click)="loadAddresses()" *ngIf="id != null">
           <ng-template mat-tab-label>
