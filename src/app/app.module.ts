@@ -31,7 +31,6 @@ import { ShowErrorsComponent } from './shared/services/show-errors/show-errors.c
 import { UsersComponent } from './configurables/users/users.component';
 import { StoresComponent } from './configurables/stores/stores.component';
 import { StoreComponent } from './configurables/store/store.component';
-import { OrdersComponent } from './runtime/orders/orders.component';
 import { OrderComponent } from './runtime/order/order.component';
 import { AboutComponent } from './company/about/about.component';
 import { ContactComponent } from './company/contact/contact.component';
@@ -70,6 +69,9 @@ import { PriceBookEntriesComponent } from './configurables/price-book-entries/pr
 import { PriceBookEntryComponent } from './configurables/price-book-entry/price-book-entry.component';
 import { StoreServicesComponent } from './configurables/store-services/store-services.component';
 import { WorkflowsComponent } from './configurables/workflows/workflows.component';
+import { ManageOrdersComponent } from './runtime/manage-orders/manage-orders.component';
+import { OrderItemComponent } from './runtime/order-item/order-item.component';
+import { OrderItemsComponent } from './runtime/order-items/order-items.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +86,6 @@ import { WorkflowsComponent } from './configurables/workflows/workflows.componen
     UsersComponent,
     StoresComponent,
     StoreComponent,
-    OrdersComponent,
     OrderComponent,
     AboutComponent,
     ContactComponent,
@@ -120,6 +121,9 @@ import { WorkflowsComponent } from './configurables/workflows/workflows.componen
     PriceBookEntryComponent,
     StoreServicesComponent,
     WorkflowsComponent,
+    ManageOrdersComponent,
+    OrderItemComponent,
+    OrderItemsComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

@@ -1,0 +1,110 @@
+<div class="product-selected-items">
+    <mat-chip-list #chipList aria-label="Fruit selection">
+        <mat-chip [removable]="true" *ngIf="sclothing">
+            CLOTHING ( {{ sclothing['name'] | uppercase }} )
+            <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+        </mat-chip>
+        <mat-chip [removable]="true" *ngIf="sfabric">
+            FABRIC ( {{ sfabric['name'] | uppercase }} )
+            <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+        </mat-chip>
+    </mat-chip-list>
+</div>
+
+ <div>     
+<mat-horizontal-stepper #stepper class="order-item-details-stepper">
+    <mat-step state="add" label="Clothing">
+        <div class="lists-container order-item-list-container">
+            <input autocomplete="rutjdskjde" placeholder="Search Clothings" [formControl]="name" class="list-search-input order-item-list-search" type="text">
+            <div class="vspacer"></div> 
+            <div class="list order-item-list">
+                <div class="list-item" *ngFor="let data of clothings">
+                    <div class="list-item-label" (click)="selectClothing(data)">{{ data['name'] | uppercase }}</div>
+                    <div class="list-item-actions">
+                        <button color="primary" mat-icon-button (click)="upsertServices(data, 'add')"><mat-icon>add_circle</mat-icon></button>
+                    </div>
+                </div>
+                <div class="list-item" *ngFor="let data of clothings">
+                        <div class="list-item-label" (click)="selectClothing(data)">{{ data['name'] | uppercase }}</div>
+                        <div class="list-item-actions">
+                            <button color="primary" mat-icon-button (click)="upsertServices(data, 'add')"><mat-icon>add_circle</mat-icon></button>
+                        </div>
+                    </div>
+                    <div class="list-item" *ngFor="let data of clothings">
+                            <div class="list-item-label" (click)="selectClothing(data)">{{ data['name'] | uppercase }}</div>
+                            <div class="list-item-actions">
+                                <button color="primary" mat-icon-button (click)="upsertServices(data, 'add')"><mat-icon>add_circle</mat-icon></button>
+                            </div>
+                        </div>
+            </div>
+        </div>
+    </mat-step>
+    <mat-step state="add" label="Fabric">
+        <div class="lists-container order-item-list-container">
+            <input autocomplete="rutjdskjde" placeholder="Search Fabrics" [formControl]="name" class="list-search-input order-item-list-search" type="text" *ngIf="sclothing && !sfabric">
+            <div class="list order-item-list" *ngIf="sfabric == null">
+                <div class="vspacer"></div>
+                <div class="list-item" *ngFor="let data of fabrics" (click)="selectFabric(data)">
+                    <div class="list-item-label">{{ data['name'] | uppercase }}</div>
+                    <div class="list-item-actions">
+                        <button mat-icon-button><mat-icon>add_circle</mat-icon></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-step>
+    <mat-step state="add" label="Services and Addons">
+            <div class="lists-container order-item-list-container">
+                <div class="list services-addons-list" *ngIf="sclothing && sfabric">
+                    <div class="list-header">
+                        <span class="list-title-text">SERVICES</span>
+                        <button mat-icon-button color="primary" matTooltip="RESET FILTERS" (click)="initFilters()">
+                            <mat-icon>tune</mat-icon>
+                        </button>
+                        <button mat-icon-button *ngIf="sclothing && sfabric" color="primary" matTooltip="LINK PRICE TO ALL SERVICES" (click)="callPbeDialog('all','add',0,'fabricservice',{},{},null)">
+                            <mat-icon>link</mat-icon>
+                        </button>
+                    </div>
+                    <div class="list-search-element"><input autocomplete="rutjdskjde" placeholder="Search Services" [formControl]="name" class="list-search-input" type="text"></div>
+                    <div class="vspacer"></div>
+            
+                    <div class="selected-list-item" *ngIf="sfabricService">
+                        <div class="list-item-label">{{ sfabricService['name'] | uppercase }}</div>
+                        <div class="list-item-actions">
+                            <button color="primary" mat-icon-button><mat-icon>arrow_forward_ios</mat-icon></button>
+                        </div>
+                    </div>
+                    <div *ngIf="sfabricService" class="hdivider"></div>
+                    
+                    <div class="list-item-list" *ngFor="let data of fabricServices">
+                        <div class="list-item-label" (click)="selectFabricService(data)">{{ data['name'] | uppercase }} {{ data['price'] == null ? '' : (' - ' + data['price'])  }}</div>
+                        <div class="list-item-actions">
+                            <button matTooltip="LINK PRICE" (click)="callPbeDialog('single','add',data['price'],'fabricservice',data,{},data['pricebookentry_id'])" color="primary" mat-icon-button><mat-icon>link</mat-icon></button>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="list services-addons-list" *ngIf="sclothing && sfabric">
+                    <div class="list-header">
+                        <span class="list-title-text">ADDONS</span>
+                        <button mat-icon-button color="primary" matTooltip="RESET FILTERS" (click)="initFilters()">
+                            <mat-icon>tune</mat-icon>
+                        </button>
+                        <button *ngIf="sclothing && sfabric && sfabricService" mat-icon-button color="primary" matTooltip="LINK PRICES TO ALL ADDONS" (click)="callPbeDialog('all','add',0,'fabricserviceaddon',sfabricService,{},null)">
+                            <mat-icon>link</mat-icon>
+                        </button>
+                    </div>
+                    <div class="list-search-element"><input autocomplete="rutjdskjde" placeholder="Search Addons" [formControl]="name" class="list-search-input" type="text"></div>
+                    <div class="vspacer"></div>
+            
+                    <div class="list-item" *ngFor="let data of fabricServiceAddons">
+                        <div class="list-item-label">{{ data['name'] | uppercase }} {{ data['price'] == null ? '' : (' - ' + data['price'])  }}</div>
+                        <div class="list-item-actions">
+                            <button matTooltip="LINK PRICE" (click)="callPbeDialog('single','add',data['price'],'fabricserviceaddon',sfabricService,data,data['pricebookentry_id'])" color="primary" mat-icon-button><mat-icon>link</mat-icon></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </mat-step>
+</mat-horizontal-stepper>
+</div>

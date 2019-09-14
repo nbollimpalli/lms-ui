@@ -1,0 +1,38 @@
+.order-item-list-container {
+    justify-content: center;
+    align-items: flex-start;
+    height: 40vh;
+}
+
+.services-addons-list {
+    justify-content: space-between;
+    align-items: center;
+    width: 40%;
+}
+
+.order-item-list {
+    align-items: center;
+    width: 70%;
+    height: 30vh;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+.order-item-list-search {
+    background-color: #00000014;
+}
+
+.order-item-list::-webkit-scrollbar {
+    display: none;
+  }
+
+.product-selected-items {
+    width: 100%;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+.order-item-details-stepper {
+    width: 100%;
+}

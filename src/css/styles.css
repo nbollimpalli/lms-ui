@@ -30,18 +30,18 @@
 /* dividers */
 
 .hdivider {
-  height: 0px;
-  border-bottom-color: #a5a2a261;
+  height: 1px;
+  background-color: #a5a2a261;
   width: 100%;
   margin: 5px 0;
 }
 
 .verticle-line {
   padding: 0px;
-  margin: 5vh;
+  margin: 5vh 0;
   border: 0px;
   border-color: red;
-  min-height: 50vh;
+  min-height: 75vh;
   width: 1px;
   background-color: #dcd1d18c;
 }
@@ -64,6 +64,13 @@
   margin-bottom: 2vh;
 }
 
+.flipped-icon {
+  -moz-transform:    scaleX(-1); /* Gecko */
+  -o-transform:      scaleX(-1); /* Opera */
+  -webkit-transform: scaleX(-1); /* Webkit */
+  transform:         scaleX(-1); /* Standard */
+  filter: FlipH;                 /* IE 6/7/8 */
+}
 /* spacers */
 
 html, body { height: 100%; }

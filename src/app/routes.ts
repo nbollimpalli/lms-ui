@@ -5,7 +5,6 @@ import { ProfileComponent } from './profile/profile/profile.component';
 import { UsersComponent } from './configurables/users/users.component';
 import { StoresComponent } from './configurables/stores/stores.component';
 import { StoreComponent } from './configurables/store/store.component';
-import { OrdersComponent } from './runtime/orders/orders.component';
 import { OrderComponent } from './runtime/order/order.component';
 import { AboutComponent } from './company/about/about.component';
 import { ContactComponent } from './company/contact/contact.component';
@@ -28,6 +27,7 @@ import { OrgsComponent } from './configurables/orgs/orgs.component';
 import { OrgComponent } from './configurables/org/org.component';
 import { PriceBooksComponent } from './configurables/price-books/price-books.component';
 import { PriceBookComponent } from './configurables/price-book/price-book.component';
+import { ManageOrdersComponent } from './runtime/manage-orders/manage-orders.component';
 
 export const appRoutes: Routes = [
   { path: '', component: CustomerHomeComponent , pathMatch: 'full'},
@@ -49,10 +49,10 @@ export const appRoutes: Routes = [
   { path: 'orgs', component: OrgsComponent },
   { path: 'org', component: OrgComponent },
   { path: 'org/:id', component: OrgComponent },
+  { path: 'manage/orders', component: ManageOrdersComponent },
   { path: 'pricebooks', component: PriceBooksComponent },
   { path: 'clothings', component:  ClothingsComponent},
   { path: 'reservations', component: DamagesComponent },
-  { path: 'orders', component: OrdersComponent },
   { path: 'store/:storeid/order', component: OrderComponent },
   { path: 'store/:storeid/order/:id', component: OrderComponent },
   { path: 'about', component: AboutComponent },

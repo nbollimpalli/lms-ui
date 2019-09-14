@@ -1,18 +1,33 @@
-.customer-email {
-    width: 30vh;
-    margin-left: 2vh;
+.order-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 75vh;
 }
 
-.quantity {
-    width: 5vh;
-    margin-left: 2vh;
+.order-items-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 58%;
 }
 
-.price-slab {
-    width: 15vh;
-    margin-left: 2vh;
+.order-item-details-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 40%;
 }
 
-.divider {
-    color: blue;
+
+
+.filter-tool-bar {
+    justify-content: space-between;
 }

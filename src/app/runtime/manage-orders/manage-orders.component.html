@@ -1,0 +1,114 @@
+<div class="tool-bar-container">
+    <div class="filter-tool-bar">
+        <button mat-stroked-button color="primary" matTooltip="NEW STORE" [matMenuTriggerFor]="menu">
+            {{ currentStore.name | uppercase}}
+        </button>
+        <div class="order-filters">
+            <div>
+                <div class="input-element-label">TOKEN</div>
+                <div class="input-element"><input autocomplete="rutjdskjde" class="filter-tool-bar-input" type="text"></div>
+            </div>
+            <div>
+                <div class="input-element-label">NAME OR EMAIL OR PHONE</div>
+                <div class="input-element"><input autocomplete="rutjdskjde" class="filter-tool-bar-input" type="text"></div>
+            </div>
+
+            <div>
+                <div class="input-element-label">ORDER TYPE</div>
+                <div class="input-element">
+                    <mat-select [formControl]="type" multiple>
+                    <mat-select-trigger>
+                        {{ (type.value ? type.value[0] : '') | uppercase}}
+                        <span *ngIf="type.value?.length > 1" >
+                        (+{{type.value.length - 1}} {{type.value?.length === 2 ? 'other' : 'others'}})
+                        </span>
+                    </mat-select-trigger>
+                    <mat-option *ngFor="let typeListItem of typeList" [value]="typeListItem">{{typeListItem | uppercase}}</mat-option>
+                    </mat-select>
+                </div>
+            </div>
+
+            <div>
+                <div class="input-element-label">ORDER STATUS</div>
+                <div class="input-element">
+                    <mat-select [formControl]="status" multiple>
+                    <mat-select-trigger>
+                        {{ (status.value ? status.value[0] : '') | uppercase}}
+                        <span *ngIf="status.value?.length > 1" >
+                        (+{{status.value.length - 1}} {{status.value?.length === 2 ? 'other' : 'others'}})
+                        </span>
+                    </mat-select-trigger>
+                    <mat-option *ngFor="let statusListItem of statusList" [value]="statusListItem">{{statusListItem | uppercase}}</mat-option>
+                    </mat-select>
+                </div>
+            </div>
+
+            <div>
+                <div class="input-element-label">DATE</div>
+                <div class="input-element">
+                    <input [matDatepicker]="picker" (click)="picker.open()" autocomplete="rutjdskjde" class="filter-tool-bar-input" type="text">
+                </div>
+                <mat-datepicker touchUi #picker></mat-datepicker>    
+            </div>
+            
+            
+            <button mat-stroked-button color="primary" matTooltip="NEW ORDER" [routerLink]="'/store/'+currentStore.id+'/order'">
+                CREATE ORDER
+            </button>
+        </div>
+    </div>
+</div>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item *ngFor="let store of allStores" (click)="updateCurrentStore(store)">
+        <mat-icon>store</mat-icon>
+        <span>{{ store['name'] | uppercase }}</span>
+    </button>
+</mat-menu>
+<div class="vspacer"></div>
+<div class="vspacer"></div>
+<div class="example-container mat-elevation-z8">
+        <div class="example-loading-shade"
+             *ngIf="isLoadingResults || isRateLimitReached">
+          <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+          <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+            GitHub's API rate limit has been reached. It will be reset in one minute.
+          </div>
+        </div>
+      
+        <div class="example-table-container">
+      
+          <table mat-table [dataSource]="data" class="example-table"
+                 matSort matSortActive="created" matSortDisableClear matSortDirection="desc">
+            <!-- Number Column -->
+            <ng-container matColumnDef="number">
+              <th mat-header-cell *matHeaderCellDef>#</th>
+              <td mat-cell *matCellDef="let row">{{row.number}}</td>
+            </ng-container>
+      
+            <!-- Title Column -->
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef>Title</th>
+              <td mat-cell *matCellDef="let row">{{row.title}}</td>
+            </ng-container>
+      
+            <!-- State Column -->
+            <ng-container matColumnDef="state">
+              <th mat-header-cell *matHeaderCellDef>State</th>
+              <td mat-cell *matCellDef="let row">{{row.state}}</td>
+            </ng-container>
+      
+            <!-- Created Column -->
+            <ng-container matColumnDef="created">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                Created
+              </th>
+              <td mat-cell *matCellDef="let row">{{row.created_at | date}}</td>
+            </ng-container>
+      
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+      
+        <mat-paginator [length]="resultsLength" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
